@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    class Dias
+    class EstadoTurno
     {
         private int id;
-        private DateTime fecha;
+        private string nombre;
 
         public int ioId
         {
@@ -17,10 +17,10 @@ namespace CapaDatos
             get { return this.id; }
         }
 
-        public DateTime ioFecha
+        public string ioNombre
         {
-            set { this.fecha = value; }
-            get { return this.fecha; }
+            set { this.nombre = value; }
+            get { return this.nombre; }
         }
     }
 }

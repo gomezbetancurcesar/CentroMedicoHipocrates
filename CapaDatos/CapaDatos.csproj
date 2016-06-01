@@ -42,6 +42,10 @@
   <ItemGroup>
     <Compile Include="Conexion.cs" />
     <Compile Include="Especialidades.cs" />
+    <Compile Include="EstadoTurno.cs" />
+    <Compile Include="Examenes.cs" />
+    <Compile Include="Fichas.cs" />
+    <Compile Include="Isapres.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

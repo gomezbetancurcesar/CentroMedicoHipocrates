@@ -10,8 +10,15 @@ namespace CapaDatos
 {
     class Especialidades
     {
+        private int id;
         private string nombre;
         private Conexion conexion = new Conexion();
+
+        public int ioId
+        {
+            set { this.id = value; }
+            get { return this.id; }
+        }
 
         public string ioNombre{
             set { this.nombre = value; }
