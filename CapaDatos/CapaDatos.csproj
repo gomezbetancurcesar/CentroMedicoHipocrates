@@ -47,6 +47,8 @@
     <Compile Include="Fichas.cs" />
     <Compile Include="Isapres.cs" />
     <Compile Include="Persona.cs" />
+	<Compile Include="Dias.cs" />
+	<Compile Include="Turnos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
