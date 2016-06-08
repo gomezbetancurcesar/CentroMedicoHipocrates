@@ -1,1 +1,10 @@
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\bin\Debug\CentroMedicoHipocrates.exe.config
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\bin\Debug\CentroMedicoHipocrates.exe
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\bin\Debug\CentroMedicoHipocrates.pdb
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.csprojResolveAssemblyReference.cache
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.Login.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.Properties.Resources.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.csproj.GenerateResource.Cache
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.exe
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.pdb
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.dashBoard.resources
