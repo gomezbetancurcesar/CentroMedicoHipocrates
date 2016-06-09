@@ -52,6 +52,12 @@
     <Compile Include="DashBoard.Designer.cs">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListadoMedicos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListadoMedicos.Designer.cs">
+      <DependentUpon>ListadoMedicos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -14,15 +14,25 @@ namespace CentroMedicoHipocrates
         {
             bool autenticado = false;
             //Ir a preguntar al modelo de la tabla si existe el usuario
-            if (username == "usuario")
-            {
-                autenticado = true;
-            }
-            
-            if (autenticado)
+            if (username == "admin")
             {
                 usuario.Add("usuario", username);
                 usuario.Add("rol", "administrador");
+                autenticado = true;
+            }
+
+            if (username.Equals("medico"))
+            {
+                usuario.Add("usuario", username);
+                usuario.Add("rol", "medico");
+                autenticado = true;
+            }
+
+            if (username.Equals("recepcion"))
+            {
+                usuario.Add("usuario", username);
+                usuario.Add("rol", "recepcion");
+                autenticado = true;
             }
             return autenticado;
         }
@@ -37,7 +47,8 @@ namespace CentroMedicoHipocrates
             if(usuario[index] != null)
             {
                 return usuario[index];
-            }else
+            }
+            else
             {
                 return "";
             }
