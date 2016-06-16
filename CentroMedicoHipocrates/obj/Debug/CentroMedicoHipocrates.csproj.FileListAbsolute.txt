@@ -8,3 +8,14 @@ C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoH
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.exe
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.pdb
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.dashBoard.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoMedicos.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.AgregarMedico.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ModificarMedico.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.AdminTurnos.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoAdministradores.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoEspecialidades.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoOperadores.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.MisTurnos.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.Busquedas.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\bin\Debug\CapaDatos.dll
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\bin\Debug\CapaDatos.pdb

@@ -46,7 +46,7 @@ namespace CentroMedicoHipocrates
             item.Name = "opConfiguraciones";
             item.Text = "Configuraciones";
                 subItem = new ToolStripMenuItem();
-                subItem.Name = "opTurnos";
+                subItem.Name = "AdminTurnos";
                 subItem.Text = "Turnos";
                 subItem.Click += new EventHandler(ItemClicked);
             item.DropDownItems.Add(subItem);
@@ -54,12 +54,31 @@ namespace CentroMedicoHipocrates
 
             item = new ToolStripMenuItem();
             item.Name = "opMantenedores";
-            item.Text = "Mantenedores";
+            item.Text = "Funcionarios";
                 subItem = new ToolStripMenuItem();
                 subItem.Name = "ListadoMedicos";
                 subItem.Text = "Medicos";
                 subItem.Click += new EventHandler(ItemClicked);
-            //item.Click += new EventHandler(ItemClicked);
+            item.DropDownItems.Add(subItem);
+                subItem = new ToolStripMenuItem();
+                subItem.Name = "ListadoAdministradores";
+                subItem.Text = "Administradores";
+                subItem.Click += new EventHandler(ItemClicked);
+            item.DropDownItems.Add(subItem);
+                subItem = new ToolStripMenuItem();
+                subItem.Name = "ListadoOperadores";
+                subItem.Text = "Operadores";
+                subItem.Click += new EventHandler(ItemClicked);    
+            item.DropDownItems.Add(subItem);
+            menu.Items.Add(item);
+
+            item = new ToolStripMenuItem();
+            item.Name = "opMantenedores";
+            item.Text = "Mantenedores";
+                subItem = new ToolStripMenuItem();
+                subItem.Name = "ListadoEspecialidades";
+                subItem.Text = "Especialidades";
+                subItem.Click += new EventHandler(ItemClicked);
             item.DropDownItems.Add(subItem);
             menu.Items.Add(item);
         }
@@ -68,13 +87,13 @@ namespace CentroMedicoHipocrates
         private void menuMedico(MenuStrip menu)
         {
             item = new ToolStripMenuItem();
-            item.Name = "opInicio";
+            item.Name = "DashBoard";
             item.Text = "Inicio";
             item.Click += new EventHandler(ItemClicked);
             menu.Items.Add(item);
 
             item = new ToolStripMenuItem();
-            item.Name = "opMisTurnos";
+            item.Name = "MisTurnos";
             item.Text = "Mis turnos";
             item.Click += new EventHandler(ItemClicked);
             menu.Items.Add(item);
@@ -84,38 +103,33 @@ namespace CentroMedicoHipocrates
         private void menuRecepcion(MenuStrip menu)
         {
             item = new ToolStripMenuItem();
-            item.Name = "opInicio";
+            item.Name = "DashBoard";
             item.Text = "Inicio";
             item.Click += new EventHandler(ItemClicked);
             menu.Items.Add(item);
 
             item = new ToolStripMenuItem();
-            item.Name = "opBusquedas";
+            item.Name = "Busquedas";
             item.Text = "Busquedas";
-            item.Click += new EventHandler(ItemClicked);
-            menu.Items.Add(item);
-
-            item = new ToolStripMenuItem();
-            item.Name = "opAsistencia";
-            item.Text = "Asistencia";
             item.Click += new EventHandler(ItemClicked);
             menu.Items.Add(item);
         }
 
         protected void ItemClicked(Object sender, EventArgs e)
         {
-            ToolStripMenuItem clickedItem = (ToolStripMenuItem)sender;
+            FormCollection formAbiertos = Application.OpenForms;
+
+            ToolStripMenuItem clickedItem = (ToolStripMenuItem) sender;
             var className = clickedItem.Name;
             var assembly = Assembly.GetExecutingAssembly();
             var type = assembly.GetTypes().First(t => t.Name == className);
-            
-            FormCollection formAbiertos = Application.OpenForms;
+
+            Form vista = (Form)Activator.CreateInstance(type);
+            //vista.Show();
             foreach (Form frm in formAbiertos)
             {
                 frm.Hide();
             }
-
-            Form vista = (Form)Activator.CreateInstance(type);
             vista.Show();
         }
     }

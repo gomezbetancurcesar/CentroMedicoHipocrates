@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    class Isapres
+    public class Isapres
     {
         private int id;
         private string nombre;

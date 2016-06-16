@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace CapaDatos
 {
-    class Especialidades
+    public class Especialidades
     {
         private int id;
         private string nombre;
@@ -25,14 +25,14 @@ namespace CapaDatos
             get { return this.nombre; }
         }
 
-        public DataSet obtenerEspecialidades()
+        public Especialidades buscarPorId(int id)
         {
-            SqlConnection sql = this.conexion.getConexion();
-            string query = "select * from especialidades";
-            SqlDataAdapter da = new SqlDataAdapter(query, sql);
-            DataSet ds = new DataSet();
-            da.Fill(ds);
-            return ds;
+            Especialidades especialidad = new Especialidades();
+            //IR a buscar a la base
+
+            especialidad.id = 1;
+            especialidad.nombre = "Pediatría";
+            return especialidad;
         }
     }
 }

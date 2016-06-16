@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    class Dias
+    public class Dias
     {
         private int id;
         private DateTime fecha;

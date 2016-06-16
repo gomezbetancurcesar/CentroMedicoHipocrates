@@ -46,17 +46,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminViews\AdminTurnos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminViews\AdminTurnos.Designer.cs">
+      <DependentUpon>AdminTurnos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminViews\AgregarMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminViews\AgregarMedico.Designer.cs">
+      <DependentUpon>AgregarMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminViews\ListadoAdministradores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminViews\ListadoAdministradores.Designer.cs">
+      <DependentUpon>ListadoAdministradores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminViews\ListadoEspecialidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminViews\ListadoEspecialidades.Designer.cs">
+      <DependentUpon>ListadoEspecialidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminViews\ListadoOperadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminViews\ListadoOperadores.Designer.cs">
+      <DependentUpon>ListadoOperadores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminViews\ModificarMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminViews\ModificarMedico.Designer.cs">
+      <DependentUpon>ModificarMedico.cs</DependentUpon>
+    </Compile>
     <Compile Include="DashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DashBoard.Designer.cs">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListadoMedicos.cs">
+    <Compile Include="AdminViews\ListadoMedicos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ListadoMedicos.Designer.cs">
+    <Compile Include="AdminViews\ListadoMedicos.Designer.cs">
       <DependentUpon>ListadoMedicos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtendedForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -65,14 +104,50 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginService.cs" />
+    <Compile Include="MedicoViews\MisTurnos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicoViews\MisTurnos.Designer.cs">
+      <DependentUpon>MisTurnos.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecepcionViews\Busquedas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecepcionViews\Busquedas.Designer.cs">
+      <DependentUpon>Busquedas.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AdminViews\AdminTurnos.resx">
+      <DependentUpon>AdminTurnos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminViews\AgregarMedico.resx">
+      <DependentUpon>AgregarMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminViews\ListadoAdministradores.resx">
+      <DependentUpon>ListadoAdministradores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminViews\ListadoEspecialidades.resx">
+      <DependentUpon>ListadoEspecialidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminViews\ListadoMedicos.resx">
+      <DependentUpon>ListadoMedicos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminViews\ListadoOperadores.resx">
+      <DependentUpon>ListadoOperadores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminViews\ModificarMedico.resx">
+      <DependentUpon>ModificarMedico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DashBoard.resx">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicoViews\MisTurnos.resx">
+      <DependentUpon>MisTurnos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -82,7 +157,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RecepcionViews\Busquedas.resx">
+      <DependentUpon>Busquedas.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -96,6 +175,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
+      <Project>{55a4374a-8def-4028-aaf6-688d82b1b426}</Project>
+      <Name>CapaDatos</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

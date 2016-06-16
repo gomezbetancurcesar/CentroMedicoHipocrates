@@ -30,7 +30,12 @@
         {
             this.MenuContexto = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblTop = new System.Windows.Forms.Label();
+            this.lblBottom = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblUsuario = new System.Windows.Forms.Label();
             this.MenuContexto.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuContexto
@@ -39,7 +44,7 @@
             this.menuToolStripMenuItem});
             this.MenuContexto.Location = new System.Drawing.Point(0, 0);
             this.MenuContexto.Name = "MenuContexto";
-            this.MenuContexto.Size = new System.Drawing.Size(668, 24);
+            this.MenuContexto.Size = new System.Drawing.Size(741, 24);
             this.MenuContexto.TabIndex = 1;
             this.MenuContexto.Text = "menuStrip1";
             // 
@@ -49,17 +54,58 @@
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "menu";
             // 
+            // lblTop
+            // 
+            this.lblTop.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblTop.Location = new System.Drawing.Point(3, 0);
+            this.lblTop.Name = "lblTop";
+            this.lblTop.Size = new System.Drawing.Size(500, 2);
+            this.lblTop.TabIndex = 2;
+            // 
+            // lblBottom
+            // 
+            this.lblBottom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblBottom.Location = new System.Drawing.Point(0, 98);
+            this.lblBottom.Name = "lblBottom";
+            this.lblBottom.Size = new System.Drawing.Size(500, 2);
+            this.lblBottom.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel1.Controls.Add(this.lblUsuario);
+            this.panel1.Controls.Add(this.lblBottom);
+            this.panel1.Controls.Add(this.lblTop);
+            this.panel1.Location = new System.Drawing.Point(0, 27);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(729, 100);
+            this.panel1.TabIndex = 4;
+            // 
+            // lblUsuario
+            // 
+            this.lblUsuario.AutoSize = true;
+            this.lblUsuario.Location = new System.Drawing.Point(12, 11);
+            this.lblUsuario.Name = "lblUsuario";
+            this.lblUsuario.Size = new System.Drawing.Size(43, 13);
+            this.lblUsuario.TabIndex = 4;
+            this.lblUsuario.Text = "Usuario";
+            // 
             // DashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(668, 360);
+            this.ClientSize = new System.Drawing.Size(741, 360);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
             this.MainMenuStrip = this.MenuContexto;
             this.Name = "DashBoard";
             this.Text = "dashBoard";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.DashBoard_Load);
             this.MenuContexto.ResumeLayout(false);
             this.MenuContexto.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,5 +114,9 @@
         #endregion
         private System.Windows.Forms.MenuStrip MenuContexto;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
+        private System.Windows.Forms.Label lblTop;
+        private System.Windows.Forms.Label lblBottom;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblUsuario;
     }
 }

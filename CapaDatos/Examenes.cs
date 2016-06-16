@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    class Examenes
+    public class Examenes
     {
     }
 }
