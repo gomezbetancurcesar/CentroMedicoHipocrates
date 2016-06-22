@@ -19,13 +19,13 @@ namespace CentroMedicoHipocrates
             menu.Items.Clear();
             switch (rolUsuario)
             {
-                case "administrador":
+                case "Administrador":
                     this.menuAdministrador(menu);
                 break;
-                case "medico":
+                case "Medico":
                     this.menuMedico(menu);
                 break;
-                case "recepcion":
+                case "Recepcion":
                     this.menuRecepcion(menu);
                 break;
             }
@@ -66,7 +66,7 @@ namespace CentroMedicoHipocrates
                 subItem.Click += new EventHandler(ItemClicked);
             item.DropDownItems.Add(subItem);
                 subItem = new ToolStripMenuItem();
-                subItem.Name = "ListadoOperadores";
+                subItem.Name = "ListadoRecepcionistas";
                 subItem.Text = "Operadores";
                 subItem.Click += new EventHandler(ItemClicked);    
             item.DropDownItems.Add(subItem);
@@ -75,6 +75,16 @@ namespace CentroMedicoHipocrates
             item = new ToolStripMenuItem();
             item.Name = "opMantenedores";
             item.Text = "Mantenedores";
+                subItem = new ToolStripMenuItem();
+                subItem.Name = "ListadoDias";
+                subItem.Text = "Dias";
+                subItem.Click += new EventHandler(ItemClicked);
+            item.DropDownItems.Add(subItem);
+                subItem = new ToolStripMenuItem();
+                subItem.Name = "ListadoTurnos";
+                subItem.Text = "Turnos";
+                subItem.Click += new EventHandler(ItemClicked);
+            item.DropDownItems.Add(subItem);
                 subItem = new ToolStripMenuItem();
                 subItem.Name = "ListadoEspecialidades";
                 subItem.Text = "Especialidades";
@@ -111,6 +121,12 @@ namespace CentroMedicoHipocrates
             item = new ToolStripMenuItem();
             item.Name = "Busquedas";
             item.Text = "Busquedas";
+            item.Click += new EventHandler(ItemClicked);
+            menu.Items.Add(item);
+
+            item = new ToolStripMenuItem();
+            item.Name = "Confirmaciones";
+            item.Text = "Confirmaciones";
             item.Click += new EventHandler(ItemClicked);
             menu.Items.Add(item);
         }

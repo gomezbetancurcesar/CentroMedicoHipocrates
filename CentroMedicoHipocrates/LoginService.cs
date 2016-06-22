@@ -3,36 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CapaDatos;
 
 namespace CentroMedicoHipocrates
 {
     public class LoginService
     {
         private static Dictionary<string, string> usuario = new Dictionary<string, string>();
+        private static Usuario datosUsuario = new Usuario();
 
-        public bool Autenticar(string username, string password)
+        public bool Autenticar(string rut, string password)
         {
             bool autenticado = false;
-            //Ir a preguntar al modelo de la tabla si existe el usuario
-            if (username == "admin")
+            datosUsuario = new Usuario().login(rut, password);
+            if (!datosUsuario.ioId.Equals(0))
             {
-                usuario.Add("usuario", username);
-                usuario.Add("rol", "administrador");
-                autenticado = true;
-            }
-
-            if (username.Equals("medico"))
-            {
-                usuario.Add("usuario", username);
-                usuario.Add("rol", "medico");
-                autenticado = true;
-            }
-
-            if (username.Equals("recepcion"))
-            {
-                usuario.Add("usuario", username);
-                usuario.Add("rol", "recepcion");
-                autenticado = true;
+                string nombreCompleto = datosUsuario.ioNombre + " " + datosUsuario.ioApellidoPaterno + " " + datosUsuario.ioApellidoMaterno;
+                switch (datosUsuario.ioRol.ioNombre)
+                {
+                    case "Administrador":
+                        usuario.Add("usuario", nombreCompleto);
+                        usuario.Add("rol", datosUsuario.ioRol.ioNombre);
+                        autenticado = true;
+                    break;
+                    case "Medico":
+                        usuario.Add("usuario", nombreCompleto);
+                        usuario.Add("rol", datosUsuario.ioRol.ioNombre);
+                        autenticado = true;
+                    break;
+                    case "Recepcion":
+                        usuario.Add("usuario", nombreCompleto);
+                        usuario.Add("rol", datosUsuario.ioRol.ioNombre);
+                        autenticado = true;
+                    break;
+                }
             }
             return autenticado;
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaDatos;
 
 namespace CentroMedicoHipocrates
 {
@@ -22,6 +23,18 @@ namespace CentroMedicoHipocrates
             menuCreator.generarMenu(MenuContexto, session.AuthField("rol"));
 
             this.fullWidth();
+
+            List<Especialidad> especialidades = new Especialidad().buscarTodos();
+
+            GridEspecialidades.Rows.Clear();
+            foreach (var especialidad in especialidades)
+            {
+                DataGridViewRow fila = (DataGridViewRow)GridEspecialidades.Rows[0].Clone();
+                fila.Cells[0].Value = especialidad.ioId;
+                fila.Cells[1].Value = especialidad.ioNombre;
+                GridEspecialidades.Rows.Add(fila);
+            }
+            GridEspecialidades.Refresh();
         }
 
         private void fullWidth()

@@ -34,8 +34,18 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
             this.lblTop = new System.Windows.Forms.Label();
+            this.GridEspecialidades = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panelAgregar = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.MenuContexto.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GridEspecialidades)).BeginInit();
+            this.panelAgregar.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuContexto
@@ -90,11 +100,88 @@
             this.lblTop.Size = new System.Drawing.Size(500, 2);
             this.lblTop.TabIndex = 2;
             // 
+            // GridEspecialidades
+            // 
+            this.GridEspecialidades.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.GridEspecialidades.BackgroundColor = System.Drawing.Color.Silver;
+            this.GridEspecialidades.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.GridEspecialidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridEspecialidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Nombre});
+            this.GridEspecialidades.Location = new System.Drawing.Point(0, 125);
+            this.GridEspecialidades.MultiSelect = false;
+            this.GridEspecialidades.Name = "GridEspecialidades";
+            this.GridEspecialidades.RowHeadersVisible = false;
+            this.GridEspecialidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.GridEspecialidades.Size = new System.Drawing.Size(226, 179);
+            this.GridEspecialidades.TabIndex = 12;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // panelAgregar
+            // 
+            this.panelAgregar.Controls.Add(this.btnAgregar);
+            this.panelAgregar.Controls.Add(this.textBox1);
+            this.panelAgregar.Controls.Add(this.lblNombre);
+            this.panelAgregar.Controls.Add(this.label1);
+            this.panelAgregar.Location = new System.Drawing.Point(355, 133);
+            this.panelAgregar.Name = "panelAgregar";
+            this.panelAgregar.Size = new System.Drawing.Size(374, 100);
+            this.panelAgregar.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(29, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Agregar";
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(31, 34);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(44, 13);
+            this.lblNombre.TabIndex = 1;
+            this.lblNombre.Text = "Nombre";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(96, 34);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(235, 20);
+            this.textBox1.TabIndex = 2;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Location = new System.Drawing.Point(96, 61);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.TabIndex = 3;
+            this.btnAgregar.Text = "Guardar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            // 
             // ListadoEspecialidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 445);
+            this.Controls.Add(this.panelAgregar);
+            this.Controls.Add(this.GridEspecialidades);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
             this.Name = "ListadoEspecialidades";
@@ -104,6 +191,9 @@
             this.MenuContexto.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GridEspecialidades)).EndInit();
+            this.panelAgregar.ResumeLayout(false);
+            this.panelAgregar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,5 +207,13 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblBottom;
         private System.Windows.Forms.Label lblTop;
+        private System.Windows.Forms.DataGridView GridEspecialidades;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.Panel panelAgregar;
+        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.Label label1;
     }
 }

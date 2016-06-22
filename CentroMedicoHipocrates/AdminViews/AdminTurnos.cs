@@ -23,6 +23,8 @@ namespace CentroMedicoHipocrates
             //Dibujamos el menu correspondiente a cada rol!
             menuCreator.generarMenu(MenuContexto, session.AuthField("rol"));
 
+            txtFecha.MinDate = DateTime.Today;
+            GridHorarios.RowHeadersVisible = false;
             this.fullWidth();
         }
 
@@ -55,33 +57,44 @@ namespace CentroMedicoHipocrates
         private void button1_Click(object sender, EventArgs e)
         {
             string fecha = txtFecha.Value.Date.ToString("yyyy-MM-dd");
-            this.buscarHorarios(txtRut.Text, fecha);
+            string fechaBuscada = txtFecha.Value.ToLongDateString().ToString();
+            this.buscarHorarios(txtRut.Text, fecha, fechaBuscada);
+
             panelHorarios.Visible = true;
             panelDatosMedico.Visible = true;
         }
 
-        private void buscarHorarios(string rut, string fecha)
+        private void buscarHorarios(string rut, string fecha, string fechaBuscada)
         {
+            DateTime formatDate = DateTime.ParseExact(fecha, "yyyy-MM-dd", null);
+            lblFechaBuscada.Text = fechaBuscada;
+            lblValueFechaBuscada.Text = fecha;
+
             DataGridViewButtonCell btnFila;
             DataGridViewRow fila;
 
-            Medicos medico = new CapaDatos.Medicos().buscarPorRut(rut);
-            lblNombre.Text = medico.ioPersona.ioNombre;
-            lblApellidoPaterno.Text = medico.ioPersona.ioApellidoPaterno;
-            lblApellidoMaterno.Text = medico.ioPersona.ioApellidoMaterno;
-            lblEspecialidad.Text = medico.ioEspecialidad.ioNombre;
+            Doctor doctor = new CapaDatos.Doctor().buscarPorRut(rut);
+            lblNombre.Text = doctor.ioUsuario.ioNombre;
+            lblApellidoPaterno.Text = doctor.ioUsuario.ioApellidoPaterno;
+            lblApellidoMaterno.Text = doctor.ioUsuario.ioApellidoMaterno;
+            lblEspecialidad.Text = doctor.ioEspecialidad.ioNombre;
+            lblRut.Text = doctor.ioUsuario.ioRut;
 
             GridHorarios.Rows.Clear();
-            List<Turnos> turnos = new CapaDatos.Turnos().turnosDisponibles();
+            List<Turno> turnos = new CapaDatos.Turno().buscarTodos();
+
             foreach (var turno in turnos)
             {
                 fila = (DataGridViewRow)GridHorarios.Rows[0].Clone();
-                fila.Cells[0].Value = turno.ioHoraInicio;
-                btnFila = (DataGridViewButtonCell)fila.Cells[1];
+                fila.Cells[0].Value = turno.ioId;
+                fila.Cells[1].Value = turno.ioId;
+                fila.Cells[2].Value = turno.ioHoraInicio;
+                fila.Cells[3].Value = turno.ioHoraFin;
+                btnFila = (DataGridViewButtonCell)fila.Cells[4];
                 btnFila.FlatStyle = FlatStyle.Popup;
-                btnFila.Value = turno.ioEstado.ioNombre;
+                btnFila.Value = turno.ioEstadoTurno.ioNombre;
                 //Habilitado
-                if (turno.ioEstadoId.Equals(1)){
+                if (turno.ioEstadoTurnoId.Equals(1)){
                     btnFila.Style.BackColor = System.Drawing.Color.Green;
                 }else{
                     btnFila.Style.BackColor = System.Drawing.Color.Red;
@@ -90,6 +103,36 @@ namespace CentroMedicoHipocrates
             }
             //Redibujamos la tabla de los medicos
             GridHorarios.Refresh();
+        }
+
+        private void btnRetrocederDia_Click(object sender, EventArgs e)
+        {
+            DateTime fecha = DateTime.ParseExact(lblValueFechaBuscada.Text, "yyyy-MM-dd", null);
+            if (fecha.Equals(txtFecha.MinDate))
+            {
+                btnRetrocederDia.Visible = false;
+            }else
+            {
+                fecha = fecha.AddDays(-1);
+                txtFecha.Value = fecha.Date;
+                string strfecha = fecha.Date.ToString("yyyy-MM-dd");
+                string fechaBuscada = fecha.ToLongDateString().ToString();
+                this.buscarHorarios(txtRut.Text, strfecha, fechaBuscada);
+            }
+            
+        }
+
+        private void btnAvanzarDia_Click(object sender, EventArgs e)
+        {
+            btnRetrocederDia.Visible = true;
+            DateTime fecha = DateTime.ParseExact(lblValueFechaBuscada.Text, "yyyy-MM-dd", null);
+            fecha = fecha.AddDays(1);
+
+            txtFecha.Value = fecha.Date;
+            string strfecha = fecha.Date.ToString("yyyy-MM-dd");
+            string fechaBuscada = fecha.ToLongDateString().ToString();
+
+            this.buscarHorarios(txtRut.Text, strfecha, fechaBuscada);
         }
     }
 }

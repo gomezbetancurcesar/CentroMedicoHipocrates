@@ -31,10 +31,6 @@
             this.MenuContexto = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GridMedicos = new System.Windows.Forms.DataGridView();
-            this.Rut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Especialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaNacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
@@ -42,6 +38,12 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
             this.lblTop = new System.Windows.Forms.Label();
+            this.Rut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApellidoPaterno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApellidoMaterno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Especialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaNacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MenuContexto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridMedicos)).BeginInit();
             this.panel1.SuspendLayout();
@@ -71,42 +73,18 @@
             this.GridMedicos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridMedicos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Rut,
-            this.NombreCompleto,
+            this.Nombre,
+            this.ApellidoPaterno,
+            this.ApellidoMaterno,
             this.Especialidad,
             this.FechaNacimiento});
             this.GridMedicos.Location = new System.Drawing.Point(0, 125);
             this.GridMedicos.MultiSelect = false;
             this.GridMedicos.Name = "GridMedicos";
             this.GridMedicos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridMedicos.Size = new System.Drawing.Size(450, 179);
+            this.GridMedicos.Size = new System.Drawing.Size(621, 179);
             this.GridMedicos.TabIndex = 3;
             this.GridMedicos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Rut
-            // 
-            this.Rut.HeaderText = "Rut";
-            this.Rut.Name = "Rut";
-            this.Rut.ReadOnly = true;
-            // 
-            // NombreCompleto
-            // 
-            this.NombreCompleto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.NombreCompleto.HeaderText = "Nombre Completo";
-            this.NombreCompleto.Name = "NombreCompleto";
-            this.NombreCompleto.ReadOnly = true;
-            this.NombreCompleto.Width = 106;
-            // 
-            // Especialidad
-            // 
-            this.Especialidad.HeaderText = "Especialidad";
-            this.Especialidad.Name = "Especialidad";
-            this.Especialidad.ReadOnly = true;
-            // 
-            // FechaNacimiento
-            // 
-            this.FechaNacimiento.HeaderText = "Fecha Nacimiento";
-            this.FechaNacimiento.Name = "FechaNacimiento";
-            this.FechaNacimiento.ReadOnly = true;
             // 
             // panel1
             // 
@@ -179,6 +157,42 @@
             this.lblTop.Size = new System.Drawing.Size(500, 2);
             this.lblTop.TabIndex = 2;
             // 
+            // Rut
+            // 
+            this.Rut.HeaderText = "Rut";
+            this.Rut.Name = "Rut";
+            this.Rut.ReadOnly = true;
+            // 
+            // Nombre
+            // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 69;
+            // 
+            // ApellidoPaterno
+            // 
+            this.ApellidoPaterno.HeaderText = "Apellido Paterno";
+            this.ApellidoPaterno.Name = "ApellidoPaterno";
+            // 
+            // ApellidoMaterno
+            // 
+            this.ApellidoMaterno.HeaderText = "Apellido Materno";
+            this.ApellidoMaterno.Name = "ApellidoMaterno";
+            // 
+            // Especialidad
+            // 
+            this.Especialidad.HeaderText = "Especialidad";
+            this.Especialidad.Name = "Especialidad";
+            this.Especialidad.ReadOnly = true;
+            // 
+            // FechaNacimiento
+            // 
+            this.FechaNacimiento.HeaderText = "Fecha Nacimiento";
+            this.FechaNacimiento.Name = "FechaNacimiento";
+            this.FechaNacimiento.ReadOnly = true;
+            // 
             // ListadoMedicos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,10 +219,6 @@
         private System.Windows.Forms.MenuStrip MenuContexto;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.DataGridView GridMedicos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rut;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreCompleto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Especialidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FechaNacimiento;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblBottom;
@@ -216,5 +226,11 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApellidoPaterno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApellidoMaterno;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Especialidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaNacimiento;
     }
 }

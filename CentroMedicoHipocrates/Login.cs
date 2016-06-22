@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaDatos;
 
 namespace CentroMedicoHipocrates
 {
@@ -29,6 +30,7 @@ namespace CentroMedicoHipocrates
 
         private void button1_Click(object sender, EventArgs e)
         {
+           
             LoginService login = new LoginService();
             string username = txtUsuario.Text;
             string password = txtPassword.Text;

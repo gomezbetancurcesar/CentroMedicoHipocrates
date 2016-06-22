@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaDatos;
 
 namespace CentroMedicoHipocrates
 {
@@ -18,28 +19,22 @@ namespace CentroMedicoHipocrates
         public ListadoMedicos()
         {
             InitializeComponent();
-
             //Dibujamos el menu correspondiente a cada rol!
             menuCreator.generarMenu(MenuContexto, session.AuthField("rol"));
-
             this.fullWidth();
+            List<Doctor> doctores = new Doctor().buscarTodos();
 
-            //Aqui deberiamos obtener los datos de los medicos reales del sistema
-            DataGridViewRow fila = (DataGridViewRow) GridMedicos.Rows[0].Clone();
-            fila.Cells[0].Value = 1;
-            fila.Cells[1].Value = 1;
-            fila.Cells[2].Value = 1;
-            fila.Cells[3].Value = 1;
-            GridMedicos.Rows.Add(fila);
-
-            //otra fila para la tabla donde definimos los mediocos del sistema
-            fila = (DataGridViewRow) GridMedicos.Rows[0].Clone();
-            fila.Cells[0].Value = 2;
-            fila.Cells[1].Value = 3;
-            fila.Cells[2].Value = 2;
-            fila.Cells[3].Value = 2;
-            GridMedicos.Rows.Add(fila);
-
+            foreach (var doctor in doctores)
+            {
+                DataGridViewRow fila = (DataGridViewRow)GridMedicos.Rows[0].Clone();
+                fila.Cells[0].Value = doctor.ioUsuario.ioRut;
+                fila.Cells[1].Value = doctor.ioUsuario.ioNombre;
+                fila.Cells[2].Value = doctor.ioUsuario.ioApellidoPaterno;
+                fila.Cells[3].Value = doctor.ioUsuario.ioApellidoMaterno;
+                fila.Cells[4].Value = doctor.ioEspecialidad.ioNombre;
+                fila.Cells[5].Value = doctor.ioUsuario.ioFechaNacimento.ToString();
+                GridMedicos.Rows.Add(fila);
+            }
             //Redibujamos la tabla de los medicos
             GridMedicos.Refresh();
         }

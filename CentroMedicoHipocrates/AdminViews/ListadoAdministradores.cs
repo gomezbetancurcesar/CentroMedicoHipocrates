@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaDatos;
 
 namespace CentroMedicoHipocrates
 {
@@ -22,6 +23,20 @@ namespace CentroMedicoHipocrates
             menuCreator.generarMenu(MenuContexto, session.AuthField("rol"));
 
             this.fullWidth();
+
+            List<Administrador> administradores = new Administrador().buscarTodos();
+
+            foreach (var administrador in administradores)
+            {
+                DataGridViewRow fila = (DataGridViewRow)GridAdministradores.Rows[0].Clone();
+                fila.Cells[0].Value = administrador.ioPersona.ioRut;
+                fila.Cells[1].Value = administrador.ioPersona.ioNombre;
+                fila.Cells[2].Value = administrador.ioPersona.ioApellidoPaterno;
+                fila.Cells[3].Value = administrador.ioPersona.ioApellidoMaterno;
+                fila.Cells[4].Value = administrador.ioPersona.ioFechaNacimento.ToString();
+                GridAdministradores.Rows.Add(fila);
+            }
+            GridAdministradores.Refresh();
         }
 
         private void fullWidth()
@@ -39,6 +54,11 @@ namespace CentroMedicoHipocrates
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void GridMedicos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

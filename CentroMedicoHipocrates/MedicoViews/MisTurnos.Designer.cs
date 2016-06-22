@@ -34,6 +34,9 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
             this.lblTop = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.MenuContexto.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -90,11 +93,39 @@
             this.lblTop.Size = new System.Drawing.Size(500, 2);
             this.lblTop.TabIndex = 2;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 149);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Fecha";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(69, 143);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 12;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(69, 179);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Buscar";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // MisTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(786, 427);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
             this.Name = "MisTurnos";
@@ -117,5 +148,8 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblBottom;
         private System.Windows.Forms.Label lblTop;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button button1;
     }
 }

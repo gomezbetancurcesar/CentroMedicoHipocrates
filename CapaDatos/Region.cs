@@ -6,21 +6,35 @@ using System.Threading.Tasks;
 
 namespace CapaDatos
 {
-    public class Isapres
+    public class Region
     {
         private int id;
         private string nombre;
 
+        public Region()
+        {
+
+        }
+
         public int ioId
         {
-            set { this.id = value; }
             get { return this.id; }
+            set { this.id = value; }
         }
 
         public string ioNombre
         {
-            set { this.nombre = value; }
             get { return this.nombre; }
+            set { this.nombre = value; }
+        }
+
+        public List<Region> buscarTodos()
+        {
+            List<Region> regiones = new List<Region>();
+
+            //IR a buscar a la base
+            //consultar("select * from Regiones");
+            return regiones;
         }
     }
 }

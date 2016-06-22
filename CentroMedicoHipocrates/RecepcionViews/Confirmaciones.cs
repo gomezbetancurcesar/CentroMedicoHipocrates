@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace CentroMedicoHipocrates
 {
-    public partial class ListadoOperadores : Form
+    public partial class Confirmaciones : Form
     {
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
-        public ListadoOperadores()
+        public Confirmaciones()
         {
             InitializeComponent();
             //Dibujamos el menu correspondiente a cada rol!
