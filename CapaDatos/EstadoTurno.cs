@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.DataAccess.Client;
 
 namespace CapaDatos
 {
@@ -48,9 +49,30 @@ namespace CapaDatos
 
         public EstadoTurno buscarPorId(int id)
         {
-            EstadoTurno estado = new EstadoTurno();
-            //ir a la base de datos
-            return estado;
+            EstadoTurno estadoTurno = new EstadoTurno();
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from estado_turnos where id = " + id);
+            if (dr.Read())
+            {
+                estadoTurno.id = Int32.Parse(dr["id"].ToString());
+                estadoTurno.nombre = dr["nombre"].ToString();
+            }
+            conexion.cerrarConexion();
+            return estadoTurno;
+        }
+
+        public EstadoTurno buscarPorNombre(string nombre)
+        {
+            EstadoTurno estadoTurno = new EstadoTurno();
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from estado_turnos where nombre = '" + nombre + "'");
+            if (dr.Read())
+            {
+                estadoTurno.id = Int32.Parse(dr["id"].ToString());
+                estadoTurno.nombre = dr["nombre"].ToString();
+            }
+            conexion.cerrarConexion();
+            return estadoTurno;
         }
     }
 }

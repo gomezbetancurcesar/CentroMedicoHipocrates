@@ -57,5 +57,44 @@ namespace CapaDatos
             conexion.cerrarConexion();
             return especialidades;
         }
+
+        public Boolean guardar(Especialidad especialidad)
+        {
+            Conexion conexion = new Conexion();
+            bool guardo = false;
+            int id = conexion.getSequenceValor("SEQ_ESPECIALIDADES", 1);
+            conexion.cerrarConexion();
+
+            string query = "insert into ESPECIALIDADES (id, nombre) values (";
+            query += id + ",";
+            query += "'" + especialidad.ioNombre + "')";
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+
+            if (filasIngresadas > 0)
+            {
+                guardo = true;
+            }
+            return guardo;
+        }
+
+        public Boolean actualizar(Especialidad especialidad)
+        {
+            bool guarda = false;
+            Conexion conexion = new Conexion();
+            string query = "update ESPECIALIDADES set";
+            query += " id=" + especialidad.ioId.ToString() + ",";
+            query += " nombre='" + especialidad.ioNombre + "'";
+            query += " where id=" + especialidad.ioId.ToString();
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                guarda = true;
+            }
+            return guarda;
+        }
     }
 }

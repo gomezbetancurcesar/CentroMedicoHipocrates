@@ -23,3 +23,5 @@ C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoH
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoDias.resources
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoTurnos.resources
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\bin\Debug\Oracle.DataAccess.dll
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoIsapres.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoOficinas.resources

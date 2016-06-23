@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.DataAccess.Client;
 
 namespace CapaDatos
 {
@@ -39,19 +40,73 @@ namespace CapaDatos
         {
             List<Oficina> oficinas = new List<Oficina>();
             Oficina oficina;
-            //ir a la base
-            oficina = new Oficina();
-
-
-            oficinas.Add(oficina);
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from oficinas");
+            while (dr.Read())
+            {
+                oficina = new Oficina();
+                oficina.id = Int32.Parse(dr["id"].ToString());
+                oficina.piso = Int32.Parse(dr["piso"].ToString());
+                oficina.numero = dr["numero"].ToString();
+                oficinas.Add(oficina);
+            }
+            conexion.cerrarConexion();
             return oficinas;
         }
 
         public Oficina buscarPorId(int id)
         {
             Oficina oficina = new Oficina();
-            //ir a la base
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from oficinas where id = " + id);
+            if (dr.Read())
+            {
+                oficina.id = Int32.Parse(dr["id"].ToString());
+                oficina.piso = Int32.Parse(dr["piso"].ToString());
+                oficina.numero = dr["numero"].ToString();
+            }
+            conexion.cerrarConexion();
             return oficina;
+        }
+
+        public Boolean guardar(Oficina oficina)
+        {
+            bool guarda = false;
+            Conexion conexion = new Conexion();
+            int id = conexion.getSequenceValor("SEQ_OFICINAS", 1);
+            conexion.cerrarConexion();
+
+            string query = "insert into OFICINAS (id, piso, numero) values (";
+            query += id + ",";
+            query += oficina.ioPiso + ",";
+            query += "'" + oficina.ioNumero+ "')";
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                guarda = true;
+            }
+            return guarda;
+        }
+
+        public Boolean actualizar(Oficina oficina)
+        {
+            bool guarda = false;
+            Conexion conexion = new Conexion();
+            string query = "update OFICINAS set";
+            query +=" id=" + oficina.ioId.ToString() + ",";
+            query += " piso=" + oficina.ioPiso.ToString() + ",";
+            query += " numero='" + oficina.ioNumero + "'";
+            query += " where id=" + oficina.ioId.ToString();
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                guarda = true;
+            }
+            return guarda;
         }
     }
 }

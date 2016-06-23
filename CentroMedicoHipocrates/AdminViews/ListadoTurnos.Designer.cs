@@ -33,24 +33,25 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.lblUsuario = new System.Windows.Forms.Label();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.lblBottom = new System.Windows.Forms.Label();
             this.lblTop = new System.Windows.Forms.Label();
             this.GridTurnos = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstadoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelAgregar = new System.Windows.Forms.Panel();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.comboEstados = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.txtHoraFin = new System.Windows.Forms.DateTimePicker();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.txtHoraInicio = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoraInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MenuContexto.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridTurnos)).BeginInit();
@@ -78,8 +79,6 @@
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel1.Controls.Add(this.btnEliminar);
             this.panel1.Controls.Add(this.lblUsuario);
-            this.panel1.Controls.Add(this.btnModificar);
-            this.panel1.Controls.Add(this.btnAgregar);
             this.panel1.Controls.Add(this.lblBottom);
             this.panel1.Controls.Add(this.lblTop);
             this.panel1.Location = new System.Drawing.Point(0, 27);
@@ -105,26 +104,6 @@
             this.lblUsuario.Size = new System.Drawing.Size(43, 13);
             this.lblUsuario.TabIndex = 4;
             this.lblUsuario.Text = "Usuario";
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnModificar.Location = new System.Drawing.Point(352, 16);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(70, 62);
-            this.btnModificar.TabIndex = 12;
-            this.btnModificar.Text = "button1";
-            this.btnModificar.UseVisualStyleBackColor = false;
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.BackColor = System.Drawing.Color.LimeGreen;
-            this.btnAgregar.Location = new System.Drawing.Point(261, 17);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(70, 62);
-            this.btnAgregar.TabIndex = 11;
-            this.btnAgregar.Text = "button1";
-            this.btnAgregar.UseVisualStyleBackColor = false;
             // 
             // lblBottom
             // 
@@ -152,31 +131,84 @@
             this.GridTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
+            this.EstadoId,
             this.HoraInicio,
             this.HoraFin,
             this.Estado});
             this.GridTurnos.Location = new System.Drawing.Point(0, 125);
             this.GridTurnos.MultiSelect = false;
             this.GridTurnos.Name = "GridTurnos";
-            this.GridTurnos.RowHeadersVisible = false;
             this.GridTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridTurnos.Size = new System.Drawing.Size(422, 179);
+            this.GridTurnos.Size = new System.Drawing.Size(436, 179);
             this.GridTurnos.TabIndex = 12;
-            this.GridTurnos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridTurnos_CellContentClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // EstadoId
+            // 
+            this.EstadoId.HeaderText = "EstadoId";
+            this.EstadoId.Name = "EstadoId";
+            this.EstadoId.Visible = false;
+            // 
+            // HoraInicio
+            // 
+            this.HoraInicio.HeaderText = "Hora Inicio";
+            this.HoraInicio.Name = "HoraInicio";
+            this.HoraInicio.ReadOnly = true;
+            this.HoraInicio.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // HoraFin
+            // 
+            this.HoraFin.HeaderText = "Hora Fin";
+            this.HoraFin.Name = "HoraFin";
+            this.HoraFin.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
             // 
             // panelAgregar
             // 
+            this.panelAgregar.Controls.Add(this.txtId);
+            this.panelAgregar.Controls.Add(this.btnCancelar);
             this.panelAgregar.Controls.Add(this.comboEstados);
-            this.panelAgregar.Controls.Add(this.dateTimePicker2);
-            this.panelAgregar.Controls.Add(this.dateTimePicker1);
+            this.panelAgregar.Controls.Add(this.txtHoraFin);
+            this.panelAgregar.Controls.Add(this.btnGuardar);
+            this.panelAgregar.Controls.Add(this.txtHoraInicio);
             this.panelAgregar.Controls.Add(this.label4);
             this.panelAgregar.Controls.Add(this.label3);
             this.panelAgregar.Controls.Add(this.label2);
             this.panelAgregar.Controls.Add(this.label1);
             this.panelAgregar.Location = new System.Drawing.Point(442, 133);
             this.panelAgregar.Name = "panelAgregar";
-            this.panelAgregar.Size = new System.Drawing.Size(405, 157);
+            this.panelAgregar.Size = new System.Drawing.Size(405, 171);
             this.panelAgregar.TabIndex = 13;
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(327, 130);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(35, 20);
+            this.txtId.TabIndex = 10;
+            this.txtId.Text = "0";
+            this.txtId.Visible = false;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(222, 127);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Visible = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // comboEstados
             // 
@@ -186,25 +218,35 @@
             this.comboEstados.Size = new System.Drawing.Size(136, 21);
             this.comboEstados.TabIndex = 8;
             // 
-            // dateTimePicker2
+            // txtHoraFin
             // 
-            this.dateTimePicker2.CustomFormat = "HH:mm";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(118, 62);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.ShowUpDown = true;
-            this.dateTimePicker2.Size = new System.Drawing.Size(57, 20);
-            this.dateTimePicker2.TabIndex = 7;
+            this.txtHoraFin.CustomFormat = "HH:mm";
+            this.txtHoraFin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtHoraFin.Location = new System.Drawing.Point(118, 62);
+            this.txtHoraFin.Name = "txtHoraFin";
+            this.txtHoraFin.ShowUpDown = true;
+            this.txtHoraFin.Size = new System.Drawing.Size(57, 20);
+            this.txtHoraFin.TabIndex = 7;
             // 
-            // dateTimePicker1
+            // btnGuardar
             // 
-            this.dateTimePicker1.CustomFormat = "HH:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(118, 39);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(57, 20);
-            this.dateTimePicker1.TabIndex = 6;
+            this.btnGuardar.Location = new System.Drawing.Point(118, 127);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 3;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // txtHoraInicio
+            // 
+            this.txtHoraInicio.CustomFormat = "HH:mm";
+            this.txtHoraInicio.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtHoraInicio.Location = new System.Drawing.Point(118, 39);
+            this.txtHoraInicio.Name = "txtHoraInicio";
+            this.txtHoraInicio.ShowUpDown = true;
+            this.txtHoraInicio.Size = new System.Drawing.Size(57, 20);
+            this.txtHoraInicio.TabIndex = 6;
             // 
             // label4
             // 
@@ -242,40 +284,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Datos";
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Location = new System.Drawing.Point(560, 306);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardar.TabIndex = 3;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
-            // 
-            // HoraInicio
-            // 
-            this.HoraInicio.HeaderText = "Hora Inicio";
-            this.HoraInicio.Name = "HoraInicio";
-            this.HoraInicio.ReadOnly = true;
-            this.HoraInicio.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // HoraFin
-            // 
-            this.HoraFin.HeaderText = "Hora Fin";
-            this.HoraFin.Name = "HoraFin";
-            this.HoraFin.ReadOnly = true;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            // 
             // ListadoTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -283,7 +291,6 @@
             this.ClientSize = new System.Drawing.Size(902, 437);
             this.Controls.Add(this.panelAgregar);
             this.Controls.Add(this.GridTurnos);
-            this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
             this.Name = "ListadoTurnos";
@@ -308,8 +315,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Label lblUsuario;
-        private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Label lblBottom;
         private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.DataGridView GridTurnos;
@@ -318,11 +323,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboEstados;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker txtHoraFin;
+        private System.Windows.Forms.DateTimePicker txtHoraInicio;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstadoId;
         private System.Windows.Forms.DataGridViewTextBoxColumn HoraInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn HoraFin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.DataAccess.Client;
 
 namespace CapaDatos
 {
@@ -47,6 +48,17 @@ namespace CapaDatos
         public Turno buscarPorId(int id)
         {
             Turno turno = new Turno();
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from turnos where id = "+ id);
+            if (dr.Read())
+            {
+                turno.ioId = Int32.Parse(dr["id"].ToString());
+                turno.ioEstadoTurnoId = Int32.Parse(dr["estado_turno_id"].ToString());
+                turno.ioHoraInicio = dr["hora_inicio"].ToString();
+                turno.ioHoraFin = dr["hora_fin"].ToString();
+                turno.EstadoTurno = new EstadoTurno().buscarPorId(turno.ioEstadoTurnoId);
+            }
+            conexion.cerrarConexion();
             return turno;
         }
 
@@ -54,47 +66,62 @@ namespace CapaDatos
         {
             List<Turno> turnos = new List<Turno>();
             Turno turno;
-            //Ir a buscar a la base!
-            turno = new Turno();
-            turno.hora_inicio = "08:30";
-            turno.hora_fin = "09:00";
-            turnos.Add(turno);
-
-            turno = new Turno();
-            turno.hora_inicio = "09:00";
-            turno.hora_fin = "09:30";
-            turnos.Add(turno);
-
-            turno = new Turno();
-            turno.hora_inicio = "09:30";
-            turno.hora_fin = "10:00";
-            turnos.Add(turno);
-
-            turno = new Turno();
-            turno.hora_inicio = "10:00";
-            turno.hora_fin = "10:30";
-            turnos.Add(turno);
-
-            turno = new Turno();
-            turno.hora_inicio = "10:30";
-            turno.hora_fin = "11:00";
-            turnos.Add(turno);
-
-            turno = new Turno();
-            turno.hora_inicio = "11:00";
-            turno.hora_fin = "11:30";
-            turnos.Add(turno);
-
-            turno = new Turno();
-            turno.hora_inicio = "11:30";
-            turno.hora_fin = "12:00";
-            turnos.Add(turno);
-
-            turno = new Turno();
-            turno.hora_inicio = "12:00";
-            turno.hora_fin = "12:00";
-            turnos.Add(turno);
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from turnos");
+            while (dr.Read())
+            {
+                turno = new Turno();
+                turno.ioId = Int32.Parse(dr["id"].ToString());
+                turno.ioEstadoTurnoId = Int32.Parse(dr["estado_turno_id"].ToString());
+                turno.ioHoraInicio = dr["hora_inicio"].ToString();
+                turno.ioHoraFin = dr["hora_fin"].ToString();
+                turno.EstadoTurno = new EstadoTurno().buscarPorId(turno.ioEstadoTurnoId);
+                turnos.Add(turno);
+            }
+            conexion.cerrarConexion();
             return turnos;
+        }
+
+        public bool guardar(Turno turno)
+        {
+            Conexion conexion = new Conexion();
+            bool almaceno = false;
+            int id = conexion.getSequenceValor("SEQ_TURNOS", 1);
+            conexion.cerrarConexion();
+
+            string query = "insert into TURNOS (id, estado_turno_id, hora_inicio, hora_fin) values (";
+            query += id + ",";
+            query += turno.ioEstadoTurnoId.ToString()+",";
+            query += "'" + turno.ioHoraInicio + "',";
+            query += "'" + turno.ioHoraFin + "')";
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if(filasIngresadas > 0)
+            {
+                almaceno = true;
+            }
+            return almaceno;
+        }
+
+        public Boolean actualizar(Turno turno)
+        {
+            bool guarda = false;
+            Conexion conexion = new Conexion();
+            string query = "update TURNOS set";
+            query += " id=" + turno.ioId.ToString() + ",";
+            query += " estado_turno_id=" + turno.ioEstadoTurnoId.ToString() + ",";
+            query += " hora_inicio='" + turno.ioHoraInicio + "',";
+            query += " hora_fin='" + turno.ioHoraFin + "'";
+            query += " where id=" + turno.ioId.ToString();
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                guarda = true;
+            }
+            return guarda;
         }
     }
 }

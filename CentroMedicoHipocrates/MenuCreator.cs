@@ -75,11 +75,13 @@ namespace CentroMedicoHipocrates
             item = new ToolStripMenuItem();
             item.Name = "opMantenedores";
             item.Text = "Mantenedores";
+            /*
                 subItem = new ToolStripMenuItem();
                 subItem.Name = "ListadoDias";
                 subItem.Text = "Dias";
                 subItem.Click += new EventHandler(ItemClicked);
             item.DropDownItems.Add(subItem);
+            */
                 subItem = new ToolStripMenuItem();
                 subItem.Name = "ListadoTurnos";
                 subItem.Text = "Turnos";
@@ -88,6 +90,16 @@ namespace CentroMedicoHipocrates
                 subItem = new ToolStripMenuItem();
                 subItem.Name = "ListadoEspecialidades";
                 subItem.Text = "Especialidades";
+                subItem.Click += new EventHandler(ItemClicked);
+            item.DropDownItems.Add(subItem);
+                subItem = new ToolStripMenuItem();
+                subItem.Name = "ListadoIsapres";
+                subItem.Text = "Isapres";
+                subItem.Click += new EventHandler(ItemClicked);
+            item.DropDownItems.Add(subItem);
+                subItem = new ToolStripMenuItem();
+                subItem.Name = "ListadoOficinas";
+                subItem.Text = "Oficinas";
                 subItem.Click += new EventHandler(ItemClicked);
             item.DropDownItems.Add(subItem);
             menu.Items.Add(item);

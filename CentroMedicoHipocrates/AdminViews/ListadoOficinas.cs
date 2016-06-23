@@ -11,19 +11,19 @@ using CapaDatos;
 
 namespace CentroMedicoHipocrates
 {
-    public partial class ListadoEspecialidades : Form
+    public partial class ListadoOficinas : Form
     {
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
-        public ListadoEspecialidades()
+        public ListadoOficinas()
         {
             InitializeComponent();
             //Dibujamos el menu correspondiente a cada rol!
             menuCreator.generarMenu(MenuContexto, session.AuthField("rol"));
 
             this.fullWidth();
-            this.dibujarGrid();
+            this.dibujarDataGrid();
         }
 
         private void fullWidth()
@@ -43,52 +43,56 @@ namespace CentroMedicoHipocrates
             Application.Exit();
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private void dibujarDataGrid()
         {
-            Especialidad especialidad = new Especialidad();
-            bool guardo = false;
-            if (!txtNombre.Text.Equals(""))
+            GridOficinas.CellClick += new DataGridViewCellEventHandler(this.OnCellClick);
+
+            List<Oficina> oficinas = new Oficina().buscarTodos();
+            GridOficinas.Rows.Clear();
+            foreach (var oficina in oficinas)
             {
-                especialidad.ioNombre = txtNombre.Text;
+                DataGridViewRow fila = (DataGridViewRow)GridOficinas.Rows[0].Clone();
+                fila.Cells[0].Value = oficina.ioId;
+                fila.Cells[1].Value = oficina.ioPiso;
+                fila.Cells[2].Value = oficina.ioNumero;
+                GridOficinas.Rows.Add(fila);
+            }
+            GridOficinas.Refresh();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            Oficina oficina = new Oficina();
+            bool guarda = false;
+            if (!txtPiso.Text.Equals("") && !txtNumero.Text.Equals(""))
+            {
+                oficina.ioPiso = Int32.Parse(txtPiso.Text);
+                oficina.ioNumero = txtNumero.Text;
+
                 if (txtId.Text.Equals("0"))
                 {
-                    guardo = especialidad.guardar(especialidad);
+                    guarda = oficina.guardar(oficina);
                 }
                 else
                 {
-                    especialidad.ioId = Int32.Parse(txtId.Text);
-                    guardo = especialidad.actualizar(especialidad);
+                    oficina.ioId = Int32.Parse(txtId.Text);
+                    guarda = oficina.actualizar(oficina);
                 }
             }
-
-            if (guardo)
+            if (guarda)
             {
-                this.dibujarGrid();
+                this.dibujarDataGrid();
                 this.limpiarFormulario();
             }
         }
 
-        public void dibujarGrid()
-        {
-            GridEspecialidades.CellClick += new DataGridViewCellEventHandler(this.OnCellClick);
-            List<Especialidad> especialidades = new Especialidad().buscarTodos();
-            GridEspecialidades.Rows.Clear();
-            foreach (var especialidad in especialidades)
-            {
-                DataGridViewRow fila = (DataGridViewRow)GridEspecialidades.Rows[0].Clone();
-                fila.Cells[0].Value = especialidad.ioId;
-                fila.Cells[1].Value = especialidad.ioNombre;
-                GridEspecialidades.Rows.Add(fila);
-            }
-            GridEspecialidades.Refresh();
-        }
-
         private void OnCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = GridEspecialidades.SelectedRows[0];
+            DataGridViewRow row = GridOficinas.SelectedRows[0];
 
             txtId.Text = row.Cells["Id"].Value.ToString();
-            txtNombre.Text = row.Cells["Nombre"].Value.ToString();
+            txtPiso.Text = row.Cells["Piso"].Value.ToString();
+            txtNumero.Text = row.Cells["Numero"].Value.ToString();
 
             btnCancelar.Visible = true;
         }
@@ -96,7 +100,8 @@ namespace CentroMedicoHipocrates
         private void limpiarFormulario()
         {
             txtId.Text = "0";
-            txtNombre.Text = "";
+            txtPiso.Text = "";
+            txtNumero.Text = "";
             btnCancelar.Visible = false;
         }
 

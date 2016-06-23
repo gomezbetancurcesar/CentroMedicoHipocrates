@@ -11,19 +11,19 @@ using CapaDatos;
 
 namespace CentroMedicoHipocrates
 {
-    public partial class ListadoEspecialidades : Form
+    public partial class ListadoIsapres : Form
     {
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
-        public ListadoEspecialidades()
+        public ListadoIsapres()
         {
             InitializeComponent();
             //Dibujamos el menu correspondiente a cada rol!
             menuCreator.generarMenu(MenuContexto, session.AuthField("rol"));
 
             this.fullWidth();
-            this.dibujarGrid();
+            this.dibujarDataGrid();
         }
 
         private void fullWidth()
@@ -43,49 +43,48 @@ namespace CentroMedicoHipocrates
             Application.Exit();
         }
 
-        private void btnAgregar_Click(object sender, EventArgs e)
+        private void dibujarDataGrid()
         {
-            Especialidad especialidad = new Especialidad();
+            GridIsapres.CellClick += new DataGridViewCellEventHandler(this.OnCellClick);
+            List<Isapre> isapres = new Isapre().buscarTodos();
+            GridIsapres.Rows.Clear();
+            foreach (var isapre in isapres)
+            {
+                DataGridViewRow fila = (DataGridViewRow)GridIsapres.Rows[0].Clone();
+                fila.Cells[0].Value = isapre.ioId;
+                fila.Cells[1].Value = isapre.ioNombre;
+                GridIsapres.Rows.Add(fila);
+            }
+            GridIsapres.Refresh();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            Isapre isapre = new Isapre();
             bool guardo = false;
             if (!txtNombre.Text.Equals(""))
             {
-                especialidad.ioNombre = txtNombre.Text;
+                isapre.ioNombre = txtNombre.Text;
                 if (txtId.Text.Equals("0"))
                 {
-                    guardo = especialidad.guardar(especialidad);
-                }
-                else
+                    guardo = isapre.guardar(isapre);
+                }else
                 {
-                    especialidad.ioId = Int32.Parse(txtId.Text);
-                    guardo = especialidad.actualizar(especialidad);
+                    isapre.ioId = Int32.Parse(txtId.Text);
+                    guardo = isapre.actualizar(isapre);
                 }
             }
-
+            
             if (guardo)
             {
-                this.dibujarGrid();
+                this.dibujarDataGrid();
                 this.limpiarFormulario();
             }
         }
 
-        public void dibujarGrid()
-        {
-            GridEspecialidades.CellClick += new DataGridViewCellEventHandler(this.OnCellClick);
-            List<Especialidad> especialidades = new Especialidad().buscarTodos();
-            GridEspecialidades.Rows.Clear();
-            foreach (var especialidad in especialidades)
-            {
-                DataGridViewRow fila = (DataGridViewRow)GridEspecialidades.Rows[0].Clone();
-                fila.Cells[0].Value = especialidad.ioId;
-                fila.Cells[1].Value = especialidad.ioNombre;
-                GridEspecialidades.Rows.Add(fila);
-            }
-            GridEspecialidades.Refresh();
-        }
-
         private void OnCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = GridEspecialidades.SelectedRows[0];
+            DataGridViewRow row = GridIsapres.SelectedRows[0];
 
             txtId.Text = row.Cells["Id"].Value.ToString();
             txtNombre.Text = row.Cells["Nombre"].Value.ToString();
