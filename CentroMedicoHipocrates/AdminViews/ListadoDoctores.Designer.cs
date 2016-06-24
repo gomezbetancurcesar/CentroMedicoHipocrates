@@ -1,6 +1,6 @@
 ﻿namespace CentroMedicoHipocrates
 {
-    partial class ListadoMedicos
+    partial class ListadoDoctores
     {
         /// <summary>
         /// Required designer variable.
@@ -38,6 +38,7 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
             this.lblTop = new System.Windows.Forms.Label();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rut = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ApellidoPaterno = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +56,7 @@
             this.menuToolStripMenuItem});
             this.MenuContexto.Location = new System.Drawing.Point(0, 0);
             this.MenuContexto.Name = "MenuContexto";
-            this.MenuContexto.Size = new System.Drawing.Size(673, 24);
+            this.MenuContexto.Size = new System.Drawing.Size(777, 24);
             this.MenuContexto.TabIndex = 2;
             this.MenuContexto.Text = "menuStrip1";
             // 
@@ -68,10 +69,12 @@
             // GridMedicos
             // 
             this.GridMedicos.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.GridMedicos.AllowUserToAddRows = false;
             this.GridMedicos.BackgroundColor = System.Drawing.Color.Silver;
             this.GridMedicos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.GridMedicos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridMedicos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.Rut,
             this.Nombre,
             this.ApellidoPaterno,
@@ -157,6 +160,12 @@
             this.lblTop.Size = new System.Drawing.Size(500, 2);
             this.lblTop.TabIndex = 2;
             // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
             // Rut
             // 
             this.Rut.HeaderText = "Rut";
@@ -193,15 +202,15 @@
             this.FechaNacimiento.Name = "FechaNacimiento";
             this.FechaNacimiento.ReadOnly = true;
             // 
-            // ListadoMedicos
+            // ListadoDoctores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 360);
+            this.ClientSize = new System.Drawing.Size(777, 384);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.GridMedicos);
             this.Controls.Add(this.MenuContexto);
-            this.Name = "ListadoMedicos";
+            this.Name = "ListadoDoctores";
             this.Text = "ListadoMedicos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.MenuContexto.ResumeLayout(false);
@@ -226,6 +235,7 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Rut;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn ApellidoPaterno;

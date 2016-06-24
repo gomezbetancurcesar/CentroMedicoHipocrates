@@ -117,6 +117,7 @@
             // GridIsapres
             // 
             this.GridIsapres.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.GridIsapres.AllowUserToAddRows = false;
             this.GridIsapres.BackgroundColor = System.Drawing.Color.Silver;
             this.GridIsapres.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.GridIsapres.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

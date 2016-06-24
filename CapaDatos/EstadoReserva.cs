@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.DataAccess.Client;
 
 namespace CapaDatos
 {
@@ -38,19 +39,46 @@ namespace CapaDatos
         public List<EstadoReserva> buscarTodos()
         {
             List<EstadoReserva> estados = new List<EstadoReserva>();
-            EstadoReserva estado;
-
-            //ir a la base
-            estado = new EstadoReserva();
-            estados.Add(estado);
+            EstadoReserva estadoTurno;
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from estado_reservas");
+            while (dr.Read())
+            {
+                estadoTurno = new EstadoReserva();
+                estadoTurno.id = Int32.Parse(dr["id"].ToString());
+                estadoTurno.nombre = dr["nombre"].ToString();
+                estados.Add(estadoTurno);
+            }
+            conexion.cerrarConexion();
             return estados;
         }
 
         public EstadoReserva buscarPorId(int id)
         {
-            EstadoReserva estado = new EstadoReserva();
-            //ir a la base de datos
-            return estado;
+            EstadoReserva estadoTurno = new EstadoReserva();
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from estado_reservas where id = " + id);
+            if (dr.Read())
+            {
+                estadoTurno.id = Int32.Parse(dr["id"].ToString());
+                estadoTurno.nombre = dr["nombre"].ToString();
+            }
+            conexion.cerrarConexion();
+            return estadoTurno;
+        }
+
+        public EstadoReserva buscarPorNombre(string nombre)
+        {
+            EstadoReserva estadoTurno = new EstadoReserva();
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from estado_reservas where nombre = '" + nombre + "'");
+            if (dr.Read())
+            {
+                estadoTurno.id = Int32.Parse(dr["id"].ToString());
+                estadoTurno.nombre = dr["nombre"].ToString();
+            }
+            conexion.cerrarConexion();
+            return estadoTurno;
         }
     }
 }

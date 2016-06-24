@@ -54,6 +54,21 @@ namespace CapaDatos
             return oficinas;
         }
 
+        public Oficina buscarPorNumero(string numero)
+        {
+            Oficina oficina = new Oficina();
+            Conexion conexion = new Conexion();
+            string query = "select * from oficinas where numero='" + numero + "'";
+            OracleDataReader dr = conexion.consultar(query);
+            if (dr.Read())
+            {
+                oficina.ioId = Int32.Parse(dr["id"].ToString());
+                oficina.ioNumero = dr["numero"].ToString();
+            }
+            conexion.cerrarConexion();
+            return oficina;
+        }
+
         public Oficina buscarPorId(int id)
         {
             Oficina oficina = new Oficina();

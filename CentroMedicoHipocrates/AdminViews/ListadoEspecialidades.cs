@@ -75,10 +75,10 @@ namespace CentroMedicoHipocrates
             GridEspecialidades.Rows.Clear();
             foreach (var especialidad in especialidades)
             {
-                DataGridViewRow fila = (DataGridViewRow)GridEspecialidades.Rows[0].Clone();
+                int indice = GridEspecialidades.Rows.Add();
+                DataGridViewRow fila = GridEspecialidades.Rows[indice];
                 fila.Cells[0].Value = especialidad.ioId;
                 fila.Cells[1].Value = especialidad.ioNombre;
-                GridEspecialidades.Rows.Add(fila);
             }
             GridEspecialidades.Refresh();
         }

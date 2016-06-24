@@ -50,10 +50,10 @@ namespace CentroMedicoHipocrates
             GridIsapres.Rows.Clear();
             foreach (var isapre in isapres)
             {
-                DataGridViewRow fila = (DataGridViewRow)GridIsapres.Rows[0].Clone();
+                int indice = GridIsapres.Rows.Add();
+                DataGridViewRow fila = GridIsapres.Rows[indice];
                 fila.Cells[0].Value = isapre.ioId;
                 fila.Cells[1].Value = isapre.ioNombre;
-                GridIsapres.Rows.Add(fila);
             }
             GridIsapres.Refresh();
         }

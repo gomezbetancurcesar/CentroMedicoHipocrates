@@ -88,13 +88,13 @@ namespace CentroMedicoHipocrates
             GridTurnos.Rows.Clear();
             foreach (var turno in turnos)
             {
-                DataGridViewRow fila = (DataGridViewRow)GridTurnos.Rows[0].Clone();
+                int indice = GridTurnos.Rows.Add();
+                DataGridViewRow fila = GridTurnos.Rows[indice];
                 fila.Cells[0].Value = turno.ioId;
                 fila.Cells[1].Value = turno.ioEstadoTurnoId;
                 fila.Cells[2].Value = turno.ioHoraInicio;
                 fila.Cells[3].Value = turno.ioHoraFin;
                 fila.Cells[4].Value = turno.ioEstadoTurno.ioNombre;
-                GridTurnos.Rows.Add(fila);
             }
             GridTurnos.Refresh();
         }

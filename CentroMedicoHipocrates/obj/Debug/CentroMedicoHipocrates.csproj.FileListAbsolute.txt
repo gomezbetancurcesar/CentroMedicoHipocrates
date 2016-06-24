@@ -8,7 +8,6 @@ C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoH
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.exe
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.pdb
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.dashBoard.resources
-C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoMedicos.resources
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.AgregarMedico.resources
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ModificarMedico.resources
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.AdminTurnos.resources
@@ -25,3 +24,4 @@ C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoH
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\bin\Debug\Oracle.DataAccess.dll
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoIsapres.resources
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoOficinas.resources
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CentroMedicoHipocrates\obj\Debug\CentroMedicoHipocrates.ListadoDoctores.resources

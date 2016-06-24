@@ -124,6 +124,7 @@
             // GridTurnos
             // 
             this.GridTurnos.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.GridTurnos.AllowUserToAddRows = false;
             this.GridTurnos.AllowUserToResizeColumns = false;
             this.GridTurnos.AllowUserToResizeRows = false;
             this.GridTurnos.BackgroundColor = System.Drawing.Color.Silver;

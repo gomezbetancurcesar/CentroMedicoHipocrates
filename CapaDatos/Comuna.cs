@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.DataAccess.Client;
 
 namespace CapaDatos
 {
@@ -14,8 +15,7 @@ namespace CapaDatos
         private Provincia Provincia;
 
         public Comuna()
-        {
-
+        { 
         }
 
         public int ioId
@@ -45,8 +45,54 @@ namespace CapaDatos
         public List<Comuna> buscarTodos(int provinciaId = -1)
         {
             List<Comuna> comunas = new List<Comuna>();
-            //IR a buscar a la base
+            Comuna comuna;
+            Conexion conexion = new Conexion();
+            string query = "select * from comunas";
+            if(provinciaId > 0)
+            {
+                query = " where provincia_id = " + provinciaId;
+            }
+            OracleDataReader dr = conexion.consultar(query);
+            while (dr.Read())
+            {
+                comuna = new Comuna();
+                comuna.ioId = Int32.Parse(dr["id"].ToString());
+                comuna.ioProvinciaId = Int32.Parse(dr["provincia_id"].ToString());
+                comuna.nombre = dr["nombre"].ToString();
+                comunas.Add(comuna);
+            }
+            conexion.cerrarConexion();
             return comunas;
+        }
+
+        public Comuna buscarPorNombre(string nombre)
+        {
+            Comuna comuna = new Comuna();
+            Conexion conexion = new Conexion();
+            string query = "select * from comunas where nombre='" + nombre + "'";
+            OracleDataReader dr = conexion.consultar(query);
+            if (dr.Read())
+            {
+                comuna.ioId = Int32.Parse(dr["id"].ToString());
+                comuna.ioNombre = dr["nombre"].ToString();
+            }
+            conexion.cerrarConexion();
+            return comuna;
+        }
+
+        public Comuna buscarPorId(int id)
+        {
+            Comuna comuna = new Comuna();
+            Conexion conexion = new Conexion();
+            string query = "select * from comunas where id=" + id;
+            OracleDataReader dr = conexion.consultar(query);
+            if (dr.Read())
+            {
+                comuna.ioId = Int32.Parse(dr["id"].ToString());
+                comuna.ioNombre = dr["nombre"].ToString();
+            }
+            conexion.cerrarConexion();
+            return comuna;
         }
     }
 }

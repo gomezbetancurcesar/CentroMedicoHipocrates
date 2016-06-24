@@ -112,11 +112,11 @@
     <Compile Include="DashBoard.Designer.cs">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminViews\ListadoMedicos.cs">
+    <Compile Include="AdminViews\ListadoDoctores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminViews\ListadoMedicos.Designer.cs">
-      <DependentUpon>ListadoMedicos.cs</DependentUpon>
+    <Compile Include="AdminViews\ListadoDoctores.Designer.cs">
+      <DependentUpon>ListadoDoctores.cs</DependentUpon>
     </Compile>
     <Compile Include="ExtendedForm.cs">
       <SubType>Form</SubType>
@@ -167,8 +167,8 @@
     <EmbeddedResource Include="AdminViews\ListadoIsapres.resx">
       <DependentUpon>ListadoIsapres.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminViews\ListadoMedicos.resx">
-      <DependentUpon>ListadoMedicos.cs</DependentUpon>
+    <EmbeddedResource Include="AdminViews\ListadoDoctores.resx">
+      <DependentUpon>ListadoDoctores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminViews\ListadoOficinas.resx">
       <DependentUpon>ListadoOficinas.cs</DependentUpon>

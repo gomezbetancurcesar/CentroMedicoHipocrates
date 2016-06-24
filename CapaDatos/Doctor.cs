@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.DataAccess.Client;
 
 namespace CapaDatos
 {
@@ -11,12 +12,19 @@ namespace CapaDatos
         private Usuario Usuario = new Usuario();
         private Especialidad Especialidad = new Especialidad();
         private Oficina Oficina = new Oficina();
+        private int id;
         private int especialidad_id;
         private int usuario_id;
         private int oficina_id;
 
         public Doctor()
         {
+        }
+
+        public int ioId
+        {
+            set { this.id = value; }
+            get { return this.id; }
         }
 
         public int ioEspecialidadId
@@ -57,19 +65,26 @@ namespace CapaDatos
 
         public List<Doctor> buscarTodos()
         {
-            List<Doctor> medicos = new List<Doctor>();
-            Doctor medico;
+            List<Doctor> doctores = new List<Doctor>();
+            Doctor doctor;
+            Conexion conexion = new Conexion();
+            string query = "select * from doctores";
+            OracleDataReader dr = conexion.consultar(query);
+            while (dr.Read())
+            {
+                doctor = new Doctor();
+                doctor.ioId = Int32.Parse(dr["id"].ToString());
+                doctor.ioUsuarioId = Int32.Parse(dr["usuario_id"].ToString());
+                doctor.ioEspecialidadId = Int32.Parse(dr["especialidad_id"].ToString());
+                doctor.ioOficinaId = Int32.Parse(dr["oficina_id"].ToString());
 
-            medico = new Doctor();
-            medico.ioEspecialidadId = 1;
-            medico.ioUsuarioId = 1;
-            medico.ioOficinaId = 1;
-            medico.Usuario = new Usuario().buscarPorId(medico.ioUsuarioId);
-            medico.Especialidad = new Especialidad().buscarPorId(medico.ioEspecialidadId);
-            medico.Oficina = new Oficina().buscarPorId(medico.ioOficinaId);
-            medicos.Add(medico);
-
-            return medicos;
+                doctor.ioUsuario = new Usuario().buscarPorId(doctor.ioUsuarioId);
+                doctor.ioEspecialidad = new Especialidad().buscarPorId(doctor.ioEspecialidadId);
+                doctor.ioOficina = new Oficina().buscarPorId(doctor.ioOficinaId);
+                doctores.Add(doctor);
+            }
+            conexion.cerrarConexion();
+            return doctores;
         }
 
         public Doctor buscarPorRut(string rut)
@@ -89,6 +104,79 @@ namespace CapaDatos
             medico.Usuario = new Usuario().buscarPorId(personaId);
             medico.Especialidad = new Especialidad().buscarPorId(medico.ioEspecialidadId);
             return medico;
+        }
+
+        public Doctor buscarPorId(int id)
+        {
+            Doctor doctor = new Doctor();
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from doctores where id="+ id);
+            if (dr.Read())
+            {
+                doctor.ioId = Int32.Parse(dr["id"].ToString());
+                doctor.ioEspecialidadId = Int32.Parse(dr["especialidad_id"].ToString());
+                doctor.ioOficinaId = Int32.Parse(dr["oficina_id"].ToString());
+                doctor.ioUsuarioId = Int32.Parse(dr["usuario_id"].ToString());
+
+                doctor.ioUsuario = new Usuario().buscarPorId(doctor.ioUsuarioId);
+                doctor.ioEspecialidad = new Especialidad().buscarPorId(doctor.ioEspecialidadId);
+                doctor.ioOficina = new Oficina().buscarPorId(doctor.ioOficinaId);
+            }
+            conexion.cerrarConexion();
+            return doctor;
+        }
+
+        public Boolean guardar(Doctor doctor)
+        {
+            bool guardo = false;
+            Conexion conexion = new Conexion();
+            bool guardaUsuario = new Usuario().guardar(doctor.ioUsuario);
+            if (guardaUsuario)
+            {
+                int idUsuario = conexion.getSequenceValor("SEQ_USUARIOS");
+                conexion.cerrarConexion();
+
+                int id = conexion.getSequenceValor("SEQ_DOCTORES", 1);
+                conexion.cerrarConexion();
+
+                string query = "insert into doctores (id, usuario_id, especialidad_id, oficina_id) values (";
+                query += id + ",";
+                query += idUsuario + ",";
+                query += doctor.ioEspecialidadId + ",";
+                query += doctor.ioOficinaId + ")";
+
+                int filasIngresadas = conexion.ingresar(query);
+                conexion.cerrarConexion();
+                if (filasIngresadas > 0)
+                {
+                    guardo = true;
+                }
+            }
+            return guardo;
+        }
+
+        public Boolean actualizar(Doctor doctor)
+        {
+            bool guardo = false;
+            Conexion conexion = new Conexion();
+
+            bool guardaUsuario = new Usuario().actualizar(doctor.ioUsuario);
+            if (guardaUsuario)
+            {
+                string query = "update doctores set";
+                query += " id=" + doctor.ioId.ToString() + ",";
+                query += " especialidad_id=" + doctor.ioEspecialidadId.ToString() + ",";
+                query += " oficina_id=" + doctor.ioOficinaId.ToString();
+                query += " where id=" + doctor.ioId.ToString();
+                Console.WriteLine(query);
+                int filasIngresadas = conexion.ingresar(query);
+                conexion.cerrarConexion();
+                if (filasIngresadas > 0)
+                {
+                    guardo = true;
+                }
+            }
+            return guardo;
         }
     }
 }

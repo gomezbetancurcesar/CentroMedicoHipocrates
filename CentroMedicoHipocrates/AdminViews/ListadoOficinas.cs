@@ -51,11 +51,11 @@ namespace CentroMedicoHipocrates
             GridOficinas.Rows.Clear();
             foreach (var oficina in oficinas)
             {
-                DataGridViewRow fila = (DataGridViewRow)GridOficinas.Rows[0].Clone();
+                int indice = GridOficinas.Rows.Add();
+                DataGridViewRow fila = GridOficinas.Rows[indice];
                 fila.Cells[0].Value = oficina.ioId;
                 fila.Cells[1].Value = oficina.ioPiso;
                 fila.Cells[2].Value = oficina.ioNumero;
-                GridOficinas.Rows.Add(fila);
             }
             GridOficinas.Refresh();
         }

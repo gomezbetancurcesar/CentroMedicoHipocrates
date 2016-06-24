@@ -56,8 +56,8 @@ namespace CentroMedicoHipocrates
             item.Name = "opMantenedores";
             item.Text = "Funcionarios";
                 subItem = new ToolStripMenuItem();
-                subItem.Name = "ListadoMedicos";
-                subItem.Text = "Medicos";
+                subItem.Name = "ListadoDoctores";
+                subItem.Text = "Doctores";
                 subItem.Click += new EventHandler(ItemClicked);
             item.DropDownItems.Add(subItem);
                 subItem = new ToolStripMenuItem();

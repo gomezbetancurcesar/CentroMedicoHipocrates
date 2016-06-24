@@ -39,11 +39,17 @@ namespace CapaDatos
         public List<EstadoTurno> buscarTodos()
         {
             List<EstadoTurno> estados = new List<EstadoTurno>();
-            EstadoTurno estado;
-
-            //ir a la base
-            estado = new EstadoTurno();
-            estados.Add(estado);
+            EstadoTurno estadoTurno;
+            Conexion conexion = new Conexion();
+            OracleDataReader dr = conexion.consultar("select * from estado_turnos");
+            while (dr.Read())
+            {
+                estadoTurno = new EstadoTurno();
+                estadoTurno.id = Int32.Parse(dr["id"].ToString());
+                estadoTurno.nombre = dr["nombre"].ToString();
+                estados.Add(estadoTurno);
+            }
+            conexion.cerrarConexion();
             return estados;
         }
 

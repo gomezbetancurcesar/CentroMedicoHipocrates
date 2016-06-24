@@ -11,12 +11,12 @@ using CapaDatos;
 
 namespace CentroMedicoHipocrates
 {
-    public partial class ListadoMedicos : Form
+    public partial class ListadoDoctores : Form
     {
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
-        public ListadoMedicos()
+        public ListadoDoctores()
         {
             InitializeComponent();
             //Dibujamos el menu correspondiente a cada rol!
@@ -26,14 +26,15 @@ namespace CentroMedicoHipocrates
 
             foreach (var doctor in doctores)
             {
-                DataGridViewRow fila = (DataGridViewRow)GridMedicos.Rows[0].Clone();
-                fila.Cells[0].Value = doctor.ioUsuario.ioRut;
-                fila.Cells[1].Value = doctor.ioUsuario.ioNombre;
-                fila.Cells[2].Value = doctor.ioUsuario.ioApellidoPaterno;
-                fila.Cells[3].Value = doctor.ioUsuario.ioApellidoMaterno;
-                fila.Cells[4].Value = doctor.ioEspecialidad.ioNombre;
-                fila.Cells[5].Value = doctor.ioUsuario.ioFechaNacimento.ToString();
-                GridMedicos.Rows.Add(fila);
+                int indice = GridMedicos.Rows.Add();
+                DataGridViewRow fila = GridMedicos.Rows[indice];
+                fila.Cells[0].Value = doctor.ioId;
+                fila.Cells[1].Value = doctor.ioUsuario.ioRut;
+                fila.Cells[2].Value = doctor.ioUsuario.ioNombre;
+                fila.Cells[3].Value = doctor.ioUsuario.ioApellidoPaterno;
+                fila.Cells[4].Value = doctor.ioUsuario.ioApellidoMaterno;
+                fila.Cells[5].Value = doctor.ioEspecialidad.ioNombre;
+                fila.Cells[6].Value = doctor.ioUsuario.ioFechaNacimento.Date.ToString("dd/MM/yyyy");
             }
             //Redibujamos la tabla de los medicos
             GridMedicos.Refresh();
@@ -75,7 +76,10 @@ namespace CentroMedicoHipocrates
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            ModificarMedico vistaModificar = new ModificarMedico();
+            DataGridViewRow row = GridMedicos.SelectedRows[0];
+            int id = Int32.Parse(row.Cells["Id"].Value.ToString());
+            
+            ModificarMedico vistaModificar = new ModificarMedico(id);
             vistaModificar.Show();
             this.Hide();
         }

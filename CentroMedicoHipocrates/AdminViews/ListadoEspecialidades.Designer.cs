@@ -105,6 +105,7 @@
             // GridEspecialidades
             // 
             this.GridEspecialidades.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.GridEspecialidades.AllowUserToAddRows = false;
             this.GridEspecialidades.BackgroundColor = System.Drawing.Color.Silver;
             this.GridEspecialidades.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.GridEspecialidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

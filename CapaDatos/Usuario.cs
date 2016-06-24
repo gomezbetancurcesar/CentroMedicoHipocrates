@@ -117,17 +117,21 @@ namespace CapaDatos
         {
             Usuario usuario = new Usuario();
             Conexion conexion = new Conexion();
-            string query = "select * from usuarios where id='" + id + "'";
+            string query = "select * from usuarios where id=" + id;
             OracleDataReader dr = conexion.consultar(query);
             if (dr.Read())
             {
-                usuario.id = Int32.Parse(dr["id"].ToString());
-                usuario.rut = dr["rut"].ToString();
-                usuario.nombres = dr["nombres"].ToString();
-                usuario.apellidoPaterno = dr["apellido_paterno"].ToString();
-                usuario.apellidoMaterno = dr["apellido_materno"].ToString();
-                usuario.direccion = dr["direccion"].ToString();
-                //usuario.fechaNacimento = DateTime.ParseExact(dr["rut"].ToString(), "MM/dd/yyyy", null);
+                usuario.ioId = Int32.Parse(dr["id"].ToString());
+                usuario.ioRut = dr["rut"].ToString();
+                usuario.ioNombre = dr["nombres"].ToString();
+                usuario.ioApellidoPaterno = dr["apellido_paterno"].ToString();
+                usuario.ioApellidoMaterno = dr["apellido_materno"].ToString();
+                usuario.ioDireccion = dr["direccion"].ToString();
+                usuario.fechaNacimento = Convert.ToDateTime(dr["fecha_nacimiento"].ToString());
+                usuario.ioPassword = dr["password"].ToString();
+                usuario.ioComunaId = Int32.Parse(dr["comuna_id"].ToString());
+
+                usuario.ioComuna = new Comuna().buscarPorId(usuario.ioComunaId);
             }
             conexion.cerrarConexion();
             return usuario;
@@ -146,13 +150,91 @@ namespace CapaDatos
                 usuario.nombres = dr["nombres"].ToString();
                 usuario.apellidoPaterno = dr["apellido_paterno"].ToString();
                 usuario.apellidoMaterno = dr["apellido_materno"].ToString();
-                //usuario.fechaNacimento = DateTime.ParseExact(dr["rut"].ToString(), "MM/dd/yyyy", null);
-                //usuario.direccion = dr["direccion"].ToString();
                 usuario.UsuarioRoles = new UsuarioRoles().buscarPorUsuarioId(usuario.id);
                 usuario.Rol = new Rol().buscarPorId(usuario.UsuarioRoles.ioRolId);
             }
             conexion.cerrarConexion();
             return usuario;
+        }
+
+        public List<Usuario> buscarPorRol(string rol)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            Usuario usuario;
+            Conexion conexion = new Conexion();
+            string query = "select usu.* from roles r ";
+            query += "inner join usuario_roles ur on r.id = ur.rol_id ";
+            query += "inner join usuarios usu on ur.usuario_id = usu.id";
+            query += "where r.nombre = '"+rol+"'";
+            OracleDataReader dr = conexion.consultar(query);
+            while (dr.Read())
+            {
+                usuario = new Usuario();
+                usuario.id = Int32.Parse(dr["id"].ToString());
+                usuario.rut = dr["rut"].ToString();
+                usuario.nombres = dr["nombres"].ToString();
+                usuario.apellidoPaterno = dr["apellido_paterno"].ToString();
+                usuario.apellidoMaterno = dr["apellido_materno"].ToString();
+                //usuario.UsuarioRoles = new UsuarioRoles().buscarPorUsuarioId(usuario.id);
+                //usuario.Rol = new Rol().buscarPorId(usuario.UsuarioRoles.ioRolId);
+                usuarios.Add(usuario);
+            }
+            conexion.cerrarConexion();
+            return usuarios;
+        }
+
+        public Boolean guardar(Usuario usuario)
+        {
+            Conexion conexion = new Conexion();
+            bool guardo = false;
+
+            int id = conexion.getSequenceValor("SEQ_USUARIOS", 1);
+            conexion.cerrarConexion();
+
+            string query = "insert into usuarios (id, comuna_id, nombres, apellido_paterno, apellido_materno, rut, fecha_nacimiento, direccion, password) values (";
+            query += id + ",";
+            query += usuario.ioComunaId + ",";
+            query += "'" + usuario.ioNombre + "',";
+            query += "'" + usuario.ioApellidoPaterno + "',";
+            query += "'" + usuario.ioApellidoMaterno + "',";
+            query += "'" + usuario.ioRut + "',";
+            query += " DATE '" + usuario.ioFechaNacimento.Date.ToString("yyyy-MM-dd") + "',";
+            query += "'" + usuario.ioDireccion + "',";
+            query += "'" + usuario.ioPassword + "')";
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                guardo = true;
+            }
+            return guardo;
+        }
+
+        public Boolean actualizar(Usuario usuario)
+        {
+            Conexion conexion = new Conexion();
+            bool guardo = false;
+
+            string query = "update usuarios set";
+            query += " id=" + usuario.ioId.ToString() + ",";
+            query += " comuna_id=" + usuario.ioComunaId.ToString() + ",";
+            query += " nombres='" + usuario.ioNombre + "',";
+            query += " apellido_paterno='" + usuario.ioApellidoPaterno + "',";
+            query += " apellido_materno='" + usuario.ioApellidoMaterno + "',";
+            query += " rut='" + usuario.ioRut + "',";
+            query += " fecha_nacimiento= DATE '" + usuario.ioFechaNacimento.Date.ToString("yyyy-MM-dd") + "',";
+            query += " direccion='" + usuario.ioDireccion + "',";
+            query += " password='" + usuario.ioPassword + "'";
+            query += " where id=" + usuario.ioId.ToString();
+            Console.WriteLine(query);
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                guardo = true;
+            }
+            return guardo;
         }
     }
 }

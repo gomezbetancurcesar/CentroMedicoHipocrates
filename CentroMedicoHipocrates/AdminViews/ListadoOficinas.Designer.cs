@@ -120,6 +120,7 @@
             // GridOficinas
             // 
             this.GridOficinas.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.GridOficinas.AllowUserToAddRows = false;
             this.GridOficinas.AllowUserToResizeRows = false;
             this.GridOficinas.BackgroundColor = System.Drawing.Color.Silver;
             this.GridOficinas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;

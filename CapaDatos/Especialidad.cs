@@ -40,6 +40,21 @@ namespace CapaDatos
             return especialidad;
         }
 
+        public Especialidad buscarPorNombre(string nombre)
+        {
+            Especialidad especialidad = new Especialidad();
+            Conexion conexion = new Conexion();
+            string query = "select * from especialidades where nombre='" + nombre + "'";
+            OracleDataReader dr = conexion.consultar(query);
+            if (dr.Read())
+            {
+                especialidad.id = Int32.Parse(dr["id"].ToString());
+                especialidad.nombre = dr["nombre"].ToString();
+            }
+            conexion.cerrarConexion();
+            return especialidad;
+        }
+
         public List<Especialidad> buscarTodos()
         {
             List<Especialidad> especialidades = new List<Especialidad>();
