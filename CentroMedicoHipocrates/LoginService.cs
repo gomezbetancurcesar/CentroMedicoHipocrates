@@ -25,10 +25,11 @@ namespace CentroMedicoHipocrates
                         usuario.Add("usuario", nombreCompleto);
                         usuario.Add("rol", datosUsuario.ioRol.ioNombre);
                         autenticado = true;
-                    break;
+                        break;
                     case "Medico":
                         usuario.Add("usuario", nombreCompleto);
                         usuario.Add("rol", datosUsuario.ioRol.ioNombre);
+                        datosUsuario.ioDoctor = new Doctor().buscarPorPersonaId(datosUsuario.ioId);
                         autenticado = true;
                     break;
                     case "Recepcion":
@@ -56,6 +57,11 @@ namespace CentroMedicoHipocrates
             {
                 return "";
             }
+        }
+
+        public Usuario getUser()
+        {
+            return datosUsuario;
         }
     }
 }

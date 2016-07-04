@@ -35,10 +35,26 @@
             this.lblBottom = new System.Windows.Forms.Label();
             this.lblTop = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.dateBuscar = new System.Windows.Forms.DateTimePicker();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.panelHorarios = new System.Windows.Forms.Panel();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.lblValueFechaBuscada = new System.Windows.Forms.Label();
+            this.btnAvanzarDia = new System.Windows.Forms.Button();
+            this.btnRetrocederDia = new System.Windows.Forms.Button();
+            this.lblFechaBuscada = new System.Windows.Forms.Label();
+            this.GridHorarios = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdAgenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panelReservas = new System.Windows.Forms.Panel();
             this.MenuContexto.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panelHorarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GridHorarios)).BeginInit();
             this.SuspendLayout();
             // 
             // MenuContexto
@@ -47,7 +63,7 @@
             this.menuToolStripMenuItem});
             this.MenuContexto.Location = new System.Drawing.Point(0, 0);
             this.MenuContexto.Name = "MenuContexto";
-            this.MenuContexto.Size = new System.Drawing.Size(786, 24);
+            this.MenuContexto.Size = new System.Drawing.Size(847, 24);
             this.MenuContexto.TabIndex = 9;
             this.MenuContexto.Text = "menuStrip1";
             // 
@@ -102,29 +118,168 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "Fecha";
             // 
-            // dateTimePicker1
+            // dateBuscar
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(69, 143);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 12;
+            this.dateBuscar.CustomFormat = "dd-MM-yyyy";
+            this.dateBuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateBuscar.Location = new System.Drawing.Point(69, 143);
+            this.dateBuscar.Name = "dateBuscar";
+            this.dateBuscar.Size = new System.Drawing.Size(200, 20);
+            this.dateBuscar.TabIndex = 12;
             // 
-            // button1
+            // btnBuscar
             // 
-            this.button1.Location = new System.Drawing.Point(69, 179);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnBuscar.Location = new System.Drawing.Point(69, 179);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 13;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // panelHorarios
+            // 
+            this.panelHorarios.Controls.Add(this.btnCancelar);
+            this.panelHorarios.Controls.Add(this.lblValueFechaBuscada);
+            this.panelHorarios.Controls.Add(this.btnAvanzarDia);
+            this.panelHorarios.Controls.Add(this.btnRetrocederDia);
+            this.panelHorarios.Controls.Add(this.lblFechaBuscada);
+            this.panelHorarios.Controls.Add(this.GridHorarios);
+            this.panelHorarios.Controls.Add(this.label4);
+            this.panelHorarios.Location = new System.Drawing.Point(0, 218);
+            this.panelHorarios.Name = "panelHorarios";
+            this.panelHorarios.Size = new System.Drawing.Size(434, 401);
+            this.panelHorarios.TabIndex = 14;
+            this.panelHorarios.Visible = false;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(353, 87);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // lblValueFechaBuscada
+            // 
+            this.lblValueFechaBuscada.AutoSize = true;
+            this.lblValueFechaBuscada.Location = new System.Drawing.Point(132, 66);
+            this.lblValueFechaBuscada.Name = "lblValueFechaBuscada";
+            this.lblValueFechaBuscada.Size = new System.Drawing.Size(35, 13);
+            this.lblValueFechaBuscada.TabIndex = 5;
+            this.lblValueFechaBuscada.Text = "label6";
+            this.lblValueFechaBuscada.Visible = false;
+            // 
+            // btnAvanzarDia
+            // 
+            this.btnAvanzarDia.Location = new System.Drawing.Point(283, 39);
+            this.btnAvanzarDia.Name = "btnAvanzarDia";
+            this.btnAvanzarDia.Size = new System.Drawing.Size(44, 23);
+            this.btnAvanzarDia.TabIndex = 4;
+            this.btnAvanzarDia.Text = ">>";
+            this.btnAvanzarDia.UseVisualStyleBackColor = true;
+            this.btnAvanzarDia.Click += new System.EventHandler(this.btnAvanzarDia_Click);
+            // 
+            // btnRetrocederDia
+            // 
+            this.btnRetrocederDia.Location = new System.Drawing.Point(32, 39);
+            this.btnRetrocederDia.Name = "btnRetrocederDia";
+            this.btnRetrocederDia.Size = new System.Drawing.Size(44, 23);
+            this.btnRetrocederDia.TabIndex = 3;
+            this.btnRetrocederDia.Text = "<<";
+            this.btnRetrocederDia.UseVisualStyleBackColor = true;
+            this.btnRetrocederDia.Click += new System.EventHandler(this.btnRetrocederDia_Click);
+            // 
+            // lblFechaBuscada
+            // 
+            this.lblFechaBuscada.AutoSize = true;
+            this.lblFechaBuscada.Location = new System.Drawing.Point(129, 44);
+            this.lblFechaBuscada.Name = "lblFechaBuscada";
+            this.lblFechaBuscada.Size = new System.Drawing.Size(35, 13);
+            this.lblFechaBuscada.TabIndex = 2;
+            this.lblFechaBuscada.Text = "label6";
+            // 
+            // GridHorarios
+            // 
+            this.GridHorarios.AllowUserToAddRows = false;
+            this.GridHorarios.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.GridHorarios.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GridHorarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridHorarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.IdAgenda,
+            this.HoraInicio,
+            this.HoraFin,
+            this.Estado});
+            this.GridHorarios.Location = new System.Drawing.Point(22, 87);
+            this.GridHorarios.Name = "GridHorarios";
+            this.GridHorarios.RowHeadersVisible = false;
+            this.GridHorarios.Size = new System.Drawing.Size(325, 301);
+            this.GridHorarios.TabIndex = 1;
+            this.GridHorarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridHorarios_CellContentClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // IdAgenda
+            // 
+            this.IdAgenda.HeaderText = "IdAgenda";
+            this.IdAgenda.Name = "IdAgenda";
+            this.IdAgenda.Visible = false;
+            // 
+            // HoraInicio
+            // 
+            this.HoraInicio.HeaderText = "Hora Inicio";
+            this.HoraInicio.Name = "HoraInicio";
+            this.HoraInicio.ReadOnly = true;
+            this.HoraInicio.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // HoraFin
+            // 
+            this.HoraFin.HeaderText = "Hora Fin";
+            this.HoraFin.Name = "HoraFin";
+            this.HoraFin.ReadOnly = true;
+            this.HoraFin.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Estado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(166, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Horarios";
+            // 
+            // panelReservas
+            // 
+            this.panelReservas.Location = new System.Drawing.Point(451, 143);
+            this.panelReservas.Name = "panelReservas";
+            this.panelReservas.Size = new System.Drawing.Size(336, 478);
+            this.panelReservas.TabIndex = 15;
+            this.panelReservas.Visible = false;
             // 
             // MisTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(786, 427);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dateTimePicker1);
+            this.ClientSize = new System.Drawing.Size(847, 633);
+            this.Controls.Add(this.panelReservas);
+            this.Controls.Add(this.panelHorarios);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.dateBuscar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
@@ -135,6 +290,9 @@
             this.MenuContexto.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panelHorarios.ResumeLayout(false);
+            this.panelHorarios.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GridHorarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,7 +307,21 @@
         private System.Windows.Forms.Label lblBottom;
         private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DateTimePicker dateBuscar;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Panel panelHorarios;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Label lblValueFechaBuscada;
+        private System.Windows.Forms.Button btnAvanzarDia;
+        private System.Windows.Forms.Button btnRetrocederDia;
+        private System.Windows.Forms.Label lblFechaBuscada;
+        private System.Windows.Forms.DataGridView GridHorarios;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdAgenda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoraInicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HoraFin;
+        private System.Windows.Forms.DataGridViewButtonColumn Estado;
+        private System.Windows.Forms.Panel panelReservas;
     }
 }

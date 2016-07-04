@@ -1,6 +1,6 @@
 ﻿namespace CentroMedicoHipocrates
 {
-    partial class AgregarMedico
+    partial class MisDatosMedico
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MenuContexto = new System.Windows.Forms.MenuStrip();
-            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
             this.lblTop = new System.Windows.Forms.Label();
+            this.MenuContexto = new System.Windows.Forms.MenuStrip();
+            this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtUsuarioId = new System.Windows.Forms.TextBox();
+            this.txtId = new System.Windows.Forms.TextBox();
             this.comboComuna = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.txtDireccion = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.comboOficina = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -58,49 +57,21 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.MenuContexto.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.MenuContexto.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // MenuContexto
-            // 
-            this.MenuContexto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuToolStripMenuItem});
-            this.MenuContexto.Location = new System.Drawing.Point(0, 0);
-            this.MenuContexto.Name = "MenuContexto";
-            this.MenuContexto.Size = new System.Drawing.Size(752, 24);
-            this.MenuContexto.TabIndex = 3;
-            this.MenuContexto.Text = "menuStrip1";
-            // 
-            // menuToolStripMenuItem
-            // 
-            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.menuToolStripMenuItem.Text = "menu";
             // 
             // panel1
             // 
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Controls.Add(this.lblUsuario);
             this.panel1.Controls.Add(this.lblBottom);
             this.panel1.Controls.Add(this.lblTop);
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(729, 100);
-            this.panel1.TabIndex = 6;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BackColor = System.Drawing.Color.Red;
-            this.btnCancelar.Location = new System.Drawing.Point(305, 11);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(70, 62);
-            this.btnCancelar.TabIndex = 8;
-            this.btnCancelar.Text = "button1";
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.panel1.TabIndex = 12;
             // 
             // lblUsuario
             // 
@@ -127,14 +98,30 @@
             this.lblTop.Size = new System.Drawing.Size(500, 2);
             this.lblTop.TabIndex = 2;
             // 
+            // MenuContexto
+            // 
+            this.MenuContexto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuToolStripMenuItem});
+            this.MenuContexto.Location = new System.Drawing.Point(0, 0);
+            this.MenuContexto.Name = "MenuContexto";
+            this.MenuContexto.Size = new System.Drawing.Size(857, 24);
+            this.MenuContexto.TabIndex = 13;
+            this.MenuContexto.Text = "menuStrip1";
+            // 
+            // menuToolStripMenuItem
+            // 
+            this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.menuToolStripMenuItem.Text = "menu";
+            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.txtUsuarioId);
+            this.panel2.Controls.Add(this.txtId);
             this.panel2.Controls.Add(this.comboComuna);
             this.panel2.Controls.Add(this.label11);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.txtPassword);
+            this.panel2.Controls.Add(this.btnGuardar);
             this.panel2.Controls.Add(this.txtDireccion);
-            this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.comboOficina);
             this.panel2.Controls.Add(this.label8);
@@ -151,10 +138,28 @@
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(3, 133);
+            this.panel2.Location = new System.Drawing.Point(0, 133);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(372, 340);
-            this.panel2.TabIndex = 7;
+            this.panel2.TabIndex = 14;
+            // 
+            // txtUsuarioId
+            // 
+            this.txtUsuarioId.Location = new System.Drawing.Point(67, 289);
+            this.txtUsuarioId.Name = "txtUsuarioId";
+            this.txtUsuarioId.Size = new System.Drawing.Size(34, 20);
+            this.txtUsuarioId.TabIndex = 23;
+            this.txtUsuarioId.Text = "0";
+            this.txtUsuarioId.Visible = false;
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(265, 287);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(29, 20);
+            this.txtId.TabIndex = 22;
+            this.txtId.Text = "0";
+            this.txtId.Visible = false;
             // 
             // comboComuna
             // 
@@ -173,22 +178,15 @@
             this.label11.TabIndex = 20;
             this.label11.Text = "Comuna";
             // 
-            // button1
+            // btnGuardar
             // 
-            this.button1.Location = new System.Drawing.Point(157, 287);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Guardar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(157, 204);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(128, 20);
-            this.txtPassword.TabIndex = 18;
+            this.btnGuardar.Location = new System.Drawing.Point(157, 287);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 19;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtDireccion
             // 
@@ -196,15 +194,6 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(128, 20);
             this.txtDireccion.TabIndex = 17;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(18, 207);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(61, 13);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "Contraseña";
             // 
             // label9
             // 
@@ -218,7 +207,7 @@
             // comboOficina
             // 
             this.comboOficina.FormattingEnabled = true;
-            this.comboOficina.Location = new System.Drawing.Point(157, 254);
+            this.comboOficina.Location = new System.Drawing.Point(157, 231);
             this.comboOficina.Name = "comboOficina";
             this.comboOficina.Size = new System.Drawing.Size(151, 21);
             this.comboOficina.TabIndex = 14;
@@ -226,7 +215,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 261);
+            this.label8.Location = new System.Drawing.Point(18, 238);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 13);
             this.label8.TabIndex = 13;
@@ -235,7 +224,7 @@
             // comboEspecialidad
             // 
             this.comboEspecialidad.FormattingEnabled = true;
-            this.comboEspecialidad.Location = new System.Drawing.Point(157, 228);
+            this.comboEspecialidad.Location = new System.Drawing.Point(157, 205);
             this.comboEspecialidad.Name = "comboEspecialidad";
             this.comboEspecialidad.Size = new System.Drawing.Size(151, 21);
             this.comboEspecialidad.TabIndex = 12;
@@ -243,7 +232,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 235);
+            this.label7.Location = new System.Drawing.Point(18, 212);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(67, 13);
             this.label7.TabIndex = 11;
@@ -340,21 +329,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Datos Médico";
             // 
-            // AgregarMedico
+            // MisDatosMedico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 509);
+            this.ClientSize = new System.Drawing.Size(857, 502);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
-            this.Name = "AgregarMedico";
-            this.Text = "AgregarMedico";
+            this.Controls.Add(this.panel1);
+            this.Name = "MisDatosMedico";
+            this.Text = "MisDatos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.MenuContexto.ResumeLayout(false);
-            this.MenuContexto.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.MenuContexto.ResumeLayout(false);
+            this.MenuContexto.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -364,13 +353,23 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip MenuContexto;
-        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblBottom;
         private System.Windows.Forms.Label lblTop;
+        private System.Windows.Forms.MenuStrip MenuContexto;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.ComboBox comboComuna;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.TextBox txtDireccion;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboOficina;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboEspecialidad;
+        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dateFechaNac;
         private System.Windows.Forms.TextBox txtApellidoMaterno;
         private System.Windows.Forms.TextBox txtApellidoPaterno;
@@ -382,17 +381,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboEspecialidad;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.TextBox txtDireccion;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comboOficina;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboComuna;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtUsuarioId;
     }
 }

@@ -62,12 +62,19 @@ namespace CapaDatos
             return turno;
         }
 
-        public List<Turno> buscarTodos(int estado = 0)
+        public List<Turno> buscarTodos(int estado = 0, string order = "ASC")
         {
             List<Turno> turnos = new List<Turno>();
             Turno turno;
             Conexion conexion = new Conexion();
-            OracleDataReader dr = conexion.consultar("select * from turnos");
+            string query = "select * from turnos";
+            if (!estado.Equals(0))
+            {
+                query += " where estado_turno_id = " + estado;
+            }
+            query += " order by hora_inicio "+order;
+
+            OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
                 turno = new Turno();

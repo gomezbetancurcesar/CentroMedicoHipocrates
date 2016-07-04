@@ -107,7 +107,7 @@ namespace CentroMedicoHipocrates
             txtId.Text = row.Cells["Id"].Value.ToString();
             txtHoraInicio.Text = row.Cells["HoraInicio"].Value.ToString();
             txtHoraFin.Text = row.Cells["HoraFin"].Value.ToString();
-            comboEstados.SelectedText = row.Cells["Estado"].Value.ToString();
+            comboEstados.Text = row.Cells["Estado"].Value.ToString();
 
             btnCancelar.Visible = true;
         }

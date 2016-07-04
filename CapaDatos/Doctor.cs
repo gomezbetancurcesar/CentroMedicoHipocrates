@@ -9,9 +9,9 @@ namespace CapaDatos
 {
     public class Doctor
     {
-        private Usuario Usuario = new Usuario();
-        private Especialidad Especialidad = new Especialidad();
-        private Oficina Oficina = new Oficina();
+        private Usuario Usuario;
+        private Especialidad Especialidad;
+        private Oficina Oficina;
         private int id;
         private int especialidad_id;
         private int usuario_id;
@@ -87,23 +87,50 @@ namespace CapaDatos
             return doctores;
         }
 
-        public Doctor buscarPorRut(string rut)
+        public Doctor buscarPorRut(string rut, Boolean fullData = false)
         {
-            Doctor medico = new Doctor();
-            Usuario persona = new Usuario().buscarPorRut(rut);
-            //ir a buscar a la base los datos del medico
-            medico = this.buscarPorPersonaId(persona.ioId);
-            return medico;
+            Doctor doctor = new Doctor();
+            Conexion conexion = new Conexion();
+            string query = "select doc.* from usuarios usu ";
+            query += "inner join doctores doc on doc.usuario_id = usu.id ";
+            query += "where usu.rut = '"+rut+"'";
+            OracleDataReader dr = conexion.consultar(query);
+
+            while (dr.Read())
+            {
+                doctor.ioId = Int32.Parse(dr["id"].ToString());
+                doctor.ioUsuarioId = Int32.Parse(dr["usuario_id"].ToString());
+                doctor.ioEspecialidadId = Int32.Parse(dr["especialidad_id"].ToString());
+                doctor.ioOficinaId = Int32.Parse(dr["oficina_id"].ToString());
+
+                if (fullData)
+                {
+                    doctor.ioUsuario = new Usuario().buscarPorId(doctor.ioUsuarioId);
+                    doctor.ioEspecialidad = new Especialidad().buscarPorId(doctor.ioEspecialidadId);
+                    doctor.ioOficina = new Oficina().buscarPorId(doctor.ioOficinaId);
+                }
+            }
+            conexion.cerrarConexion();
+            return doctor;
         }
 
         public Doctor buscarPorPersonaId(int personaId)
         {
-            Doctor medico = new Doctor();
-            medico.ioEspecialidadId = 1;
-            medico.ioUsuarioId = 1;
-            medico.Usuario = new Usuario().buscarPorId(personaId);
-            medico.Especialidad = new Especialidad().buscarPorId(medico.ioEspecialidadId);
-            return medico;
+            Doctor doctor = new Doctor();
+            Conexion conexion = new Conexion();
+            string query = "select * from doctores ";
+            query += "where usuario_id = " + personaId;
+            OracleDataReader dr = conexion.consultar(query);
+
+            while (dr.Read())
+            {
+                doctor.ioId = Int32.Parse(dr["id"].ToString());
+                doctor.ioUsuarioId = Int32.Parse(dr["usuario_id"].ToString());
+                doctor.ioEspecialidadId = Int32.Parse(dr["especialidad_id"].ToString());
+                doctor.ioOficinaId = Int32.Parse(dr["oficina_id"].ToString());
+            }
+            conexion.cerrarConexion();
+            return doctor;
         }
 
         public Doctor buscarPorId(int id)
@@ -126,16 +153,42 @@ namespace CapaDatos
             return doctor;
         }
 
+        public List<Doctor> buscarPorEspecialidad(string nombreEspecialidad, Boolean fullData = false)
+        {
+            List<Doctor> doctores = new List<Doctor>();
+            Doctor doctor;
+            Conexion conexion = new Conexion();
+
+            Especialidad especialidad = new Especialidad().buscarPorNombre(nombreEspecialidad);
+            OracleDataReader dr = conexion.consultar("select * from doctores where especialidad_id=" + especialidad.ioId);
+            while (dr.Read())
+            {
+                doctor = new Doctor();
+                doctor.ioId = Int32.Parse(dr["id"].ToString());
+                doctor.ioEspecialidadId = Int32.Parse(dr["especialidad_id"].ToString());
+                doctor.ioOficinaId = Int32.Parse(dr["oficina_id"].ToString());
+                doctor.ioUsuarioId = Int32.Parse(dr["usuario_id"].ToString());
+
+                if (fullData)
+                {
+                    doctor.ioUsuario = new Usuario().buscarPorId(doctor.ioUsuarioId);
+                    doctor.ioEspecialidad = new Especialidad().buscarPorId(doctor.ioEspecialidadId);
+                    doctor.ioOficina = new Oficina().buscarPorId(doctor.ioOficinaId);
+                }
+                doctores.Add(doctor);
+            }
+            conexion.cerrarConexion();
+            return doctores;
+        }
+
         public Boolean guardar(Doctor doctor)
         {
             bool guardo = false;
             Conexion conexion = new Conexion();
-            bool guardaUsuario = new Usuario().guardar(doctor.ioUsuario);
-            if (guardaUsuario)
+            int idUsuario = new Usuario().guardar(doctor.ioUsuario);
+            //Validamos si guardo el usuario
+            if (idUsuario > 0)
             {
-                int idUsuario = conexion.getSequenceValor("SEQ_USUARIOS");
-                conexion.cerrarConexion();
-
                 int id = conexion.getSequenceValor("SEQ_DOCTORES", 1);
                 conexion.cerrarConexion();
 
@@ -144,7 +197,7 @@ namespace CapaDatos
                 query += idUsuario + ",";
                 query += doctor.ioEspecialidadId + ",";
                 query += doctor.ioOficinaId + ")";
-
+                Console.WriteLine(query);
                 int filasIngresadas = conexion.ingresar(query);
                 conexion.cerrarConexion();
                 if (filasIngresadas > 0)
@@ -168,7 +221,7 @@ namespace CapaDatos
                 query += " especialidad_id=" + doctor.ioEspecialidadId.ToString() + ",";
                 query += " oficina_id=" + doctor.ioOficinaId.ToString();
                 query += " where id=" + doctor.ioId.ToString();
-                Console.WriteLine(query);
+
                 int filasIngresadas = conexion.ingresar(query);
                 conexion.cerrarConexion();
                 if (filasIngresadas > 0)

@@ -128,7 +128,7 @@
             this.GridIsapres.MultiSelect = false;
             this.GridIsapres.Name = "GridIsapres";
             this.GridIsapres.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridIsapres.Size = new System.Drawing.Size(185, 179);
+            this.GridIsapres.Size = new System.Drawing.Size(185, 364);
             this.GridIsapres.TabIndex = 13;
             // 
             // Id

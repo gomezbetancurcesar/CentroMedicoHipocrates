@@ -116,7 +116,7 @@
             this.GridEspecialidades.MultiSelect = false;
             this.GridEspecialidades.Name = "GridEspecialidades";
             this.GridEspecialidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridEspecialidades.Size = new System.Drawing.Size(226, 179);
+            this.GridEspecialidades.Size = new System.Drawing.Size(226, 308);
             this.GridEspecialidades.TabIndex = 12;
             // 
             // Id

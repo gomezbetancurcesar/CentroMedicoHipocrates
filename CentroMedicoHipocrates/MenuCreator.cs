@@ -75,13 +75,6 @@ namespace CentroMedicoHipocrates
             item = new ToolStripMenuItem();
             item.Name = "opMantenedores";
             item.Text = "Mantenedores";
-            /*
-                subItem = new ToolStripMenuItem();
-                subItem.Name = "ListadoDias";
-                subItem.Text = "Dias";
-                subItem.Click += new EventHandler(ItemClicked);
-            item.DropDownItems.Add(subItem);
-            */
                 subItem = new ToolStripMenuItem();
                 subItem.Name = "ListadoTurnos";
                 subItem.Text = "Turnos";
@@ -119,6 +112,18 @@ namespace CentroMedicoHipocrates
             item.Text = "Mis turnos";
             item.Click += new EventHandler(ItemClicked);
             menu.Items.Add(item);
+
+            item = new ToolStripMenuItem();
+            item.Name = "IngresarFichas";
+            item.Text = "Fichas";
+            item.Click += new EventHandler(ItemClicked);
+            menu.Items.Add(item);
+
+            item = new ToolStripMenuItem();
+            item.Name = "MisDatosMedico";
+            item.Text = "Mis datos";
+            item.Click += new EventHandler(ItemClicked);
+            menu.Items.Add(item);
         }
 
         //Generamos el menu para la recepcion
@@ -139,6 +144,27 @@ namespace CentroMedicoHipocrates
             item = new ToolStripMenuItem();
             item.Name = "Confirmaciones";
             item.Text = "Confirmaciones";
+            item.Click += new EventHandler(ItemClicked);
+            menu.Items.Add(item);
+
+            item = new ToolStripMenuItem();
+            item.Name = "opMantenedores";
+            item.Text = "Reservas";
+                subItem = new ToolStripMenuItem();
+                subItem.Name = "Reservar";
+                subItem.Text = "Reservar";
+                subItem.Click += new EventHandler(ItemClicked);
+            item.DropDownItems.Add(subItem);
+                subItem = new ToolStripMenuItem();
+                subItem.Name = "SobreCupos";
+                subItem.Text = "Sobre Cupos";
+                subItem.Click += new EventHandler(ItemClicked);
+            item.DropDownItems.Add(subItem);
+            menu.Items.Add(item);
+
+            item = new ToolStripMenuItem();
+            item.Name = "MisDatosRecepcion";
+            item.Text = "Mis datos";
             item.Click += new EventHandler(ItemClicked);
             menu.Items.Add(item);
         }

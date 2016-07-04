@@ -23,7 +23,7 @@ namespace CentroMedicoHipocrates
             //Dibujamos el menu correspondiente a cada rol!
             menuCreator.generarMenu(MenuContexto, session.AuthField("rol"));
 
-            txtFecha.MinDate = DateTime.Today;
+            txtFechaBuscada.MinDate = DateTime.Today;
             GridHorarios.RowHeadersVisible = false;
             this.fullWidth();
         }
@@ -45,23 +45,11 @@ namespace CentroMedicoHipocrates
             Application.Exit();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
-            var senderGrid = (DataGridView)sender;
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-            {
-               // MessageBox.Show("click en boton!");
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string fecha = txtFecha.Value.Date.ToString("yyyy-MM-dd");
-            string fechaBuscada = txtFecha.Value.ToLongDateString().ToString();
-            this.buscarHorarios(txtRut.Text, fecha, fechaBuscada);
-
-            panelHorarios.Visible = true;
-            panelDatosMedico.Visible = true;
+            string fecha = txtFechaBuscada.Value.Date.ToString("yyyy-MM-dd");
+            string fechaBuscada = txtFechaBuscada.Value.ToLongDateString().ToString();
+            this.buscarHorarios(txtRutBuscado.Text, fecha, fechaBuscada);
         }
 
         private void buscarHorarios(string rut, string fecha, string fechaBuscada)
@@ -71,55 +59,84 @@ namespace CentroMedicoHipocrates
             lblValueFechaBuscada.Text = fecha;
 
             DataGridViewButtonCell btnFila;
-            DataGridViewRow fila;
-
-            Doctor doctor = new CapaDatos.Doctor().buscarPorRut(rut);
-            lblNombre.Text = doctor.ioUsuario.ioNombre;
-            lblApellidoPaterno.Text = doctor.ioUsuario.ioApellidoPaterno;
-            lblApellidoMaterno.Text = doctor.ioUsuario.ioApellidoMaterno;
-            lblEspecialidad.Text = doctor.ioEspecialidad.ioNombre;
-            lblRut.Text = doctor.ioUsuario.ioRut;
-
-            GridHorarios.Rows.Clear();
-            List<Turno> turnos = new CapaDatos.Turno().buscarTodos();
-
-            foreach (var turno in turnos)
+            Doctor doctor = new Doctor().buscarPorRut(rut, true);
+            if(!doctor.ioId.Equals(0))
             {
-                fila = (DataGridViewRow)GridHorarios.Rows[0].Clone();
-                fila.Cells[0].Value = turno.ioId;
-                fila.Cells[1].Value = turno.ioId;
-                fila.Cells[2].Value = turno.ioHoraInicio;
-                fila.Cells[3].Value = turno.ioHoraFin;
-                btnFila = (DataGridViewButtonCell)fila.Cells[4];
-                btnFila.FlatStyle = FlatStyle.Popup;
-                btnFila.Value = turno.ioEstadoTurno.ioNombre;
-                //Habilitado
-                if (turno.ioEstadoTurnoId.Equals(1)){
-                    btnFila.Style.BackColor = System.Drawing.Color.Green;
-                }else{
-                    btnFila.Style.BackColor = System.Drawing.Color.Red;
+                panelHorarios.Visible = true;
+                panelDatosMedico.Visible = true;
+
+                lblId.Text = doctor.ioId.ToString();
+                lblNombre.Text = doctor.ioUsuario.ioNombre;
+                lblApellidoPaterno.Text = doctor.ioUsuario.ioApellidoPaterno;
+                lblApellidoMaterno.Text = doctor.ioUsuario.ioApellidoMaterno;
+                lblEspecialidad.Text = doctor.ioEspecialidad.ioNombre;
+                lblRut.Text = doctor.ioUsuario.ioRut;
+
+                GridHorarios.Rows.Clear();
+
+                List<Agenda> agendas = new Agenda().buscarTodas(doctor.ioId, formatDate);
+                List<Turno> turnos = new Turno().buscarTodos(1);
+
+                foreach (var turno in turnos)
+                {
+                    //fila = (DataGridViewRow)GridHorarios.Rows[0].Clone();
+                    Agenda agenda = agendas.Find(x => x.ioTurnoId == turno.ioId);
+                    int index = GridHorarios.Rows.Add();
+                    DataGridViewRow fila = GridHorarios.Rows[index];
+                    fila.Cells[0].Value = turno.ioId;
+
+                    bool agendaConfigurada = false;
+                    if (agenda == null)
+                    {
+                        fila.Cells[1].Value = 0;
+                    }
+                    else
+                    {
+                        fila.Cells[1].Value = agenda.ioId;
+                        agendaConfigurada = true;
+                    }
+
+                    fila.Cells[2].Value = turno.ioHoraInicio;
+                    fila.Cells[3].Value = turno.ioHoraFin;
+                    btnFila = (DataGridViewButtonCell)fila.Cells[4];
+                    btnFila.FlatStyle = FlatStyle.Popup;
+                    
+                    //Agenda configurada
+                    if (agendaConfigurada)
+                    {
+                        btnFila.Value = "Habilitado";
+                        btnFila.Style.BackColor = System.Drawing.Color.Green;
+                    }
+                    else
+                    {
+                        btnFila.Value = "Sin Configurar";
+                        btnFila.Style.BackColor = System.Drawing.Color.Gray;
+                    }
                 }
-                GridHorarios.Rows.Add(fila);
+                //Redibujamos la tabla de los medicos
+                GridHorarios.Refresh();
             }
-            //Redibujamos la tabla de los medicos
-            GridHorarios.Refresh();
+            else
+            {
+                panelHorarios.Visible = false;
+                panelDatosMedico.Visible = false;
+            }
         }
 
         private void btnRetrocederDia_Click(object sender, EventArgs e)
         {
             DateTime fecha = DateTime.ParseExact(lblValueFechaBuscada.Text, "yyyy-MM-dd", null);
-            if (fecha.Equals(txtFecha.MinDate))
+            if (fecha.Equals(txtFechaBuscada.MinDate))
             {
                 btnRetrocederDia.Visible = false;
             }else
             {
                 fecha = fecha.AddDays(-1);
-                txtFecha.Value = fecha.Date;
+                txtFechaBuscada.Value = fecha.Date;
                 string strfecha = fecha.Date.ToString("yyyy-MM-dd");
                 string fechaBuscada = fecha.ToLongDateString().ToString();
-                this.buscarHorarios(txtRut.Text, strfecha, fechaBuscada);
+                this.buscarHorarios(txtRutBuscado.Text, strfecha, fechaBuscada);
             }
-            
         }
 
         private void btnAvanzarDia_Click(object sender, EventArgs e)
@@ -128,11 +145,105 @@ namespace CentroMedicoHipocrates
             DateTime fecha = DateTime.ParseExact(lblValueFechaBuscada.Text, "yyyy-MM-dd", null);
             fecha = fecha.AddDays(1);
 
-            txtFecha.Value = fecha.Date;
+            txtFechaBuscada.Value = fecha.Date;
             string strfecha = fecha.Date.ToString("yyyy-MM-dd");
             string fechaBuscada = fecha.ToLongDateString().ToString();
 
-            this.buscarHorarios(txtRut.Text, strfecha, fechaBuscada);
+            this.buscarHorarios(txtRutBuscado.Text, strfecha, fechaBuscada);
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            panelHorarios.Visible = false;
+            panelDatosMedico.Visible = false;
+            txtRutBuscado.Text = "";
+            txtFechaBuscada.Text = "";
+        }
+
+        private void GridHorarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == GridHorarios.Columns["Estado"].Index && e.RowIndex >= 0)
+            {
+                DataGridViewRow fila = GridHorarios.Rows[e.RowIndex];
+                Agenda agenda = new Agenda();
+                agenda.ioTurnoId = Int32.Parse(fila.Cells["Id"].Value.ToString());
+                agenda.ioDia = txtFechaBuscada.Value;
+                agenda.ioDoctorId = Int32.Parse(lblId.Text);
+                agenda.ioEsSobrecupo = 0;
+                agenda.ioFechaCreacion = DateTime.Now;
+
+                bool realizaAccion = false;
+                if (fila.Cells["IdAgenda"].Value.ToString().Equals("0"))
+                {
+                    if (agenda.guardar(agenda))
+                    {
+                        realizaAccion = true;
+                    }
+                }
+                else
+                {
+                    agenda.ioId = Int32.Parse(fila.Cells["IdAgenda"].Value.ToString());
+                    if (agenda.eliminar(agenda)){
+                        realizaAccion = true;
+                    }
+                }
+                if (realizaAccion)
+                {
+                    string fecha = txtFechaBuscada.Value.Date.ToString("yyyy-MM-dd");
+                    string fechaBuscada = txtFechaBuscada.Value.ToLongDateString().ToString();
+                    this.buscarHorarios(txtRutBuscado.Text, fecha, fechaBuscada);
+                }
+            }
+        }
+
+        private void btnHabilitarTodos_Click(object sender, EventArgs e)
+        {
+            List<Agenda> agendas = new List<Agenda>();
+            Agenda agenda = new Agenda();
+            foreach (DataGridViewRow fila in GridHorarios.Rows)
+            {
+                //No tiene agenda configurada
+                if (fila.Cells["IdAgenda"].Value.ToString().Equals("0"))
+                {
+                    agenda = new Agenda();
+                    agenda.ioTurnoId = Int32.Parse(fila.Cells["Id"].Value.ToString());
+                    agenda.ioDia = txtFechaBuscada.Value;
+                    agenda.ioDoctorId = Int32.Parse(lblId.Text);
+                    agenda.ioEsSobrecupo = 0;
+                    agenda.ioFechaCreacion = DateTime.Now;
+                    agendas.Add(agenda);
+                }
+            }
+
+            if (agenda.guardarTodos(agendas))
+            {
+                string fecha = txtFechaBuscada.Value.Date.ToString("yyyy-MM-dd");
+                string fechaBuscada = txtFechaBuscada.Value.ToLongDateString().ToString();
+                this.buscarHorarios(txtRutBuscado.Text, fecha, fechaBuscada);
+            }
+        }
+
+        private void btnInhabilitarTodos_Click(object sender, EventArgs e)
+        {
+            List<Agenda> agendas = new List<Agenda>();
+            Agenda agenda = new Agenda();
+            foreach (DataGridViewRow fila in GridHorarios.Rows)
+            {
+                //Tiene agenda configurada
+                if (!fila.Cells["IdAgenda"].Value.ToString().Equals("0"))
+                {
+                    agenda = new Agenda();
+                    agenda.ioId = Int32.Parse(fila.Cells["IdAgenda"].Value.ToString());
+                    agendas.Add(agenda);
+                }
+            }
+
+            if (agenda.eliminarTodos(agendas))
+            {
+                string fecha = txtFechaBuscada.Value.Date.ToString("yyyy-MM-dd");
+                string fechaBuscada = txtFechaBuscada.Value.ToLongDateString().ToString();
+                this.buscarHorarios(txtRutBuscado.Text, fecha, fechaBuscada);
+            }
         }
     }
 }

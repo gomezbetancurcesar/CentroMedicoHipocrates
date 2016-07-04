@@ -35,13 +35,16 @@
             this.MenuContexto = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtFecha = new System.Windows.Forms.DateTimePicker();
-            this.txtRut = new System.Windows.Forms.TextBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.txtFechaBuscada = new System.Windows.Forms.DateTimePicker();
+            this.txtRutBuscado = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelHorarios = new System.Windows.Forms.Panel();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnInhabilitarTodos = new System.Windows.Forms.Button();
+            this.btnHabilitarTodos = new System.Windows.Forms.Button();
             this.lblValueFechaBuscada = new System.Windows.Forms.Label();
             this.btnAvanzarDia = new System.Windows.Forms.Button();
             this.btnRetrocederDia = new System.Windows.Forms.Button();
@@ -49,6 +52,9 @@
             this.GridHorarios = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.panelDatosMedico = new System.Windows.Forms.Panel();
+            this.lblId = new System.Windows.Forms.Label();
+            this.lblRut = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.lblEspecialidad = new System.Windows.Forms.Label();
             this.lblApellidoMaterno = new System.Windows.Forms.Label();
             this.lblApellidoPaterno = new System.Windows.Forms.Label();
@@ -58,14 +64,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.lblRut = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdTurnoMedico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdAgenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HoraInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -131,9 +131,9 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.txtFecha);
-            this.panel2.Controls.Add(this.txtRut);
+            this.panel2.Controls.Add(this.btnBuscar);
+            this.panel2.Controls.Add(this.txtFechaBuscada);
+            this.panel2.Controls.Add(this.txtRutBuscado);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
@@ -142,32 +142,32 @@
             this.panel2.Size = new System.Drawing.Size(372, 128);
             this.panel2.TabIndex = 9;
             // 
-            // button1
+            // btnBuscar
             // 
-            this.button1.Location = new System.Drawing.Point(157, 87);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Ver";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnBuscar.Location = new System.Drawing.Point(157, 87);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 11;
+            this.btnBuscar.Text = "Ver";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // txtFecha
+            // txtFechaBuscada
             // 
-            this.txtFecha.CustomFormat = "dd/MM/yyyy";
-            this.txtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.txtFecha.Location = new System.Drawing.Point(157, 60);
-            this.txtFecha.MinDate = new System.DateTime(2016, 1, 12, 0, 0, 0, 0);
-            this.txtFecha.Name = "txtFecha";
-            this.txtFecha.Size = new System.Drawing.Size(200, 20);
-            this.txtFecha.TabIndex = 10;
+            this.txtFechaBuscada.CustomFormat = "dd/MM/yyyy";
+            this.txtFechaBuscada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtFechaBuscada.Location = new System.Drawing.Point(157, 60);
+            this.txtFechaBuscada.MinDate = new System.DateTime(2016, 1, 12, 0, 0, 0, 0);
+            this.txtFechaBuscada.Name = "txtFechaBuscada";
+            this.txtFechaBuscada.Size = new System.Drawing.Size(200, 20);
+            this.txtFechaBuscada.TabIndex = 10;
             // 
-            // txtRut
+            // txtRutBuscado
             // 
-            this.txtRut.Location = new System.Drawing.Point(157, 37);
-            this.txtRut.Name = "txtRut";
-            this.txtRut.Size = new System.Drawing.Size(128, 20);
-            this.txtRut.TabIndex = 6;
+            this.txtRutBuscado.Location = new System.Drawing.Point(157, 37);
+            this.txtRutBuscado.Name = "txtRutBuscado";
+            this.txtRutBuscado.Size = new System.Drawing.Size(128, 20);
+            this.txtRutBuscado.TabIndex = 6;
             // 
             // label3
             // 
@@ -198,10 +198,9 @@
             // 
             // panelHorarios
             // 
-            this.panelHorarios.Controls.Add(this.button5);
-            this.panelHorarios.Controls.Add(this.button4);
-            this.panelHorarios.Controls.Add(this.button3);
-            this.panelHorarios.Controls.Add(this.button2);
+            this.panelHorarios.Controls.Add(this.btnCancelar);
+            this.panelHorarios.Controls.Add(this.btnInhabilitarTodos);
+            this.panelHorarios.Controls.Add(this.btnHabilitarTodos);
             this.panelHorarios.Controls.Add(this.lblValueFechaBuscada);
             this.panelHorarios.Controls.Add(this.btnAvanzarDia);
             this.panelHorarios.Controls.Add(this.btnRetrocederDia);
@@ -213,6 +212,36 @@
             this.panelHorarios.Size = new System.Drawing.Size(467, 401);
             this.panelHorarios.TabIndex = 10;
             this.panelHorarios.Visible = false;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(355, 164);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnInhabilitarTodos
+            // 
+            this.btnInhabilitarTodos.Location = new System.Drawing.Point(355, 134);
+            this.btnInhabilitarTodos.Name = "btnInhabilitarTodos";
+            this.btnInhabilitarTodos.Size = new System.Drawing.Size(93, 23);
+            this.btnInhabilitarTodos.TabIndex = 7;
+            this.btnInhabilitarTodos.Text = "Inhabilitar Todos";
+            this.btnInhabilitarTodos.UseVisualStyleBackColor = true;
+            this.btnInhabilitarTodos.Click += new System.EventHandler(this.btnInhabilitarTodos_Click);
+            // 
+            // btnHabilitarTodos
+            // 
+            this.btnHabilitarTodos.Location = new System.Drawing.Point(355, 105);
+            this.btnHabilitarTodos.Name = "btnHabilitarTodos";
+            this.btnHabilitarTodos.Size = new System.Drawing.Size(93, 23);
+            this.btnHabilitarTodos.TabIndex = 6;
+            this.btnHabilitarTodos.Text = "Habilitar Todos";
+            this.btnHabilitarTodos.UseVisualStyleBackColor = true;
+            this.btnHabilitarTodos.Click += new System.EventHandler(this.btnHabilitarTodos_Click);
             // 
             // lblValueFechaBuscada
             // 
@@ -255,21 +284,22 @@
             // 
             // GridHorarios
             // 
+            this.GridHorarios.AllowUserToAddRows = false;
             this.GridHorarios.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.GridHorarios.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridHorarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridHorarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
-            this.IdTurnoMedico,
+            this.IdAgenda,
             this.HoraInicio,
             this.HoraFin,
             this.Estado});
             this.GridHorarios.Location = new System.Drawing.Point(22, 87);
             this.GridHorarios.Name = "GridHorarios";
             this.GridHorarios.RowHeadersVisible = false;
-            this.GridHorarios.Size = new System.Drawing.Size(305, 301);
+            this.GridHorarios.Size = new System.Drawing.Size(325, 301);
             this.GridHorarios.TabIndex = 1;
-            this.GridHorarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.GridHorarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridHorarios_CellContentClick);
             // 
             // label4
             // 
@@ -282,6 +312,7 @@
             // 
             // panelDatosMedico
             // 
+            this.panelDatosMedico.Controls.Add(this.lblId);
             this.panelDatosMedico.Controls.Add(this.lblRut);
             this.panelDatosMedico.Controls.Add(this.label15);
             this.panelDatosMedico.Controls.Add(this.lblEspecialidad);
@@ -298,6 +329,34 @@
             this.panelDatosMedico.Size = new System.Drawing.Size(373, 207);
             this.panelDatosMedico.TabIndex = 11;
             this.panelDatosMedico.Visible = false;
+            // 
+            // lblId
+            // 
+            this.lblId.AutoSize = true;
+            this.lblId.Location = new System.Drawing.Point(230, 39);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(13, 13);
+            this.lblId.TabIndex = 11;
+            this.lblId.Text = "0";
+            this.lblId.Visible = false;
+            // 
+            // lblRut
+            // 
+            this.lblRut.AutoSize = true;
+            this.lblRut.Location = new System.Drawing.Point(157, 35);
+            this.lblRut.Name = "lblRut";
+            this.lblRut.Size = new System.Drawing.Size(31, 13);
+            this.lblRut.TabIndex = 10;
+            this.lblRut.Text = "laalal";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(22, 35);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(24, 13);
+            this.label15.TabIndex = 9;
+            this.label15.Text = "Rut";
             // 
             // lblEspecialidad
             // 
@@ -380,71 +439,17 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Datos Médico";
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(22, 35);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(24, 13);
-            this.label15.TabIndex = 9;
-            this.label15.Text = "Rut";
-            // 
-            // lblRut
-            // 
-            this.lblRut.AutoSize = true;
-            this.lblRut.Location = new System.Drawing.Point(157, 35);
-            this.lblRut.Name = "lblRut";
-            this.lblRut.Size = new System.Drawing.Size(31, 13);
-            this.lblRut.TabIndex = 10;
-            this.lblRut.Text = "laalal";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(355, 105);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Habilitar Todos";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(355, 134);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(93, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Inhabilitar Todos";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(355, 239);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Guardar";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(355, 269);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "Cancelar";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
             // Id
             // 
             this.Id.HeaderText = "Id";
             this.Id.Name = "Id";
             this.Id.Visible = false;
             // 
-            // IdTurnoMedico
+            // IdAgenda
             // 
-            this.IdTurnoMedico.HeaderText = "IdTurnoMedico";
-            this.IdTurnoMedico.Name = "IdTurnoMedico";
-            this.IdTurnoMedico.Visible = false;
+            this.IdAgenda.HeaderText = "IdAgenda";
+            this.IdAgenda.Name = "IdAgenda";
+            this.IdAgenda.Visible = false;
             // 
             // HoraInicio
             // 
@@ -506,9 +511,9 @@
         private System.Windows.Forms.MenuStrip MenuContexto;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DateTimePicker txtFecha;
-        private System.Windows.Forms.TextBox txtRut;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.DateTimePicker txtFechaBuscada;
+        private System.Windows.Forms.TextBox txtRutBuscado;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -531,12 +536,12 @@
         private System.Windows.Forms.Label lblValueFechaBuscada;
         private System.Windows.Forms.Label lblRut;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnInhabilitarTodos;
+        private System.Windows.Forms.Button btnHabilitarTodos;
+        private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdTurnoMedico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdAgenda;
         private System.Windows.Forms.DataGridViewTextBoxColumn HoraInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn HoraFin;
         private System.Windows.Forms.DataGridViewButtonColumn Estado;

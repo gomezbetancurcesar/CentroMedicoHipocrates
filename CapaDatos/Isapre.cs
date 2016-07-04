@@ -56,6 +56,21 @@ namespace CapaDatos
             return isapres;
         }
 
+        public Isapre buscarPorNombre(string nombre)
+        {
+            Isapre isapre = new Isapre();
+            Conexion conexion = new Conexion();
+            string query = "select * from isapres where nombre='" + nombre + "'";
+            OracleDataReader dr = conexion.consultar(query);
+            if (dr.Read())
+            {
+                isapre.id = Int32.Parse(dr["id"].ToString());
+                isapre.nombre = dr["nombre"].ToString();
+            }
+            conexion.cerrarConexion();
+            return isapre;
+        }
+
         public Boolean guardar(Isapre isapre)
         {
             bool guarda = false;

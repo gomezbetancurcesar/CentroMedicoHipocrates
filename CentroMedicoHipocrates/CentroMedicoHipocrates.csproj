@@ -52,23 +52,11 @@
     <Compile Include="AdminViews\AdminTurnos.Designer.cs">
       <DependentUpon>AdminTurnos.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminViews\AgregarMedico.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AdminViews\AgregarMedico.Designer.cs">
-      <DependentUpon>AgregarMedico.cs</DependentUpon>
-    </Compile>
     <Compile Include="AdminViews\ListadoAdministradores.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdminViews\ListadoAdministradores.Designer.cs">
       <DependentUpon>ListadoAdministradores.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AdminViews\ListadoDias.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AdminViews\ListadoDias.Designer.cs">
-      <DependentUpon>ListadoDias.cs</DependentUpon>
     </Compile>
     <Compile Include="AdminViews\ListadoEspecialidades.cs">
       <SubType>Form</SubType>
@@ -100,12 +88,6 @@
     <Compile Include="AdminViews\ListadoTurnos.Designer.cs">
       <DependentUpon>ListadoTurnos.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminViews\ModificarMedico.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AdminViews\ModificarMedico.Designer.cs">
-      <DependentUpon>ModificarMedico.cs</DependentUpon>
-    </Compile>
     <Compile Include="DashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +110,18 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginService.cs" />
+    <Compile Include="MedicoViews\IngresarFichas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicoViews\IngresarFichas.Designer.cs">
+      <DependentUpon>IngresarFichas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicoViews\MisDatosMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicoViews\MisDatosMedico.Designer.cs">
+      <DependentUpon>MisDatosMedico.cs</DependentUpon>
+    </Compile>
     <Compile Include="MedicoViews\MisTurnos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,17 +143,29 @@
     <Compile Include="RecepcionViews\Confirmaciones.Designer.cs">
       <DependentUpon>Confirmaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="RecepcionViews\MisDatosRecepcion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecepcionViews\MisDatosRecepcion.Designer.cs">
+      <DependentUpon>MisDatosRecepcion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecepcionViews\Reservar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecepcionViews\Reservar.Designer.cs">
+      <DependentUpon>Reservar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecepcionViews\SobreCupos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecepcionViews\SobreCupos.Designer.cs">
+      <DependentUpon>SobreCupos.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdminViews\AdminTurnos.resx">
       <DependentUpon>AdminTurnos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminViews\AgregarMedico.resx">
-      <DependentUpon>AgregarMedico.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AdminViews\ListadoAdministradores.resx">
       <DependentUpon>ListadoAdministradores.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AdminViews\ListadoDias.resx">
-      <DependentUpon>ListadoDias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminViews\ListadoEspecialidades.resx">
       <DependentUpon>ListadoEspecialidades.cs</DependentUpon>
@@ -179,14 +185,17 @@
     <EmbeddedResource Include="AdminViews\ListadoTurnos.resx">
       <DependentUpon>ListadoTurnos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminViews\ModificarMedico.resx">
-      <DependentUpon>ModificarMedico.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DashBoard.resx">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicoViews\IngresarFichas.resx">
+      <DependentUpon>IngresarFichas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicoViews\MisDatosMedico.resx">
+      <DependentUpon>MisDatosMedico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MedicoViews\MisTurnos.resx">
       <DependentUpon>MisTurnos.cs</DependentUpon>
@@ -206,6 +215,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RecepcionViews\Confirmaciones.resx">
       <DependentUpon>Confirmaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecepcionViews\MisDatosRecepcion.resx">
+      <DependentUpon>MisDatosRecepcion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecepcionViews\Reservar.resx">
+      <DependentUpon>Reservar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecepcionViews\SobreCupos.resx">
+      <DependentUpon>SobreCupos.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">

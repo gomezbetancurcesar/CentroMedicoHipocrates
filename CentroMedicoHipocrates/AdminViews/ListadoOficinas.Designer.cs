@@ -133,7 +133,7 @@
             this.GridOficinas.MultiSelect = false;
             this.GridOficinas.Name = "GridOficinas";
             this.GridOficinas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridOficinas.Size = new System.Drawing.Size(245, 179);
+            this.GridOficinas.Size = new System.Drawing.Size(245, 427);
             this.GridOficinas.TabIndex = 15;
             // 
             // Id
@@ -244,7 +244,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(766, 507);
+            this.ClientSize = new System.Drawing.Size(766, 588);
             this.Controls.Add(this.panelDatos);
             this.Controls.Add(this.GridOficinas);
             this.Controls.Add(this.panel1);

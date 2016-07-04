@@ -12,8 +12,8 @@ namespace CapaDatos
         private int id;
         private int usuario_id;
         private int rol_id;
-        private Usuario Usuario = new Usuario();
-        private Rol Rol = new Rol();
+        private Usuario Usuario;
+        private Rol Rol;
 
         public UsuarioRoles()
         {
@@ -70,6 +70,48 @@ namespace CapaDatos
             }
             //conexion.cerrarConexion();
             return usuarioRol;
+        }
+
+        public Boolean guardar(UsuarioRoles usuarioRoles)
+        {
+            bool guardo = false;
+            Conexion conexion = new Conexion();
+
+            int id = conexion.getSequenceValor("SEQ_USUARIO_ROLES", 1);
+            conexion.cerrarConexion();
+
+            string query = "insert into usuario_roles (id, usuario_id, rol_id) values (";
+            query += id + ",";
+            query += usuarioRoles.ioUsuarioId + ",";
+            query += usuarioRoles.ioRolId + ")";
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                guardo = true;
+            }
+            return guardo;
+        }
+
+        public Boolean actualizar(UsuarioRoles usuarioRoles)
+        {
+            bool guardo = false;
+            Conexion conexion = new Conexion();
+
+            string query = "update usuario_roles set";
+            query += " id=" + usuarioRoles.ioId.ToString() + ",";
+            query += " usuario_id=" + usuarioRoles.ioUsuarioId.ToString() + ",";
+            query += " rol_id=" + usuarioRoles.ioRolId.ToString() + ",";
+            query += " where id=" + usuarioRoles.ioId.ToString();
+
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                guardo = true;
+            }
+            return guardo;
         }
     }
 }

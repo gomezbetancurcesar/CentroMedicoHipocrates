@@ -1,6 +1,5 @@
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CapaDatos\bin\Debug\CapaDatos.dll
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CapaDatos\bin\Debug\CapaDatos.pdb
-C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CapaDatos\obj\Debug\CapaDatos.csprojResolveAssemblyReference.cache
+C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CapaDatos\bin\Debug\Oracle.DataAccess.dll
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CapaDatos\obj\Debug\CapaDatos.dll
 C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CapaDatos\obj\Debug\CapaDatos.pdb
-C:\Users\equipo-desarrollo-2\Documents\Visual Studio 2015\Projects\CentroMedicoHipocrates\CapaDatos\bin\Debug\Oracle.DataAccess.dll

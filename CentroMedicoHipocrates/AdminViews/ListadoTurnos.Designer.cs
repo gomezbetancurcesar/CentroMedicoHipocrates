@@ -140,7 +140,7 @@
             this.GridTurnos.MultiSelect = false;
             this.GridTurnos.Name = "GridTurnos";
             this.GridTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridTurnos.Size = new System.Drawing.Size(436, 179);
+            this.GridTurnos.Size = new System.Drawing.Size(436, 317);
             this.GridTurnos.TabIndex = 12;
             // 
             // Id
@@ -213,6 +213,7 @@
             // 
             // comboEstados
             // 
+            this.comboEstados.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEstados.FormattingEnabled = true;
             this.comboEstados.Location = new System.Drawing.Point(118, 85);
             this.comboEstados.Name = "comboEstados";
@@ -289,7 +290,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(902, 437);
+            this.ClientSize = new System.Drawing.Size(902, 478);
             this.Controls.Add(this.panelAgregar);
             this.Controls.Add(this.GridTurnos);
             this.Controls.Add(this.panel1);

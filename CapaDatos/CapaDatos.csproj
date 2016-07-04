@@ -59,7 +59,6 @@
     <Compile Include="Reserva.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="Usuario.cs" />
-    <Compile Include="Dia.cs" />
     <Compile Include="Provincia.cs" />
     <Compile Include="Recepcionista.cs" />
     <Compile Include="Region.cs" />

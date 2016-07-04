@@ -10,17 +10,16 @@ using System.Windows.Forms;
 
 namespace CentroMedicoHipocrates
 {
-    public partial class ListadoDias : Form
+    public partial class IngresarFichas : Form
     {
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
-        public ListadoDias()
+        public IngresarFichas()
         {
             InitializeComponent();
             //Dibujamos el menu correspondiente a cada rol!
             menuCreator.generarMenu(MenuContexto, session.AuthField("rol"));
-
             this.fullWidth();
         }
 
@@ -34,11 +33,6 @@ namespace CentroMedicoHipocrates
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");
-        }
-
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            Application.Exit();
         }
     }
 }

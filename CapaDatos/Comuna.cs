@@ -80,7 +80,7 @@ namespace CapaDatos
             return comuna;
         }
 
-        public Comuna buscarPorId(int id)
+        public Comuna buscarPorId(int id, Boolean fullData = false)
         {
             Comuna comuna = new Comuna();
             Conexion conexion = new Conexion();
@@ -90,6 +90,11 @@ namespace CapaDatos
             {
                 comuna.ioId = Int32.Parse(dr["id"].ToString());
                 comuna.ioNombre = dr["nombre"].ToString();
+                comuna.ioProvinciaId = Int32.Parse(dr["provincia_id"].ToString());
+                if (fullData)
+                {
+                    comuna.ioProvincia = new Provincia().buscarPorId(comuna.ioProvinciaId, true);
+                }
             }
             conexion.cerrarConexion();
             return comuna;
