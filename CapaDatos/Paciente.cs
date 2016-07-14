@@ -116,15 +116,15 @@ namespace CapaDatos
             return paciente;
         }
 
-        public Usuario buscarPorRut(String rut)
+        public Usuario buscarPorRut(String rut, Boolean fullData = true)
         {
             Usuario usuario = new Usuario();
             Conexion conexion = new Conexion();
 
-            usuario = new Usuario().buscarPorRut(rut, true);
+            usuario = new Usuario().buscarPorRut(rut, fullData);
             if (!usuario.ioId.Equals(0))
             {
-                usuario.ioPaciente = this.buscarPorUsuarioId(usuario.ioId, true);
+                usuario.ioPaciente = this.buscarPorUsuarioId(usuario.ioId, fullData);
             }
             return usuario;
         }
@@ -180,7 +180,7 @@ namespace CapaDatos
             if (guardaUsuario)
             {
                 string query = "update pacientes set";
-                query += " isapre_id=" + paciente.ioIsapreId.ToString() + ",";
+                query += " isapre_id=" + paciente.ioIsapreId.ToString();
                 query += " where id=" + paciente.ioId.ToString();
 
                 int filasIngresadas = conexion.ingresar(query);

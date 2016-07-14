@@ -30,7 +30,6 @@
         {
             this.MenuContexto = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lblTop = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblUsuario = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@
             // 
             // MenuContexto
             // 
+            this.MenuContexto.BackColor = System.Drawing.Color.MidnightBlue;
             this.MenuContexto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem});
             this.MenuContexto.Location = new System.Drawing.Point(0, 0);
@@ -54,14 +54,6 @@
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "menu";
             // 
-            // lblTop
-            // 
-            this.lblTop.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTop.Location = new System.Drawing.Point(3, 0);
-            this.lblTop.Name = "lblTop";
-            this.lblTop.Size = new System.Drawing.Size(500, 2);
-            this.lblTop.TabIndex = 2;
-            // 
             // lblBottom
             // 
             this.lblBottom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -72,11 +64,11 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel1.Controls.Add(this.lblUsuario);
             this.panel1.Controls.Add(this.lblBottom);
-            this.panel1.Controls.Add(this.lblTop);
-            this.panel1.Location = new System.Drawing.Point(0, 27);
+            this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(729, 100);
             this.panel1.TabIndex = 4;
@@ -94,10 +86,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(741, 360);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.MenuContexto;
+            this.MaximizeBox = false;
             this.Name = "DashBoard";
             this.Text = "dashBoard";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -114,7 +109,6 @@
         #endregion
         private System.Windows.Forms.MenuStrip MenuContexto;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
-        private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.Label lblBottom;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblUsuario;

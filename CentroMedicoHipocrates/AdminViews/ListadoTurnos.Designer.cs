@@ -31,10 +31,8 @@
             this.MenuContexto = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
-            this.lblTop = new System.Windows.Forms.Label();
             this.GridTurnos = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstadoId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +40,7 @@
             this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelAgregar = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.comboEstados = new System.Windows.Forms.ComboBox();
@@ -51,7 +50,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.MenuContexto.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridTurnos)).BeginInit();
@@ -60,6 +58,7 @@
             // 
             // MenuContexto
             // 
+            this.MenuContexto.BackColor = System.Drawing.Color.MidnightBlue;
             this.MenuContexto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem});
             this.MenuContexto.Location = new System.Drawing.Point(0, 0);
@@ -76,25 +75,14 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Controls.Add(this.btnEliminar);
             this.panel1.Controls.Add(this.lblUsuario);
             this.panel1.Controls.Add(this.lblBottom);
-            this.panel1.Controls.Add(this.lblTop);
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(729, 100);
             this.panel1.TabIndex = 11;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.BackColor = System.Drawing.Color.Red;
-            this.btnEliminar.Location = new System.Drawing.Point(442, 17);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(70, 62);
-            this.btnEliminar.TabIndex = 13;
-            this.btnEliminar.Text = "button1";
-            this.btnEliminar.UseVisualStyleBackColor = false;
             // 
             // lblUsuario
             // 
@@ -113,22 +101,14 @@
             this.lblBottom.Size = new System.Drawing.Size(500, 2);
             this.lblBottom.TabIndex = 3;
             // 
-            // lblTop
-            // 
-            this.lblTop.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTop.Location = new System.Drawing.Point(3, 0);
-            this.lblTop.Name = "lblTop";
-            this.lblTop.Size = new System.Drawing.Size(500, 2);
-            this.lblTop.TabIndex = 2;
-            // 
             // GridTurnos
             // 
             this.GridTurnos.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.GridTurnos.AllowUserToAddRows = false;
             this.GridTurnos.AllowUserToResizeColumns = false;
             this.GridTurnos.AllowUserToResizeRows = false;
-            this.GridTurnos.BackgroundColor = System.Drawing.Color.Silver;
-            this.GridTurnos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.GridTurnos.BackgroundColor = System.Drawing.Color.White;
+            this.GridTurnos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -136,7 +116,7 @@
             this.HoraInicio,
             this.HoraFin,
             this.Estado});
-            this.GridTurnos.Location = new System.Drawing.Point(0, 125);
+            this.GridTurnos.Location = new System.Drawing.Point(0, 134);
             this.GridTurnos.MultiSelect = false;
             this.GridTurnos.Name = "GridTurnos";
             this.GridTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -176,6 +156,9 @@
             // 
             // panelAgregar
             // 
+            this.panelAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.panelAgregar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAgregar.Controls.Add(this.label1);
             this.panelAgregar.Controls.Add(this.txtId);
             this.panelAgregar.Controls.Add(this.btnCancelar);
             this.panelAgregar.Controls.Add(this.comboEstados);
@@ -185,11 +168,20 @@
             this.panelAgregar.Controls.Add(this.label4);
             this.panelAgregar.Controls.Add(this.label3);
             this.panelAgregar.Controls.Add(this.label2);
-            this.panelAgregar.Controls.Add(this.label1);
             this.panelAgregar.Location = new System.Drawing.Point(442, 133);
             this.panelAgregar.Name = "panelAgregar";
             this.panelAgregar.Size = new System.Drawing.Size(405, 171);
             this.panelAgregar.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(114, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 24);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Datos";
             // 
             // txtId
             // 
@@ -232,12 +224,14 @@
             // 
             // btnGuardar
             // 
+            this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(170)))), ((int)(((byte)(230)))));
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.Location = new System.Drawing.Point(118, 127);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 3;
             this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtHoraInicio
@@ -277,24 +271,18 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Hora Inicio";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Datos";
-            // 
             // ListadoTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(902, 478);
             this.Controls.Add(this.panelAgregar);
             this.Controls.Add(this.GridTurnos);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ListadoTurnos";
             this.Text = "ListadoTurnos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -315,15 +303,12 @@
         private System.Windows.Forms.MenuStrip MenuContexto;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblBottom;
-        private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.DataGridView GridTurnos;
         private System.Windows.Forms.Panel panelAgregar;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboEstados;
         private System.Windows.Forms.DateTimePicker txtHoraFin;
         private System.Windows.Forms.DateTimePicker txtHoraInicio;
@@ -336,5 +321,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn HoraInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn HoraFin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.Label label1;
     }
 }

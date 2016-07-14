@@ -13,10 +13,12 @@ namespace CapaDatos
         private int turno_id;
         private int doctor_id;
         private int es_sobrecupo;
+        private int estado_agenda_id;
         private DateTime dia;
         private DateTime fecha_creacion;
         private Turno Turno;
         private Doctor Doctor;
+        private EstadoAgenda EstadoAgenda;
         private List<Reserva> Reservas;
 
         public Agenda()
@@ -48,6 +50,12 @@ namespace CapaDatos
             get { return this.es_sobrecupo; }
         }
 
+        public int ioEstadoAgendaId
+        {
+            get { return this.estado_agenda_id; }
+            set { this.estado_agenda_id = value; }
+        }
+
         public DateTime ioDia
         {
             set { this.dia = value; }
@@ -72,13 +80,19 @@ namespace CapaDatos
             get { return this.Doctor; }
         }
 
+        public EstadoAgenda ioEstadoAgenda
+        {
+            set { this.EstadoAgenda = value; }
+            get { return this.EstadoAgenda; }
+        }
+
         public List<Reserva> ioReservas
         {
             set { this.Reservas = value; }
             get { return this.Reservas; }
         }
 
-        public List<Agenda> buscarTodas(int doctorId = 0, DateTime? fecha = null, Boolean incluirTurno = false)
+        public List<Agenda> buscarTodas(int doctorId = 0, DateTime? fecha = null, Boolean incluirTurno = false, Boolean soloActivas = false, Boolean soloReservadas = false)
         {
             List<Agenda> agendas = new List<Agenda>();
             Agenda agenda;
@@ -93,10 +107,22 @@ namespace CapaDatos
                     DateTime f = (DateTime) fecha;
                     query += " and dia = DATE '" + f.ToString(formato) + "'";
                 }
+                if (soloActivas)
+                {
+                    query += " and estado_agenda_id in (1,3)";
+                }
+                if (soloReservadas)
+                {
+                    query += " and estado_agenda_id = 3";
+                }
             } else
             {
                 DateTime f = (DateTime)fecha;
                 query += " where dia = DATE '" + f.ToString(formato) + "'";
+                if (soloActivas)
+                {
+                    query += " and estado_agenda_id in (1,3)";
+                }
             }
 
             OracleDataReader dr = conexion.consultar(query);
@@ -107,10 +133,16 @@ namespace CapaDatos
                 agenda.ioDia = Convert.ToDateTime(dr["dia"].ToString());
                 agenda.ioDoctorId = Int32.Parse(dr["doctor_id"].ToString());
                 agenda.ioEsSobrecupo = Int32.Parse(dr["es_sobrecupo"].ToString());
+                agenda.ioEstadoAgendaId = Int32.Parse(dr["estado_agenda_id"].ToString());
                 if (incluirTurno)
                 {
                     agenda.Turno = new Turno().buscarPorId(agenda.ioTurnoId);
-                    agenda.Reservas = new Reserva().buscarTodos(agenda.ioId);
+                    bool fullData = false;
+                    if (soloReservadas)
+                    {
+                        fullData = true;
+                    }
+                    agenda.Reservas = new Reserva().buscarTodos(agenda.ioId,0,fullData);
                 }
                 agendas.Add(agenda);
             }
@@ -126,13 +158,15 @@ namespace CapaDatos
             int id = conexion.getSequenceValor("SEQ_AGENDA", 1);
             conexion.cerrarConexion();
 
-            string query = "insert into agenda (id, turno_id, dia, doctor_id, es_sobrecupo, fecha_creacion) values (";
+            string query = "insert into agenda (id, turno_id, dia, doctor_id, es_sobrecupo, fecha_creacion, estado_agenda_id) values (";
             query += id + ",";
             query += agenda.ioTurnoId + ",";
             query += "DATE '" + agenda.ioDia.Date.ToString(formato) + "',";
             query += agenda.ioDoctorId + ",";
             query += agenda.ioEsSobrecupo + ",";
-            query += "TO_TIMESTAMP('" + agenda.ioFechaCreacion.ToString("yyyy-MM-dd H:mm:ss") + "','YYYY-MM-DD HH24:MI:SS'))";
+            query += "TO_TIMESTAMP('" + agenda.ioFechaCreacion.ToString("yyyy-MM-dd H:mm:ss") + "','YYYY-MM-DD HH24:MI:SS'),";
+            query += agenda.ioEstadoAgendaId + ")";
+
             int filasIngresadas = conexion.ingresar(query);
             conexion.cerrarConexion();
 
@@ -191,6 +225,7 @@ namespace CapaDatos
                 agenda.ioDoctorId = Int32.Parse(dr["doctor_id"].ToString());
                 agenda.ioEsSobrecupo = Int32.Parse(dr["es_sobrecupo"].ToString());
                 agenda.ioFechaCreacion = Convert.ToDateTime(dr["fecha_creacion"].ToString());
+                agenda.ioEstadoAgendaId = Int32.Parse(dr["estado_agenda_id"].ToString());
                 if (fullData)
                 {
                     agenda.Turno = new Turno().buscarPorId(agenda.ioTurnoId);
@@ -199,6 +234,25 @@ namespace CapaDatos
             }
             conexion.cerrarConexion();
             return agenda;
+        }
+
+        public Boolean actualizar(Agenda agenda)
+        {
+            bool guardo = false;
+            Conexion conexion = new Conexion();
+            string query = "update agenda set";
+            query += " estado_agenda_id="+ agenda.ioEstadoAgendaId;
+            query += " where id=" + agenda.ioId;
+
+            Console.WriteLine(query);
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+
+            if (filasIngresadas > 0)
+            {
+                guardo = true;
+            }
+            return guardo;
         }
     }
 }

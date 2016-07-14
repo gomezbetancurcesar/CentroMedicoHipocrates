@@ -58,11 +58,23 @@
     <Compile Include="AdminViews\ListadoAdministradores.Designer.cs">
       <DependentUpon>ListadoAdministradores.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminViews\ListadoEnfermedades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminViews\ListadoEnfermedades.Designer.cs">
+      <DependentUpon>ListadoEnfermedades.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminViews\ListadoEspecialidades.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdminViews\ListadoEspecialidades.Designer.cs">
       <DependentUpon>ListadoEspecialidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminViews\ListadoExamenes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminViews\ListadoExamenes.Designer.cs">
+      <DependentUpon>ListadoExamenes.cs</DependentUpon>
     </Compile>
     <Compile Include="AdminViews\ListadoIsapres.cs">
       <SubType>Form</SubType>
@@ -110,6 +122,18 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginService.cs" />
+    <Compile Include="MedicoViews\AgendaDiaria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicoViews\AgendaDiaria.Designer.cs">
+      <DependentUpon>AgendaDiaria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicoViews\BloquearAgenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicoViews\BloquearAgenda.Designer.cs">
+      <DependentUpon>BloquearAgenda.cs</DependentUpon>
+    </Compile>
     <Compile Include="MedicoViews\IngresarFichas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,14 +185,21 @@
     <Compile Include="RecepcionViews\SobreCupos.Designer.cs">
       <DependentUpon>SobreCupos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Validaciones.cs" />
     <EmbeddedResource Include="AdminViews\AdminTurnos.resx">
       <DependentUpon>AdminTurnos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminViews\ListadoAdministradores.resx">
       <DependentUpon>ListadoAdministradores.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AdminViews\ListadoEnfermedades.resx">
+      <DependentUpon>ListadoEnfermedades.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminViews\ListadoEspecialidades.resx">
       <DependentUpon>ListadoEspecialidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminViews\ListadoExamenes.resx">
+      <DependentUpon>ListadoExamenes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminViews\ListadoIsapres.resx">
       <DependentUpon>ListadoIsapres.cs</DependentUpon>
@@ -190,6 +221,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicoViews\AgendaDiaria.resx">
+      <DependentUpon>AgendaDiaria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicoViews\BloquearAgenda.resx">
+      <DependentUpon>BloquearAgenda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MedicoViews\IngresarFichas.resx">
       <DependentUpon>IngresarFichas.cs</DependentUpon>
@@ -244,6 +281,9 @@
       <Project>{55a4374a-8def-4028-aaf6-688d82b1b426}</Project>
       <Name>CapaDatos</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

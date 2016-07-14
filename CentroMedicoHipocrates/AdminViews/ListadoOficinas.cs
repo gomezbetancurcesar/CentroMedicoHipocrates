@@ -13,6 +13,7 @@ namespace CentroMedicoHipocrates
 {
     public partial class ListadoOficinas : Form
     {
+        private Validaciones validaciones = new Validaciones();
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
@@ -32,7 +33,7 @@ namespace CentroMedicoHipocrates
             Screen pantalla = Screen.FromControl(form);
             Rectangle ventana = pantalla.WorkingArea;
             panel1.Width = ventana.Width;
-            lblTop.Width = ventana.Width;
+            panel1.Location = new Point(0, 24);
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");
@@ -60,11 +61,33 @@ namespace CentroMedicoHipocrates
             GridOficinas.Refresh();
         }
 
+        private void limpiarErrores()
+        {
+            validaciones.marcarError(txtId, Color.White);
+            validaciones.marcarError(txtPiso, Color.White);
+            validaciones.marcarError(txtNumero, Color.White);
+        }
+
+        private bool validarFormulario()
+        {
+            this.limpiarErrores();
+            if (txtPiso.Text.Equals("")) {
+                validaciones.marcarError(txtPiso);
+                return false;
+            }
+            if (txtNumero.Text.Equals("")) {
+                validaciones.marcarError(txtNumero);
+                return false;
+            }
+            return true;
+        }
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Oficina oficina = new Oficina();
             bool guarda = false;
-            if (!txtPiso.Text.Equals("") && !txtNumero.Text.Equals(""))
+
+            if(this.validarFormulario())
             {
                 oficina.ioPiso = Int32.Parse(txtPiso.Text);
                 oficina.ioNumero = txtNumero.Text;
@@ -88,13 +111,14 @@ namespace CentroMedicoHipocrates
 
         private void OnCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = GridOficinas.SelectedRows[0];
-
-            txtId.Text = row.Cells["Id"].Value.ToString();
-            txtPiso.Text = row.Cells["Piso"].Value.ToString();
-            txtNumero.Text = row.Cells["Numero"].Value.ToString();
-
-            btnCancelar.Visible = true;
+            if (GridOficinas.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = GridOficinas.SelectedRows[0];
+                txtId.Text = row.Cells["Id"].Value.ToString();
+                txtPiso.Text = row.Cells["Piso"].Value.ToString();
+                txtNumero.Text = row.Cells["Numero"].Value.ToString();
+                btnCancelar.Visible = true;
+            }
         }
 
         private void limpiarFormulario()
@@ -103,6 +127,7 @@ namespace CentroMedicoHipocrates
             txtPiso.Text = "";
             txtNumero.Text = "";
             btnCancelar.Visible = false;
+            this.limpiarErrores();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

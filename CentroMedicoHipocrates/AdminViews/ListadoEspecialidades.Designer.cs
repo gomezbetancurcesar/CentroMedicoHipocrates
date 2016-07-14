@@ -33,17 +33,16 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
-            this.lblTop = new System.Windows.Forms.Label();
             this.GridEspecialidades = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelAgregar = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.MenuContexto.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridEspecialidades)).BeginInit();
@@ -52,6 +51,7 @@
             // 
             // MenuContexto
             // 
+            this.MenuContexto.BackColor = System.Drawing.Color.MidnightBlue;
             this.MenuContexto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem});
             this.MenuContexto.Location = new System.Drawing.Point(0, 0);
@@ -68,10 +68,10 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel1.Controls.Add(this.lblUsuario);
             this.panel1.Controls.Add(this.lblBottom);
-            this.panel1.Controls.Add(this.lblTop);
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(729, 100);
@@ -94,29 +94,21 @@
             this.lblBottom.Size = new System.Drawing.Size(500, 2);
             this.lblBottom.TabIndex = 3;
             // 
-            // lblTop
-            // 
-            this.lblTop.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTop.Location = new System.Drawing.Point(3, 0);
-            this.lblTop.Name = "lblTop";
-            this.lblTop.Size = new System.Drawing.Size(500, 2);
-            this.lblTop.TabIndex = 2;
-            // 
             // GridEspecialidades
             // 
             this.GridEspecialidades.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.GridEspecialidades.AllowUserToAddRows = false;
-            this.GridEspecialidades.BackgroundColor = System.Drawing.Color.Silver;
-            this.GridEspecialidades.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.GridEspecialidades.BackgroundColor = System.Drawing.Color.White;
+            this.GridEspecialidades.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridEspecialidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridEspecialidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Nombre});
-            this.GridEspecialidades.Location = new System.Drawing.Point(0, 125);
+            this.GridEspecialidades.Location = new System.Drawing.Point(0, 133);
             this.GridEspecialidades.MultiSelect = false;
             this.GridEspecialidades.Name = "GridEspecialidades";
             this.GridEspecialidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridEspecialidades.Size = new System.Drawing.Size(226, 308);
+            this.GridEspecialidades.Size = new System.Drawing.Size(349, 395);
             this.GridEspecialidades.TabIndex = 12;
             // 
             // Id
@@ -134,16 +126,28 @@
             // 
             // panelAgregar
             // 
+            this.panelAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.panelAgregar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAgregar.Controls.Add(this.label1);
             this.panelAgregar.Controls.Add(this.txtId);
             this.panelAgregar.Controls.Add(this.btnCancelar);
             this.panelAgregar.Controls.Add(this.btnAgregar);
             this.panelAgregar.Controls.Add(this.txtNombre);
             this.panelAgregar.Controls.Add(this.lblNombre);
-            this.panelAgregar.Controls.Add(this.label1);
             this.panelAgregar.Location = new System.Drawing.Point(355, 133);
             this.panelAgregar.Name = "panelAgregar";
             this.panelAgregar.Size = new System.Drawing.Size(374, 100);
             this.panelAgregar.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(92, -1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 24);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Datos";
             // 
             // txtId
             // 
@@ -156,7 +160,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(190, 61);
+            this.btnCancelar.Location = new System.Drawing.Point(190, 68);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 4;
@@ -167,12 +171,14 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(96, 61);
+            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(170)))), ((int)(((byte)(230)))));
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Location = new System.Drawing.Point(96, 68);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "Guardar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // txtNombre
@@ -191,24 +197,18 @@
             this.lblNombre.TabIndex = 1;
             this.lblNombre.Text = "Nombre";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Agregar";
-            // 
             // ListadoEspecialidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 445);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(843, 534);
             this.Controls.Add(this.panelAgregar);
             this.Controls.Add(this.GridEspecialidades);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ListadoEspecialidades";
             this.Text = "ListadoEspecialidades";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -231,7 +231,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblBottom;
-        private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.DataGridView GridEspecialidades;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
@@ -239,8 +238,8 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -31,7 +31,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
-            this.lblTop = new System.Windows.Forms.Label();
             this.MenuContexto = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -50,8 +49,15 @@
             this.btnRetrocederDia = new System.Windows.Forms.Button();
             this.lblFechaBuscada = new System.Windows.Forms.Label();
             this.GridHorarios = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdAgenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.panelDatosMedico = new System.Windows.Forms.Panel();
+            this.lblGenero = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.lblRut = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -64,11 +70,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdAgenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoraInicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.HoraFin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             this.MenuContexto.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -79,10 +80,10 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel1.Controls.Add(this.lblUsuario);
             this.panel1.Controls.Add(this.lblBottom);
-            this.panel1.Controls.Add(this.lblTop);
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(729, 100);
@@ -105,16 +106,9 @@
             this.lblBottom.Size = new System.Drawing.Size(500, 2);
             this.lblBottom.TabIndex = 3;
             // 
-            // lblTop
-            // 
-            this.lblTop.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTop.Location = new System.Drawing.Point(3, 0);
-            this.lblTop.Name = "lblTop";
-            this.lblTop.Size = new System.Drawing.Size(500, 2);
-            this.lblTop.TabIndex = 2;
-            // 
             // MenuContexto
             // 
+            this.MenuContexto.BackColor = System.Drawing.Color.MidnightBlue;
             this.MenuContexto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem});
             this.MenuContexto.Location = new System.Drawing.Point(0, 0);
@@ -131,6 +125,8 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.btnBuscar);
             this.panel2.Controls.Add(this.txtFechaBuscada);
             this.panel2.Controls.Add(this.txtRutBuscado);
@@ -144,12 +140,14 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(170)))), ((int)(((byte)(230)))));
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBuscar.Location = new System.Drawing.Point(157, 87);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 11;
             this.btnBuscar.Text = "Ver";
-            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtFechaBuscada
@@ -190,11 +188,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(126, 9);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(128, -1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(98, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Datos";
+            this.label1.Text = "Buscador";
             // 
             // panelHorarios
             // 
@@ -209,7 +208,7 @@
             this.panelHorarios.Controls.Add(this.label4);
             this.panelHorarios.Location = new System.Drawing.Point(382, 133);
             this.panelHorarios.Name = "panelHorarios";
-            this.panelHorarios.Size = new System.Drawing.Size(467, 401);
+            this.panelHorarios.Size = new System.Drawing.Size(467, 444);
             this.panelHorarios.TabIndex = 10;
             this.panelHorarios.Visible = false;
             // 
@@ -285,7 +284,7 @@
             // GridHorarios
             // 
             this.GridHorarios.AllowUserToAddRows = false;
-            this.GridHorarios.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.GridHorarios.BackgroundColor = System.Drawing.Color.White;
             this.GridHorarios.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridHorarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridHorarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -297,21 +296,60 @@
             this.GridHorarios.Location = new System.Drawing.Point(22, 87);
             this.GridHorarios.Name = "GridHorarios";
             this.GridHorarios.RowHeadersVisible = false;
-            this.GridHorarios.Size = new System.Drawing.Size(325, 301);
+            this.GridHorarios.Size = new System.Drawing.Size(325, 342);
             this.GridHorarios.TabIndex = 1;
             this.GridHorarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridHorarios_CellContentClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // IdAgenda
+            // 
+            this.IdAgenda.HeaderText = "IdAgenda";
+            this.IdAgenda.Name = "IdAgenda";
+            this.IdAgenda.Visible = false;
+            // 
+            // HoraInicio
+            // 
+            this.HoraInicio.HeaderText = "Hora Inicio";
+            this.HoraInicio.Name = "HoraInicio";
+            this.HoraInicio.ReadOnly = true;
+            this.HoraInicio.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // HoraFin
+            // 
+            this.HoraFin.HeaderText = "Hora Fin";
+            this.HoraFin.Name = "HoraFin";
+            this.HoraFin.ReadOnly = true;
+            this.HoraFin.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Estado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(166, 9);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(166, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.Size = new System.Drawing.Size(89, 24);
             this.label4.TabIndex = 0;
             this.label4.Text = "Horarios";
             // 
             // panelDatosMedico
             // 
+            this.panelDatosMedico.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.panelDatosMedico.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelDatosMedico.Controls.Add(this.lblGenero);
+            this.panelDatosMedico.Controls.Add(this.label6);
             this.panelDatosMedico.Controls.Add(this.lblId);
             this.panelDatosMedico.Controls.Add(this.lblRut);
             this.panelDatosMedico.Controls.Add(this.label15);
@@ -329,6 +367,24 @@
             this.panelDatosMedico.Size = new System.Drawing.Size(373, 207);
             this.panelDatosMedico.TabIndex = 11;
             this.panelDatosMedico.Visible = false;
+            // 
+            // lblGenero
+            // 
+            this.lblGenero.AutoSize = true;
+            this.lblGenero.Location = new System.Drawing.Point(157, 170);
+            this.lblGenero.Name = "lblGenero";
+            this.lblGenero.Size = new System.Drawing.Size(41, 13);
+            this.lblGenero.TabIndex = 13;
+            this.lblGenero.Text = "label13";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(22, 170);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Género";
             // 
             // lblId
             // 
@@ -433,56 +489,26 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(129, 4);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(106, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 13);
+            this.label5.Size = new System.Drawing.Size(137, 24);
             this.label5.TabIndex = 0;
             this.label5.Text = "Datos Médico";
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
-            // 
-            // IdAgenda
-            // 
-            this.IdAgenda.HeaderText = "IdAgenda";
-            this.IdAgenda.Name = "IdAgenda";
-            this.IdAgenda.Visible = false;
-            // 
-            // HoraInicio
-            // 
-            this.HoraInicio.HeaderText = "Hora Inicio";
-            this.HoraInicio.Name = "HoraInicio";
-            this.HoraInicio.ReadOnly = true;
-            this.HoraInicio.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // HoraFin
-            // 
-            this.HoraFin.HeaderText = "Hora Fin";
-            this.HoraFin.Name = "HoraFin";
-            this.HoraFin.ReadOnly = true;
-            this.HoraFin.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            this.Estado.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Estado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // AdminTurnos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(911, 612);
             this.Controls.Add(this.panelDatosMedico);
             this.Controls.Add(this.panelHorarios);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.MenuContexto);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "AdminTurnos";
             this.Text = "AdminTurnos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -507,7 +533,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblBottom;
-        private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.MenuStrip MenuContexto;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
@@ -545,5 +570,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn HoraInicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn HoraFin;
         private System.Windows.Forms.DataGridViewButtonColumn Estado;
+        private System.Windows.Forms.Label lblGenero;
+        private System.Windows.Forms.Label label6;
     }
 }

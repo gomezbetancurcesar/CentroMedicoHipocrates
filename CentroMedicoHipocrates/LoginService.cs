@@ -19,6 +19,7 @@ namespace CentroMedicoHipocrates
             if (!datosUsuario.ioId.Equals(0))
             {
                 string nombreCompleto = datosUsuario.ioNombre + " " + datosUsuario.ioApellidoPaterno + " " + datosUsuario.ioApellidoMaterno;
+                usuario = new Dictionary<string, string>();
                 switch (datosUsuario.ioRol.ioNombre)
                 {
                     case "Administrador":
@@ -61,7 +62,14 @@ namespace CentroMedicoHipocrates
 
         public Usuario getUser()
         {
+            Console.WriteLine(datosUsuario.ioNombre);
             return datosUsuario;
+        }
+
+        public void setUser(Usuario usuario)
+        {
+            Console.WriteLine(usuario.ioNombre);
+            datosUsuario = usuario;
         }
     }
 }

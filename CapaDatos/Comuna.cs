@@ -42,7 +42,7 @@ namespace CapaDatos
             get { return this.Provincia; }
         }
 
-        public List<Comuna> buscarTodos(int provinciaId = -1)
+        public List<Comuna> buscarTodos(int provinciaId = -1 , Boolean fullData = false)
         {
             List<Comuna> comunas = new List<Comuna>();
             Comuna comuna;
@@ -50,7 +50,7 @@ namespace CapaDatos
             string query = "select * from comunas";
             if(provinciaId > 0)
             {
-                query = " where provincia_id = " + provinciaId;
+                query += " where provincia_id = " + provinciaId;
             }
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
@@ -59,6 +59,10 @@ namespace CapaDatos
                 comuna.ioId = Int32.Parse(dr["id"].ToString());
                 comuna.ioProvinciaId = Int32.Parse(dr["provincia_id"].ToString());
                 comuna.nombre = dr["nombre"].ToString();
+                if (fullData)
+                {
+                    comuna.ioProvincia = new Provincia().buscarPorId(comuna.ioProvinciaId);
+                }
                 comunas.Add(comuna);
             }
             conexion.cerrarConexion();

@@ -72,16 +72,21 @@ namespace CapaDatos
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
             {
-                doctor = new Doctor();
-                doctor.ioId = Int32.Parse(dr["id"].ToString());
-                doctor.ioUsuarioId = Int32.Parse(dr["usuario_id"].ToString());
-                doctor.ioEspecialidadId = Int32.Parse(dr["especialidad_id"].ToString());
-                doctor.ioOficinaId = Int32.Parse(dr["oficina_id"].ToString());
+                Console.WriteLine(dr["usuario_id"]);
+                if(!dr["usuario_id"].ToString().Equals(""))
+                {
+                    doctor = new Doctor();
+                    doctor.ioId = Int32.Parse(dr["id"].ToString());
 
-                doctor.ioUsuario = new Usuario().buscarPorId(doctor.ioUsuarioId);
-                doctor.ioEspecialidad = new Especialidad().buscarPorId(doctor.ioEspecialidadId);
-                doctor.ioOficina = new Oficina().buscarPorId(doctor.ioOficinaId);
-                doctores.Add(doctor);
+                    doctor.ioUsuarioId = Int32.Parse(dr["usuario_id"].ToString());
+                    doctor.ioEspecialidadId = Int32.Parse(dr["especialidad_id"].ToString());
+                    doctor.ioOficinaId = Int32.Parse(dr["oficina_id"].ToString());
+
+                    doctor.ioUsuario = new Usuario().buscarPorId(doctor.ioUsuarioId);
+                    doctor.ioEspecialidad = new Especialidad().buscarPorId(doctor.ioEspecialidadId);
+                    doctor.ioOficina = new Oficina().buscarPorId(doctor.ioOficinaId);
+                    doctores.Add(doctor);
+                }
             }
             conexion.cerrarConexion();
             return doctores;
@@ -153,7 +158,7 @@ namespace CapaDatos
             return doctor;
         }
 
-        public List<Doctor> buscarPorEspecialidad(string nombreEspecialidad, Boolean fullData = false)
+        public List<Doctor> buscarPorEspecialidad(string nombreEspecialidad, Boolean fullData = false, Boolean includeUser = true)
         {
             List<Doctor> doctores = new List<Doctor>();
             Doctor doctor;
@@ -167,11 +172,17 @@ namespace CapaDatos
                 doctor.ioId = Int32.Parse(dr["id"].ToString());
                 doctor.ioEspecialidadId = Int32.Parse(dr["especialidad_id"].ToString());
                 doctor.ioOficinaId = Int32.Parse(dr["oficina_id"].ToString());
-                doctor.ioUsuarioId = Int32.Parse(dr["usuario_id"].ToString());
+                if (includeUser)
+                {
+                    doctor.ioUsuarioId = Int32.Parse(dr["usuario_id"].ToString());
+                }
 
                 if (fullData)
                 {
-                    doctor.ioUsuario = new Usuario().buscarPorId(doctor.ioUsuarioId);
+                    if (includeUser)
+                    {
+                        doctor.ioUsuario = new Usuario().buscarPorId(doctor.ioUsuarioId);
+                    }
                     doctor.ioEspecialidad = new Especialidad().buscarPorId(doctor.ioEspecialidadId);
                     doctor.ioOficina = new Oficina().buscarPorId(doctor.ioOficinaId);
                 }
@@ -181,29 +192,37 @@ namespace CapaDatos
             return doctores;
         }
 
-        public Boolean guardar(Doctor doctor)
+        public Boolean guardar(Doctor doctor, Boolean guardarUsuario = true)
         {
             bool guardo = false;
             Conexion conexion = new Conexion();
-            int idUsuario = new Usuario().guardar(doctor.ioUsuario);
-            //Validamos si guardo el usuario
-            if (idUsuario > 0)
-            {
-                int id = conexion.getSequenceValor("SEQ_DOCTORES", 1);
-                conexion.cerrarConexion();
 
-                string query = "insert into doctores (id, usuario_id, especialidad_id, oficina_id) values (";
+            string query = "";
+            int id = conexion.getSequenceValor("SEQ_DOCTORES", 1);
+            conexion.cerrarConexion();
+
+            if (guardarUsuario)
+            {
+                int idUsuario = new Usuario().guardar(doctor.ioUsuario);
+                query = "insert into doctores (id, usuario_id, especialidad_id, oficina_id) values (";
                 query += id + ",";
                 query += idUsuario + ",";
                 query += doctor.ioEspecialidadId + ",";
                 query += doctor.ioOficinaId + ")";
-                Console.WriteLine(query);
-                int filasIngresadas = conexion.ingresar(query);
-                conexion.cerrarConexion();
-                if (filasIngresadas > 0)
-                {
-                    guardo = true;
-                }
+            }else
+            {
+                query = "insert into doctores (id, especialidad_id, oficina_id) values (";
+                query += id + ",";
+                query += doctor.ioEspecialidadId + ",";
+                query += doctor.ioOficinaId + ")";
+            }
+
+            //Validamos si guardo el usuario
+            int filasIngresadas = conexion.ingresar(query);
+            conexion.cerrarConexion();
+            if (filasIngresadas > 0)
+            {
+                guardo = true;
             }
             return guardo;
         }

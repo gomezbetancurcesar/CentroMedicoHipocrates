@@ -13,6 +13,7 @@ namespace CentroMedicoHipocrates
 {
     public partial class Reservar : Form
     {
+        private Validaciones validaciones = new Validaciones();
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
@@ -32,7 +33,7 @@ namespace CentroMedicoHipocrates
             Screen pantalla = Screen.FromControl(form);
             Rectangle ventana = pantalla.WorkingArea;
             panel1.Width = ventana.Width;
-            lblTop.Width = ventana.Width;
+            panel1.Location = new Point(0, 24);
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");
@@ -43,26 +44,32 @@ namespace CentroMedicoHipocrates
             Application.Exit();
         }
 
-        private void llenarCombos()
+        private void dibujarProvincias(int regionId = -1)
         {
-            //Comunas
-            List<Comuna> comunas = new Comuna().buscarTodos();
-            comboComuna.Items.Clear();
-            foreach (Comuna comuna in comunas)
-            {
-                comboComuna.Items.Add(comuna.ioNombre);
-            }
-            comboComuna.Refresh();
-
             //Provincias
-            List<Provincia> provincias = new Provincia().buscarTodos();
+            List<Provincia> provincias = new Provincia().buscarTodos(regionId);
             comboProvincia.Items.Clear();
             foreach (Provincia provincia in provincias)
             {
                 comboProvincia.Items.Add(provincia.ioNombre);
             }
             comboProvincia.Refresh();
+        }
 
+        private void dibujarComunas(int provinciaId = -1)
+        {
+            //Comunas
+            List<Comuna> comunas = new Comuna().buscarTodos(provinciaId);
+            comboComuna.Items.Clear();
+            foreach (Comuna comuna in comunas)
+            {
+                comboComuna.Items.Add(comuna.ioNombre);
+            }
+            comboComuna.Refresh();
+        }
+
+        private void llenarCombos()
+        {
             //Regiones
             List<CapaDatos.Region> regiones = new CapaDatos.Region().buscarTodos();
             comboRegion.Items.Clear();
@@ -71,6 +78,9 @@ namespace CentroMedicoHipocrates
                 comboRegion.Items.Add(region.ioNombre);
             }
             comboRegion.Refresh();
+
+            this.dibujarComunas();
+            this.dibujarProvincias();
 
             //Isapres
             List<Isapre> isapres = new Isapre().buscarTodos();
@@ -93,6 +103,7 @@ namespace CentroMedicoHipocrates
 
         private void limpiarFormulario(Boolean soloFormPaciente = false)
         {
+            this.limpiarErrores();
             if (!soloFormPaciente)
             {
                 lblUsuarioId.Text = "0";
@@ -107,6 +118,13 @@ namespace CentroMedicoHipocrates
                 comboComuna.Text = "";
                 comboProvincia.Text = "";
                 comboRegion.Text = "";
+                comboGenero.Text = "";
+                comboIsapre.Text = "";
+                comboGenero.SelectedIndex = -1;
+                comboComuna.SelectedIndex = -1;
+                comboProvincia.SelectedIndex = -1;
+                comboRegion.SelectedIndex = -1;
+                comboIsapre.SelectedIndex = -1;
             }
             lblPacienteId.Text = "0";
             comboIsapre.Text = "";
@@ -115,56 +133,91 @@ namespace CentroMedicoHipocrates
             panelHorarios.Visible = false;
         }
 
+        private void limpiarErrores()
+        {
+            validaciones.marcarError(txtRut, Color.White);
+            validaciones.marcarError(txtNombre, Color.White);
+            validaciones.marcarError(txtApellidoPaterno, Color.White);
+            validaciones.marcarError(txtApellidoMaterno, Color.White);
+            validaciones.marcarError(txtDireccion, Color.White);
+            validaciones.marcarError(txtEmail, Color.White);
+            validaciones.marcarError(txtTelefono, Color.White);
+        }
+
         private Boolean validarPersona()
         {
             if (txtRut.Text.Equals(""))
             {
-                //marcar error
+                validaciones.marcarError(txtRut);
                 return false;
+            }else
+            {
+                if (!validaciones.validaRut(txtRut.Text))
+                {
+                    validaciones.marcarError(txtRut);
+                    return false;
+                }
             }
 
             if (txtNombre.Text.Equals(""))
             {
-                //marcar error
+                validaciones.marcarError(txtNombre);
                 return false;
             }
 
             if (txtApellidoPaterno.Text.Equals(""))
             {
+                validaciones.marcarError(txtApellidoPaterno);
                 return false;
             }
 
             if (txtApellidoMaterno.Text.Equals(""))
             {
+                validaciones.marcarError(txtApellidoMaterno);
                 return false;
             }
 
             if (txtEmail.Text.Equals(""))
             {
+                validaciones.marcarError(txtEmail);
                 return false;
+            }else
+            {
+                if (validaciones.validarEmail(txtEmail.Text))
+                {
+                    validaciones.marcarError(txtEmail);
+                    return false;
+                }
             }
 
             if (txtTelefono.Text.Equals(""))
             {
+                validaciones.marcarError(txtTelefono);
                 return false;
             }
 
             if (txtDireccion.Text.Equals(""))
             {
+                validaciones.marcarError(txtDireccion);
                 return false;
             }
 
-            if (comboComuna.Text.Equals(""))
+            if (comboComuna.SelectedIndex.Equals(-1))
             {
                 return false;
             }
 
-            if (comboProvincia.Text.Equals(""))
+            if (comboProvincia.SelectedIndex.Equals(-1))
             {
                 return false;
             }
 
-            if (comboRegion.Text.Equals(""))
+            if (comboRegion.SelectedIndex.Equals(-1))
+            {
+                return false;
+            }
+
+            if (comboGenero.SelectedIndex.Equals(-1))
             {
                 return false;
             }
@@ -184,7 +237,7 @@ namespace CentroMedicoHipocrates
         {
             lblIdDoctor.Text = doctorId.ToString();
             DateTime fecha = dateFechaBuscada.Value.Date;
-            List<Agenda> agendas = new Agenda().buscarTodas(doctorId, fecha, true);
+            List<Agenda> agendas = new Agenda().buscarTodas(doctorId, fecha, true, true);
 
             //GridHorarios.CellClick += new DataGridViewCellEventHandler(this.MedicosCellClick);
             GridHorarios.Rows.Clear();
@@ -194,21 +247,23 @@ namespace CentroMedicoHipocrates
                 DataGridViewRow fila = GridHorarios.Rows[indice];
                 fila.Cells[0].Value = agenda.ioId;
                 fila.Cells[1].Value = agenda.ioTurno.ioHoraInicio + " - " + agenda.ioTurno.ioHoraFin;
-                if (agenda.ioReservas.Count.Equals(0))
+
+                if (agenda.ioEstadoAgendaId.Equals(1))
                 {
-                    fila.Cells[2].Value = "Disponible";
-                }else
+                    //Agenda disponible
+                    DataGridViewButtonCell btnFila;
+                    btnFila = (DataGridViewButtonCell)fila.Cells[2];
+                    btnFila.FlatStyle = FlatStyle.Flat;
+                    btnFila.Value = "Disponible";
+                    btnFila.Style.BackColor = Color.FromArgb(45, 180, 35);
+                }
+                else
                 {
-                    //Obtenemos las reservas anuladas
-                    List<Reserva> reservasAnuladas = agenda.ioReservas.FindAll(reservax => reservax.ioEstadoReservaId == 2);
-                    //Validamos si todas las reservas estan anuladas, la agenda está disponible
-                    if(agenda.ioReservas.Count == reservasAnuladas.Count)
-                    {
-                        fila.Cells[2].Value = "Disponible";
-                    }else
-                    {
-                        fila.Cells[2].Value = "Agendada";
-                    }
+                    DataGridViewButtonCell btnFila;
+                    btnFila = (DataGridViewButtonCell)fila.Cells[2];
+                    btnFila.FlatStyle = FlatStyle.Flat;
+                    btnFila.Value = "Agendada";
+                    btnFila.Style.BackColor = Color.FromArgb(138, 138, 138);
                 }
             }
             GridHorarios.Refresh();
@@ -231,10 +286,14 @@ namespace CentroMedicoHipocrates
                 txtEmail.Text = usuario.ioEmail;
                 txtTelefono.Text = usuario.ioTelefono;
                 txtDireccion.Text = usuario.ioDireccion;
+                comboGenero.Text = (usuario.ioGenero.Equals("M") ? "Masculino" : "Femenino");
 
-                comboComuna.Text = usuario.ioComuna.ioNombre;
-                comboProvincia.Text = usuario.ioComuna.ioProvincia.ioNombre;
                 comboRegion.Text = usuario.ioComuna.ioProvincia.ioRegion.ioNombre;
+                this.dibujarProvincias(usuario.ioComuna.ioProvincia.ioRegionId);
+                comboProvincia.Text = usuario.ioComuna.ioProvincia.ioNombre;
+
+                this.dibujarComunas(usuario.ioComuna.ioProvinciaId);
+                comboComuna.Text = usuario.ioComuna.ioNombre;
 
                 if (!usuario.ioPaciente.ioId.Equals(0))
                 {
@@ -289,11 +348,14 @@ namespace CentroMedicoHipocrates
 
         private void MedicosCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = GridMedicos.SelectedRows[0];
-            int idDoctor = Int32.Parse(row.Cells["IdMedico"].Value.ToString());
-            panelHorarios.Visible = true;
-            panelHorarios.Location = new Point(621, 225);
-            this.buscarAgendaMedico(idDoctor);
+            if (GridMedicos.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = GridMedicos.SelectedRows[0];
+                int idDoctor = Int32.Parse(row.Cells["IdMedico"].Value.ToString());
+                panelHorarios.Visible = true;
+                panelHorarios.Location = new Point(685, 250);
+                this.buscarAgendaMedico(idDoctor);
+            }
         }
 
         private void btnReservar_Click(object sender, EventArgs e)
@@ -322,6 +384,8 @@ namespace CentroMedicoHipocrates
                         paciente.ioUsuario.ioTelefono = txtTelefono.Text;
                         paciente.ioUsuario.ioDireccion = txtDireccion.Text;
                         paciente.ioUsuario.ioComunaId = comuna.ioId;
+                        paciente.ioUsuario.ioGenero = (comboGenero.Text.Equals("Masculino") ? "M" : "F");
+
                         int pacienteId = 0;
                         if (lblPacienteId.Text.Equals("0"))
                         {
@@ -338,10 +402,17 @@ namespace CentroMedicoHipocrates
                             reserva.ioAgendaId = Int32.Parse(row.Cells["IdAgenda"].Value.ToString());
                             //Estado reservado -> 1
                             reserva.ioEstadoReservaId = 1;
+                            //No es sobrecupo
+                            reserva.ioEsSobrecupo = 0;
                             reserva.ioPacienteId = pacienteId;
 
                             if (reserva.guardar(reserva))
                             {
+                                Agenda agenda = new Agenda();
+                                agenda.ioId = reserva.ioAgendaId;
+                                //Estado agendada
+                                agenda.ioEstadoAgendaId = 3;
+                                agenda.actualizar(agenda);
                                 this.limpiarFormulario();
                             }
                         }else
@@ -361,6 +432,23 @@ namespace CentroMedicoHipocrates
             {
                 MessageBox.Show("Verifique los datos del paciente");
             }
+        }
+
+        private void comboRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = new CapaDatos.Region().buscarPorNombre(comboRegion.Text).ioId;
+            this.dibujarProvincias(id);
+        }
+
+        private void comboProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = new Provincia().buscarPorNombre(comboProvincia.Text).ioId;
+            this.dibujarComunas(id);
+        }
+
+        private void panelHorarios_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

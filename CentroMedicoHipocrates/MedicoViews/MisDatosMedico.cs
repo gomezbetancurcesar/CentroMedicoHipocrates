@@ -13,6 +13,7 @@ namespace CentroMedicoHipocrates
 {
     public partial class MisDatosMedico : Form
     {
+        private Validaciones validaciones = new Validaciones();
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
@@ -35,8 +36,15 @@ namespace CentroMedicoHipocrates
             txtApellidoMaterno.Text = doctor.ioUsuario.ioApellidoMaterno;
             txtDireccion.Text = doctor.ioUsuario.ioDireccion;
             dateFechaNac.Text = doctor.ioUsuario.ioFechaNacimento.Date.ToString("dd/MM/yyyy");
+            comboGenero.Text = doctor.ioUsuario.ioGenero.Equals("M") ? "Masculino" : "Femenino";
 
+            comboRegion.Text = doctor.ioUsuario.ioComuna.ioProvincia.ioRegion.ioNombre;
+            this.dibujarProvincias(doctor.ioUsuario.ioComuna.ioProvincia.ioRegionId);
+            comboProvincia.Text = doctor.ioUsuario.ioComuna.ioProvincia.ioNombre;
+
+            this.dibujarComunas(doctor.ioUsuario.ioComuna.ioProvinciaId);
             comboComuna.Text = doctor.ioUsuario.ioComuna.ioNombre;
+
             comboEspecialidad.Text = doctor.ioEspecialidad.ioNombre;
             comboOficina.Text = doctor.ioOficina.ioNumero;
         }
@@ -47,7 +55,7 @@ namespace CentroMedicoHipocrates
             Screen pantalla = Screen.FromControl(form);
             Rectangle ventana = pantalla.WorkingArea;
             panel1.Width = ventana.Width;
-            lblTop.Width = ventana.Width;
+            panel1.Location = new Point(0, 24);
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");
@@ -58,15 +66,43 @@ namespace CentroMedicoHipocrates
             Application.Exit();
         }
 
-        private void llenarCombos()
+        private void dibujarProvincias(int regionId = -1)
         {
-            List<Comuna> comunas = new Comuna().buscarTodos();
+            //Provincias
+            List<Provincia> provincias = new Provincia().buscarTodos(regionId);
+            comboProvincia.Items.Clear();
+            foreach (Provincia provincia in provincias)
+            {
+                comboProvincia.Items.Add(provincia.ioNombre);
+            }
+            comboProvincia.Refresh();
+        }
+
+        private void dibujarComunas(int provinciaId = -1)
+        {
+            //Comunas
+            List<Comuna> comunas = new Comuna().buscarTodos(provinciaId);
             comboComuna.Items.Clear();
-            foreach (var comuna in comunas)
+            foreach (Comuna comuna in comunas)
             {
                 comboComuna.Items.Add(comuna.ioNombre);
             }
             comboComuna.Refresh();
+        }
+
+        private void llenarCombos()
+        {
+            //Regiones
+            List<CapaDatos.Region> regiones = new CapaDatos.Region().buscarTodos();
+            comboRegion.Items.Clear();
+            foreach (CapaDatos.Region region in regiones)
+            {
+                comboRegion.Items.Add(region.ioNombre);
+            }
+            comboRegion.Refresh();
+
+            this.dibujarComunas();
+            this.dibujarProvincias();
 
             List<Especialidad> especialidades = new Especialidad().buscarTodos();
             comboEspecialidad.Items.Clear();
@@ -85,31 +121,116 @@ namespace CentroMedicoHipocrates
             comboOficina.Refresh();
         }
 
+        private void limpiarErrores()
+        {
+            validaciones.marcarError(txtId, Color.White);
+            validaciones.marcarError(txtRut, Color.White);
+            validaciones.marcarError(txtNombre, Color.White);
+            validaciones.marcarError(txtApellidoPaterno, Color.White);
+            validaciones.marcarError(txtApellidoMaterno, Color.White);
+            validaciones.marcarError(txtDireccion, Color.White);
+            validaciones.marcarError(txtEmail, Color.White);
+            validaciones.marcarError(txtTelefono, Color.White);
+        }
+
         private Boolean validarDatosDoctor()
         {
-            bool validado = false;
-            if (!comboEspecialidad.SelectedIndex.Equals(-1) && !comboOficina.SelectedIndex.Equals(-1))
+            if (comboEspecialidad.SelectedIndex.Equals(-1))
             {
-                validado = true;
+                return false;
             }
-            return validado;
+
+            if (comboOficina.SelectedIndex.Equals(-1))
+            {
+                return false;
+            }
+            return true;
         }
 
         private Boolean validarDatosPersona()
         {
-            bool validado = false;
-            if (!txtRut.Text.Equals("") && !txtNombre.Text.Equals("") && !txtApellidoPaterno.Text.Equals("") && !txtApellidoMaterno.Text.Equals(""))
+            if (txtRut.Text.Equals(""))
             {
-                if (!txtDireccion.Text.Equals("") && !comboComuna.SelectedIndex.Equals(-1))
+                validaciones.marcarError(txtRut);
+                return false;
+            }
+            else
+            {
+                if (!validaciones.validaRut(txtRut.Text))
                 {
-                    validado = true;
+                    validaciones.marcarError(txtRut);
+                    return false;
                 }
             }
-            return validado;
+
+            if (txtNombre.Text.Equals(""))
+            {
+                validaciones.marcarError(txtNombre);
+                return false;
+            }
+
+            if (txtApellidoPaterno.Text.Equals(""))
+            {
+                validaciones.marcarError(txtApellidoPaterno);
+                return false;
+            }
+
+            if (txtApellidoMaterno.Text.Equals(""))
+            {
+                return false;
+            }
+
+            if (txtDireccion.Text.Equals(""))
+            {
+                validaciones.marcarError(txtDireccion);
+                return false;
+            }
+
+            if (txtTelefono.Text.Equals(""))
+            {
+                validaciones.marcarError(txtTelefono);
+                return false;
+            }
+
+            if (txtEmail.Text.Equals(""))
+            {
+                validaciones.marcarError(txtEmail);
+                return false;
+            }
+            else
+            {
+                if (!validaciones.validarEmail(txtEmail.Text))
+                {
+                    validaciones.marcarError(txtEmail);
+                    return false;
+                }
+            }
+
+            if (comboRegion.SelectedIndex.Equals(-1))
+            {
+                return false;
+            }
+
+            if (comboProvincia.SelectedIndex.Equals(-1))
+            {
+                return false;
+            }
+
+            if (comboComuna.SelectedIndex.Equals(-1))
+            {
+                return false;
+            }
+
+            if (comboGenero.SelectedIndex.Equals(-1))
+            {
+                return false;
+            }
+            return true;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            this.limpiarErrores();
             if (this.validarDatosPersona() && this.validarDatosDoctor())
             {
                 Doctor doctor = new Doctor();
@@ -117,6 +238,7 @@ namespace CentroMedicoHipocrates
                 doctor.ioEspecialidadId = new Especialidad().buscarPorNombre(comboEspecialidad.Text).ioId;
                 doctor.ioOficinaId = new Oficina().buscarPorNumero(comboOficina.Text).ioId;
 
+                doctor.ioUsuario = new Usuario();
                 doctor.ioUsuario.ioId = Int32.Parse(txtUsuarioId.Text);
                 doctor.ioUsuario.ioComunaId = new Comuna().buscarPorNombre(comboComuna.Text).ioId;
                 doctor.ioUsuario.ioNombre = txtNombre.Text;
@@ -125,13 +247,31 @@ namespace CentroMedicoHipocrates
                 doctor.ioUsuario.ioRut = txtRut.Text;
                 doctor.ioUsuario.ioDireccion = txtDireccion.Text;
                 doctor.ioUsuario.ioFechaNacimento = dateFechaNac.Value.Date;
+                doctor.ioUsuario.ioGenero = comboGenero.Text.Equals("Masculino") ? "M" : "F";
+            
                 if (doctor.actualizar(doctor))
                 {
+                    Usuario usuario = new Usuario().login("", "", doctor.ioUsuario.ioId);
+                    usuario.ioDoctor = new Doctor().buscarPorPersonaId(doctor.ioUsuario.ioId);
+                    new LoginService().setUser(usuario);
+
                     MisDatosMedico view = new MisDatosMedico();
                     view.Show();
                     this.Hide();
                 }
             }
+        }
+
+        private void comboRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = new CapaDatos.Region().buscarPorNombre(comboRegion.Text).ioId;
+            this.dibujarProvincias(id);
+        }
+
+        private void comboProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = new Provincia().buscarPorNombre(comboProvincia.Text).ioId;
+            this.dibujarComunas(id);
         }
     }
 }

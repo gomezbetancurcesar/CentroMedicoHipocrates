@@ -13,6 +13,7 @@ namespace CentroMedicoHipocrates
 {
     public partial class ListadoEspecialidades : Form
     {
+        private Validaciones validaciones = new Validaciones();
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
@@ -32,7 +33,7 @@ namespace CentroMedicoHipocrates
             Screen pantalla = Screen.FromControl(form);
             Rectangle ventana = pantalla.WorkingArea;
             panel1.Width = ventana.Width;
-            lblTop.Width = ventana.Width;
+            panel1.Location = new Point(0, 24);
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");
@@ -43,11 +44,24 @@ namespace CentroMedicoHipocrates
             Application.Exit();
         }
 
+        private bool validarFormulario()
+        {
+            this.limpiarErrores();
+            if (txtNombre.Text.Equals(""))
+            {
+                validaciones.marcarError(txtNombre);
+                return false;
+            }
+            return true;
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             Especialidad especialidad = new Especialidad();
+            especialidad.ioLaboratorio = "0";
             bool guardo = false;
-            if (!txtNombre.Text.Equals(""))
+
+            if (this.validarFormulario())
             {
                 especialidad.ioNombre = txtNombre.Text;
                 if (txtId.Text.Equals("0"))
@@ -85,12 +99,19 @@ namespace CentroMedicoHipocrates
 
         private void OnCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = GridEspecialidades.SelectedRows[0];
+            if(GridEspecialidades.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = GridEspecialidades.SelectedRows[0];
+                txtId.Text = row.Cells["Id"].Value.ToString();
+                txtNombre.Text = row.Cells["Nombre"].Value.ToString();
+                btnCancelar.Visible = true;
+            }
+        }
 
-            txtId.Text = row.Cells["Id"].Value.ToString();
-            txtNombre.Text = row.Cells["Nombre"].Value.ToString();
-
-            btnCancelar.Visible = true;
+        private void limpiarErrores()
+        {
+            validaciones.marcarError(txtId, Color.White);
+            validaciones.marcarError(txtNombre, Color.White);
         }
 
         private void limpiarFormulario()
@@ -98,6 +119,7 @@ namespace CentroMedicoHipocrates
             txtId.Text = "0";
             txtNombre.Text = "";
             btnCancelar.Visible = false;
+            this.limpiarErrores();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

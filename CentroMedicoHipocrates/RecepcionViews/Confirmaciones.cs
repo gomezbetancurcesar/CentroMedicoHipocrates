@@ -31,7 +31,7 @@ namespace CentroMedicoHipocrates
             Screen pantalla = Screen.FromControl(form);
             Rectangle ventana = pantalla.WorkingArea;
             panel1.Width = ventana.Width;
-            lblTop.Width = ventana.Width;
+            panel1.Location = new Point(0, 24);
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");
@@ -48,17 +48,30 @@ namespace CentroMedicoHipocrates
             panelPaciente.Visible = visibilidad;
             panelReserva.Visible = visibilidad;
             panelCambioEstado.Visible = visibilidad;
+            btnCancelar.Visible = true;
+            btnGuardar.Visible = true;
         }
 
-        private void llenarCombos()
+        private void llenarCombos(Boolean especial = false)
         {
             List<EstadoReserva> estados = new EstadoReserva().buscarTodos();
             comboEstados.Items.Clear();
             foreach (EstadoReserva estado in estados)
             {
-                comboEstados.Items.Add(estado.ioNombre);
+                if (especial)
+                {
+                    if (estado.ioNombre.Equals("Reservada") || estado.ioNombre.Equals("Anulada") || estado.ioNombre.Equals("Confirmada"))
+                    {
+                        comboEstados.Items.Add(estado.ioNombre);
+                    }
+                }
+                else
+                {
+                    comboEstados.Items.Add(estado.ioNombre);
+                }
             }
             comboEstados.Refresh();
+            comboEstados.Enabled = true;
         }
 
         private void llenarGrilla()
@@ -100,33 +113,52 @@ namespace CentroMedicoHipocrates
 
         private void OnCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = gridReservas.SelectedRows[0];
-            int id = Int32.Parse(row.Cells[0].Value.ToString());
-            Reserva reserva = new Reserva().buscarPorId(id, true);
+            if (gridReservas.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = gridReservas.SelectedRows[0];
+                int id = Int32.Parse(row.Cells[0].Value.ToString());
+                string estadoReservaSeleccionada = row.Cells["Estado"].Value.ToString();
 
-            this.llenarCombos();
-            lblIdReserva.Text = reserva.ioId.ToString();
-            String nombreCompleto = reserva.ioPaciente.ioUsuario.ioNombre+" ";
-            nombreCompleto += reserva.ioPaciente.ioUsuario.ioApellidoPaterno;
-            lblPacNombre.Text = nombreCompleto;
-            lblPacRut.Text = reserva.ioPaciente.ioUsuario.ioRut;
-            lblPacEmail.Text = reserva.ioPaciente.ioUsuario.ioEmail;
-            lblPacTelefono.Text = reserva.ioPaciente.ioUsuario.ioTelefono;
-            lblIsapre.Text = reserva.ioPaciente.ioIsapre.ioNombre;
+                Reserva reserva = new Reserva().buscarPorId(id, true);
 
-            nombreCompleto = reserva.ioAgenda.ioDoctor.ioUsuario.ioNombre + " ";
-            nombreCompleto += reserva.ioAgenda.ioDoctor.ioUsuario.ioApellidoPaterno;
-            lblDocNombre.Text = nombreCompleto;
-            lblDocRut.Text = reserva.ioAgenda.ioDoctor.ioUsuario.ioRut;
-            lblEspecialidad.Text = reserva.ioAgenda.ioDoctor.ioEspecialidad.ioNombre;
-            lblOficina.Text = reserva.ioAgenda.ioDoctor.ioOficina.ioNumero;
+                bool especial = false;
+                if (estadoReservaSeleccionada.Equals("Reservada"))
+                {
+                    especial = true;
+                }
 
-            lblResHoraInicio.Text = reserva.ioAgenda.ioTurno.ioHoraInicio;
-            lblResHoraFin.Text = reserva.ioAgenda.ioTurno.ioHoraFin;
-            lblResFecha.Text = reserva.ioAgenda.ioDia.Date.ToString("dd/MM/yyyy");
-            lblResFechaCreacion.Text = reserva.ioFechaReserva.ToString("dd/MM/yyyy hh:mm");
-            this.mostrarPaneles(true);
-            comboEstados.Text = reserva.ioEstadoReserva.ioNombre;
+                this.llenarCombos(especial);
+                lblIdReserva.Text = reserva.ioId.ToString();
+                String nombreCompleto = reserva.ioPaciente.ioUsuario.ioNombre + " ";
+                nombreCompleto += reserva.ioPaciente.ioUsuario.ioApellidoPaterno;
+                lblPacNombre.Text = nombreCompleto;
+                lblPacRut.Text = reserva.ioPaciente.ioUsuario.ioRut;
+                lblPacEmail.Text = reserva.ioPaciente.ioUsuario.ioEmail;
+                lblPacTelefono.Text = reserva.ioPaciente.ioUsuario.ioTelefono;
+                lblIsapre.Text = reserva.ioPaciente.ioIsapre.ioNombre;
+
+                nombreCompleto = reserva.ioAgenda.ioDoctor.ioUsuario.ioNombre + " ";
+                nombreCompleto += reserva.ioAgenda.ioDoctor.ioUsuario.ioApellidoPaterno;
+                lblDocNombre.Text = nombreCompleto;
+                lblDocRut.Text = reserva.ioAgenda.ioDoctor.ioUsuario.ioRut;
+                lblEspecialidad.Text = reserva.ioAgenda.ioDoctor.ioEspecialidad.ioNombre;
+                lblOficina.Text = reserva.ioAgenda.ioDoctor.ioOficina.ioNumero;
+
+                lblResHoraInicio.Text = reserva.ioAgenda.ioTurno.ioHoraInicio;
+                lblResHoraFin.Text = reserva.ioAgenda.ioTurno.ioHoraFin;
+                lblResFecha.Text = reserva.ioAgenda.ioDia.Date.ToString("dd/MM/yyyy");
+                lblResFechaCreacion.Text = reserva.ioFechaReserva.ToString("dd/MM/yyyy hh:mm");
+                this.mostrarPaneles(true);
+
+                comboEstados.Text = reserva.ioEstadoReserva.ioNombre;
+                //Si está anulada, se bloquea el combo
+                if (!reserva.ioEstadoReserva.ioId.Equals(1))
+                {
+                    comboEstados.Enabled = false;
+                    btnCancelar.Visible = false;
+                    btnGuardar.Visible = false;
+                }
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -141,9 +173,17 @@ namespace CentroMedicoHipocrates
                 Reserva reserva = new Reserva();
                 reserva.ioId = Int32.Parse(lblIdReserva.Text);
                 reserva.ioEstadoReservaId = new EstadoReserva().buscarPorNombre(comboEstados.Text).ioId;
-
                 if (reserva.actualizar(reserva))
                 {
+                    //Si se está anulando reserva
+                    if (reserva.ioEstadoReservaId.Equals(2))
+                    {
+                        Agenda agenda = new Agenda();
+                        agenda.ioId = new Reserva().buscarPorId(reserva.ioId).ioAgendaId;
+                        //Se marca la agenda como disponible
+                        agenda.ioEstadoAgendaId = 1;
+                        agenda.actualizar(agenda);
+                    }
                     this.mostrarPaneles(false);
                     this.llenarGrilla();
                 }

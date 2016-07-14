@@ -20,6 +20,7 @@ namespace CapaDatos
         private string password;
         private string email;
         private string telefono;
+        private string genero;
         private Comuna Comuna;
         private UsuarioRoles UsuarioRoles;
         private Rol Rol;
@@ -91,6 +92,12 @@ namespace CapaDatos
             get { return this.telefono; }
         }
 
+        public string ioGenero
+        {
+            set { this.genero = value; }
+            get { return this.genero; }
+        }
+
         public Comuna ioComuna
         {
             set { this.Comuna = value; }
@@ -138,6 +145,7 @@ namespace CapaDatos
                 usuario.ioEmail = dr["email"].ToString();
                 usuario.ioTelefono = dr["telefono"].ToString();
                 usuario.fechaNacimento = Convert.ToDateTime(dr["fecha_nacimiento"].ToString());
+                usuario.ioGenero = dr["genero"].ToString(); ;
                 usuario.ioComunaId = Int32.Parse(dr["comuna_id"].ToString());
                 if (fullData)
                 {
@@ -166,19 +174,27 @@ namespace CapaDatos
                 usuario.ioPassword = dr["password"].ToString();
                 usuario.ioEmail = dr["email"].ToString();
                 usuario.ioTelefono = dr["telefono"].ToString();
+                usuario.ioGenero = dr["genero"].ToString(); ;
                 usuario.ioComunaId = Int32.Parse(dr["comuna_id"].ToString());
 
-                usuario.ioComuna = new Comuna().buscarPorId(usuario.ioComunaId);
+                usuario.ioComuna = new Comuna().buscarPorId(usuario.ioComunaId, true);
             }
             conexion.cerrarConexion();
             return usuario;
         }
 
-        public Usuario login(string rut, string password)
+        public Usuario login(string rut = "", string password = "", int usuarioId = 0)
         {
             Usuario usuario = new Usuario();
             Conexion conexion = new Conexion();
-            string query = "select * from usuarios where rut='"+rut+"' and password='"+password+"'";
+            string query = "select * from usuarios ";
+            if (rut.Equals(""))
+            {
+                query += " where id = "+ usuarioId;
+            }else
+            {
+                query += "where rut='" + rut + "' and password='" + password + "'";
+            }
             OracleDataReader dr = conexion.consultar(query);
             if(dr.Read())
             {
@@ -218,6 +234,7 @@ namespace CapaDatos
                 usuario.ioPassword = dr["password"].ToString();
                 usuario.ioEmail = dr["email"].ToString();
                 usuario.ioTelefono = dr["telefono"].ToString();
+                usuario.ioGenero = dr["genero"].ToString(); ;
                 usuario.ioComunaId = Int32.Parse(dr["comuna_id"].ToString());
 
                 usuario.UsuarioRoles = new UsuarioRoles().buscarPorUsuarioId(usuario.id);
@@ -230,12 +247,11 @@ namespace CapaDatos
 
         public int guardar(Usuario usuario)
         {
-            Console.WriteLine("llege!!!");
             Conexion conexion = new Conexion();
             int id = conexion.getSequenceValor("SEQ_USUARIOS", 1);
             conexion.cerrarConexion();
 
-            string query = "insert into usuarios (id, comuna_id, nombres, apellido_paterno, apellido_materno, rut, fecha_nacimiento, direccion, password, email, telefono) values (";
+            string query = "insert into usuarios (id, comuna_id, nombres, apellido_paterno, apellido_materno, rut, fecha_nacimiento, direccion, password, email, genero, telefono) values (";
             query += id + ",";
             query += usuario.ioComunaId + ",";
             query += "'" + usuario.ioNombre + "',";
@@ -246,13 +262,13 @@ namespace CapaDatos
             query += "'" + usuario.ioDireccion + "',";
             query += "'" + usuario.ioPassword + "',";
             query += "'" + usuario.ioEmail + "',";
+            query += "'" + usuario.ioGenero + "',";
             query += "'" + usuario.ioTelefono + "')";
-            Console.WriteLine(query);
+
             int filasIngresadas = conexion.ingresar(query);
             conexion.cerrarConexion();
             if (filasIngresadas > 0)
             {
-                Console.WriteLine("rol a configurar:" + usuario.ioUsuarioRoles.ioRolId);
                 if (!usuario.ioUsuarioRoles.ioRolId.Equals(0))
                 {
                     usuario.ioUsuarioRoles.ioUsuarioId = id;
@@ -274,7 +290,6 @@ namespace CapaDatos
             bool guardo = false;
 
             string query = "update usuarios set";
-            query += " id=" + usuario.ioId.ToString() + ",";
             query += " comuna_id=" + usuario.ioComunaId.ToString() + ",";
             query += " nombres='" + usuario.ioNombre + "',";
             query += " apellido_paterno='" + usuario.ioApellidoPaterno + "',";
@@ -283,6 +298,7 @@ namespace CapaDatos
             query += " fecha_nacimiento= DATE '" + usuario.ioFechaNacimento.Date.ToString("yyyy-MM-dd") + "',";
             query += " direccion='" + usuario.ioDireccion + "',";
             query += " email='" + usuario.ioEmail + "',";
+            query += " genero='" + usuario.ioGenero + "',";
             query += " telefono='" + usuario.ioTelefono + "'";
             if (usuario.ioPassword != null)
             {

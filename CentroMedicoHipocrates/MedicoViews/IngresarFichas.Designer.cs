@@ -40,6 +40,7 @@
             // 
             // MenuContexto
             // 
+            this.MenuContexto.BackColor = System.Drawing.Color.MidnightBlue;
             this.MenuContexto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem});
             this.MenuContexto.Location = new System.Drawing.Point(0, 0);
@@ -56,6 +57,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel1.Controls.Add(this.lblUsuario);
             this.panel1.Controls.Add(this.lblBottom);
@@ -94,9 +96,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(760, 491);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "IngresarFichas";
             this.Text = "IngresarFichas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

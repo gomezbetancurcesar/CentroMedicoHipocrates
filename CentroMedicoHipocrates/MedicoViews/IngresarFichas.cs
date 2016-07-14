@@ -23,13 +23,18 @@ namespace CentroMedicoHipocrates
             this.fullWidth();
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void fullWidth()
         {
             Form form = this;
             Screen pantalla = Screen.FromControl(form);
             Rectangle ventana = pantalla.WorkingArea;
             panel1.Width = ventana.Width;
-            lblTop.Width = ventana.Width;
+            panel1.Location = new Point(0, 24);
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");

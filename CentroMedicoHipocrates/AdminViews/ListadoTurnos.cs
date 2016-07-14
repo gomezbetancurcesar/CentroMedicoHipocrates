@@ -13,6 +13,7 @@ namespace CentroMedicoHipocrates
 {
     public partial class ListadoTurnos : Form
     {
+        private Validaciones validaciones = new Validaciones();
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
@@ -32,7 +33,7 @@ namespace CentroMedicoHipocrates
             Screen pantalla = Screen.FromControl(form);
             Rectangle ventana = pantalla.WorkingArea;
             panel1.Width = ventana.Width;
-            lblTop.Width = ventana.Width;
+            panel1.Location = new Point(0, 24);
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");
@@ -101,15 +102,18 @@ namespace CentroMedicoHipocrates
 
         private void OnCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = GridTurnos.SelectedRows[0];
-            this.limpiarFormulario();
+            if (GridTurnos.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = GridTurnos.SelectedRows[0];
+                this.limpiarFormulario();
 
-            txtId.Text = row.Cells["Id"].Value.ToString();
-            txtHoraInicio.Text = row.Cells["HoraInicio"].Value.ToString();
-            txtHoraFin.Text = row.Cells["HoraFin"].Value.ToString();
-            comboEstados.Text = row.Cells["Estado"].Value.ToString();
+                txtId.Text = row.Cells["Id"].Value.ToString();
+                txtHoraInicio.Text = row.Cells["HoraInicio"].Value.ToString();
+                txtHoraFin.Text = row.Cells["HoraFin"].Value.ToString();
+                comboEstados.Text = row.Cells["Estado"].Value.ToString();
 
-            btnCancelar.Visible = true;
+                btnCancelar.Visible = true;
+            }
         }
 
         private void limpiarFormulario()

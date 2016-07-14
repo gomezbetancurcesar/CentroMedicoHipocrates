@@ -34,7 +34,7 @@ namespace CentroMedicoHipocrates
             Screen pantalla = Screen.FromControl(form);
             Rectangle ventana = pantalla.WorkingArea;
             panel1.Width = ventana.Width;
-            lblTop.Width = ventana.Width;
+            panel1.Location = new Point(0, 24);
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");
@@ -71,6 +71,7 @@ namespace CentroMedicoHipocrates
                 lblApellidoMaterno.Text = doctor.ioUsuario.ioApellidoMaterno;
                 lblEspecialidad.Text = doctor.ioEspecialidad.ioNombre;
                 lblRut.Text = doctor.ioUsuario.ioRut;
+                lblGenero.Text = (doctor.ioUsuario.ioGenero.Equals("M") ? "Masculino" : "Femenino");
 
                 GridHorarios.Rows.Clear();
 
@@ -132,10 +133,21 @@ namespace CentroMedicoHipocrates
             }else
             {
                 fecha = fecha.AddDays(-1);
-                txtFechaBuscada.Value = fecha.Date;
-                string strfecha = fecha.Date.ToString("yyyy-MM-dd");
-                string fechaBuscada = fecha.ToLongDateString().ToString();
-                this.buscarHorarios(txtRutBuscado.Text, strfecha, fechaBuscada);
+                if (fecha.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    fecha = fecha.AddDays(-1);
+                }
+
+                if (fecha.Equals(txtFechaBuscada.MinDate))
+                {
+                    btnRetrocederDia.Visible = false;
+                }else
+                {
+                    txtFechaBuscada.Value = fecha.Date;
+                    string strfecha = fecha.Date.ToString("yyyy-MM-dd");
+                    string fechaBuscada = fecha.ToLongDateString().ToString();
+                    this.buscarHorarios(txtRutBuscado.Text, strfecha, fechaBuscada);
+                }
             }
         }
 
@@ -144,6 +156,11 @@ namespace CentroMedicoHipocrates
             btnRetrocederDia.Visible = true;
             DateTime fecha = DateTime.ParseExact(lblValueFechaBuscada.Text, "yyyy-MM-dd", null);
             fecha = fecha.AddDays(1);
+
+            if (fecha.DayOfWeek == DayOfWeek.Sunday)
+            {
+                fecha = fecha.AddDays(1);
+            }
 
             txtFechaBuscada.Value = fecha.Date;
             string strfecha = fecha.Date.ToString("yyyy-MM-dd");
@@ -171,6 +188,8 @@ namespace CentroMedicoHipocrates
                 agenda.ioDoctorId = Int32.Parse(lblId.Text);
                 agenda.ioEsSobrecupo = 0;
                 agenda.ioFechaCreacion = DateTime.Now;
+                //Agenda disponible
+                agenda.ioEstadoAgendaId = 1;
 
                 bool realizaAccion = false;
                 if (fila.Cells["IdAgenda"].Value.ToString().Equals("0"))
@@ -211,6 +230,8 @@ namespace CentroMedicoHipocrates
                     agenda.ioDoctorId = Int32.Parse(lblId.Text);
                     agenda.ioEsSobrecupo = 0;
                     agenda.ioFechaCreacion = DateTime.Now;
+                    //Agenda Disponible
+                    agenda.ioEstadoAgendaId = 1;
                     agendas.Add(agenda);
                 }
             }

@@ -39,24 +39,28 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.txtPassword);
             this.panel1.Controls.Add(this.txtUsuario);
             this.panel1.Controls.Add(this.lblPassword);
             this.panel1.Controls.Add(this.lblUsuario);
-            this.panel1.Location = new System.Drawing.Point(12, 31);
+            this.panel1.Location = new System.Drawing.Point(33, 30);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(265, 166);
             this.panel1.TabIndex = 0;
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(170)))), ((int)(((byte)(230)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(106, 124);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "Ingresar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtPassword
@@ -106,6 +110,7 @@
             this.ClientSize = new System.Drawing.Size(724, 400);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Login";
             this.Text = "Ingreso - Centro Médico Hipócrates";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

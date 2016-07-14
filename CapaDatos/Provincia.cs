@@ -43,7 +43,7 @@ namespace CapaDatos
             set { this.Region = value; }
         }
 
-        public List<Provincia> buscarTodos(int regionId = -1)
+        public List<Provincia> buscarTodos(int regionId = -1, Boolean fullData = false)
         {
             List<Provincia> provincias = new List<Provincia>();
             Provincia provincia;
@@ -51,7 +51,7 @@ namespace CapaDatos
             string query = "select * from provincias";
             if (regionId > 0)
             {
-                query = " where region_id = " + regionId;
+                query += " where region_id = " + regionId;
             }
             OracleDataReader dr = conexion.consultar(query);
             while (dr.Read())
@@ -60,6 +60,10 @@ namespace CapaDatos
                 provincia.ioId = Int32.Parse(dr["id"].ToString());
                 provincia.ioRegionId = Int32.Parse(dr["region_id"].ToString());
                 provincia.nombre = dr["nombre"].ToString();
+                if (fullData)
+                {
+                    provincia.ioRegion = new Region().buscarPorId(provincia.ioRegionId);
+                }
                 provincias.Add(provincia);
             }
             conexion.cerrarConexion();

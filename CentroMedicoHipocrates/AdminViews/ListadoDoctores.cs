@@ -13,6 +13,7 @@ namespace CentroMedicoHipocrates
 {
     public partial class ListadoDoctores : Form
     {
+        private Validaciones validaciones = new Validaciones();
         private MenuCreator menuCreator = new MenuCreator();
         private LoginService session = new LoginService();
 
@@ -21,6 +22,7 @@ namespace CentroMedicoHipocrates
             InitializeComponent();
             //Dibujamos el menu correspondiente a cada rol!
             menuCreator.generarMenu(MenuContexto, session.AuthField("rol"));
+            MenuContexto.ForeColor = Color.White;
             this.fullWidth();
             this.dibujarGrid();
             this.dibujarCombos();
@@ -32,7 +34,7 @@ namespace CentroMedicoHipocrates
             Screen pantalla = Screen.FromControl(form);
             Rectangle ventana = pantalla.WorkingArea;
             panel1.Width = ventana.Width;
-            lblTop.Width = ventana.Width;
+            panel1.Location = new Point(0, 24);
             lblBottom.Width = ventana.Width;
 
             lblUsuario.Text = session.AuthField("usuario");
@@ -66,27 +68,50 @@ namespace CentroMedicoHipocrates
 
         private void OnCellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = GridMedicos.SelectedRows[0];
+            this.limpiarFormulario();
+            if (GridMedicos.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = GridMedicos.SelectedRows[0];
+                int id = Int32.Parse(row.Cells["Id"].Value.ToString());
+                Doctor doctor = new Doctor().buscarPorId(id);
+                txtId.Text = doctor.ioId.ToString();
+                txtUsuarioId.Text = doctor.ioUsuario.ioId.ToString();
 
-            int id = Int32.Parse(row.Cells["Id"].Value.ToString());
-            Doctor doctor = new Doctor().buscarPorId(id);
-            txtId.Text = doctor.ioId.ToString();
-            txtUsuarioId.Text = doctor.ioUsuario.ioId.ToString();
+                txtRut.Text = doctor.ioUsuario.ioRut;
+                txtNombre.Text = doctor.ioUsuario.ioNombre;
+                txtApellidoPaterno.Text = doctor.ioUsuario.ioApellidoPaterno;
+                txtApellidoMaterno.Text = doctor.ioUsuario.ioApellidoMaterno;
+                txtDireccion.Text = doctor.ioUsuario.ioDireccion;
+                txtPassword.Text = doctor.ioUsuario.ioPassword;
+                dateFechaNac.Text = doctor.ioUsuario.ioFechaNacimento.Date.ToString("dd/MM/yyyy");
+                txtEmail.Text = doctor.ioUsuario.ioEmail;
+                txtTelefono.Text = doctor.ioUsuario.ioTelefono;
 
-            txtRut.Text = doctor.ioUsuario.ioRut;
-            txtNombre.Text = doctor.ioUsuario.ioNombre;
-            txtApellidoPaterno.Text = doctor.ioUsuario.ioApellidoPaterno;
-            txtApellidoMaterno.Text = doctor.ioUsuario.ioApellidoMaterno;
-            txtDireccion.Text = doctor.ioUsuario.ioDireccion;
-            txtPassword.Text = doctor.ioUsuario.ioPassword;
-            dateFechaNac.Text = doctor.ioUsuario.ioFechaNacimento.Date.ToString("dd/MM/yyyy");
-            txtEmail.Text = doctor.ioUsuario.ioEmail;
-            txtTelefono.Text = doctor.ioUsuario.ioTelefono;
+                comboGenero.Text = (doctor.ioUsuario.ioGenero.Equals("M") ? "Masculino" : "Femenino");
+                comboRegion.Text = doctor.ioUsuario.ioComuna.ioProvincia.ioRegion.ioNombre;
+                this.dibujarProvincias(doctor.ioUsuario.ioComuna.ioProvincia.ioRegionId);
+                comboProvincia.Text = doctor.ioUsuario.ioComuna.ioProvincia.ioNombre;
 
-            comboComuna.Text = doctor.ioUsuario.ioComuna.ioNombre;
-            comboEspecialidad.Text = doctor.ioEspecialidad.ioNombre;
-            comboOficina.Text = doctor.ioOficina.ioNumero;
-            btnCancelar.Visible = true;
+                this.dibujarComunas(doctor.ioUsuario.ioComuna.ioProvinciaId);
+                comboComuna.Text = doctor.ioUsuario.ioComuna.ioNombre;
+
+                comboEspecialidad.Text = doctor.ioEspecialidad.ioNombre;
+                comboOficina.Text = doctor.ioOficina.ioNumero;
+                btnCancelar.Visible = true;
+            }
+        }
+
+        private void limpiarErrores()
+        {
+            validaciones.marcarError(txtId, Color.White);
+            validaciones.marcarError(txtRut, Color.White);
+            validaciones.marcarError(txtNombre, Color.White);
+            validaciones.marcarError(txtApellidoPaterno, Color.White);
+            validaciones.marcarError(txtApellidoMaterno, Color.White);
+            validaciones.marcarError(txtEmail, Color.White);
+            validaciones.marcarError(txtDireccion, Color.White);
+            validaciones.marcarError(txtTelefono, Color.White);
+            validaciones.marcarError(txtPassword, Color.White);
         }
 
         private void limpiarFormulario()
@@ -104,16 +129,26 @@ namespace CentroMedicoHipocrates
             txtTelefono.Text = "";
             dateFechaNac.Text = "";
 
-            comboRegion.Text = "";
-            comboProvincia.Text = "";
             comboComuna.Text = "";
+            comboComuna.SelectedIndex = -1;
+            comboProvincia.Text = "";
+            comboProvincia.SelectedIndex = -1;
+            comboRegion.Text = "";
+            comboRegion.SelectedIndex = -1;
+            comboGenero.Text = "";
+            comboGenero.SelectedIndex = -1;
+
             comboEspecialidad.Text = "";
+            comboEspecialidad.SelectedIndex = -1;
             comboOficina.Text = "";
+            comboOficina.SelectedIndex = -1;
             btnCancelar.Visible = false;
+            this.limpiarErrores();
         }
 
         private Boolean validarDatosDoctor()
         {
+            this.limpiarErrores();
             if (comboEspecialidad.SelectedIndex.Equals(-1))
             {
                 return false;
@@ -127,53 +162,104 @@ namespace CentroMedicoHipocrates
 
         private Boolean validarDatosPersona()
         {
+            this.limpiarErrores();
             if (txtRut.Text.Equals(""))
             {
+                validaciones.marcarError(txtRut);
                 return false;
             }
+            else
+            {
+                if (!validaciones.validaRut(txtRut.Text))
+                {
+                    validaciones.marcarError(txtRut);
+                    return false;
+                }
+            }
+
             if (txtNombre.Text.Equals(""))
             {
+                validaciones.marcarError(txtNombre);
                 return false;
             }
+
             if (txtApellidoPaterno.Text.Equals(""))
             {
+                validaciones.marcarError(txtApellidoPaterno);
                 return false;
             }
+
             if (txtApellidoMaterno.Text.Equals(""))
             {
+                validaciones.marcarError(txtApellidoMaterno);
                 return false;
             }
+
             if (txtDireccion.Text.Equals(""))
             {
+                validaciones.marcarError(txtDireccion);
                 return false;
             }
+
+            if (txtTelefono.Text.Equals(""))
+            {
+                validaciones.marcarError(txtTelefono);
+                return false;
+            }
+
+            if (txtEmail.Text.Equals(""))
+            {
+                validaciones.marcarError(txtEmail);
+                return false;
+            }
+            else
+            {
+                if (!validaciones.validarEmail(txtEmail.Text))
+                {
+                    validaciones.marcarError(txtEmail);
+                    return false;
+                }
+            }
+
             if (comboComuna.SelectedIndex.Equals(-1))
             {
                 return false;
             }
+
+            if (comboGenero.SelectedIndex.Equals(-1))
+            {
+                return false;
+            }
+
             return true;
         }
 
-        private void dibujarCombos()
+        private void dibujarProvincias(int regionId = -1)
         {
-            //Comunas
-            List<Comuna> comunas = new Comuna().buscarTodos();
-            comboComuna.Items.Clear();
-            foreach (Comuna comuna in comunas)
-            {
-                comboComuna.Items.Add(comuna.ioNombre);
-            }
-            comboComuna.Refresh();
-
             //Provincias
-            List<Provincia> provincias = new Provincia().buscarTodos();
+            List<Provincia> provincias = new Provincia().buscarTodos(regionId);
             comboProvincia.Items.Clear();
             foreach (Provincia provincia in provincias)
             {
                 comboProvincia.Items.Add(provincia.ioNombre);
             }
             comboProvincia.Refresh();
+        }
 
+        private void dibujarComunas(int provinciaId = -1)
+        {
+            //Comunas
+            List<Comuna> comunas = new Comuna().buscarTodos(provinciaId);
+            comboComuna.Items.Clear();
+            foreach (Comuna comuna in comunas)
+            {
+                comboComuna.Items.Add(comuna.ioNombre);
+            }
+            comboComuna.Refresh();
+        }
+
+        private void dibujarCombos()
+        {
             //Regiones
             List<CapaDatos.Region> regiones = new CapaDatos.Region().buscarTodos();
             comboRegion.Items.Clear();
@@ -182,6 +268,9 @@ namespace CentroMedicoHipocrates
                 comboRegion.Items.Add(region.ioNombre);
             }
             comboRegion.Refresh();
+
+            this.dibujarProvincias();
+            this.dibujarComunas();
 
             //Especialidades
             List<Especialidad> especialidades = new Especialidad().buscarTodos();
@@ -221,6 +310,7 @@ namespace CentroMedicoHipocrates
                 doctor.ioUsuario.ioFechaNacimento = dateFechaNac.Value.Date;
                 doctor.ioUsuario.ioEmail = txtEmail.Text;
                 doctor.ioUsuario.ioTelefono = txtTelefono.Text;
+                doctor.ioUsuario.ioGenero = (comboGenero.Text.Equals("Masculino") ? "M" : "F");
 
                 bool guarda = false;
                 if (txtId.Text.Equals("0"))
@@ -248,6 +338,18 @@ namespace CentroMedicoHipocrates
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.limpiarFormulario();
+        }
+
+        private void comboRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = new CapaDatos.Region().buscarPorNombre(comboRegion.Text).ioId;
+            this.dibujarProvincias(id);
+        }
+
+        private void comboProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = new Provincia().buscarPorNombre(comboProvincia.Text).ioId;
+            this.dibujarComunas(id);
         }
     }
 }

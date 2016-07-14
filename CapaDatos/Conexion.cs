@@ -12,7 +12,10 @@ namespace CapaDatos
 {
     public class Conexion
     {
-        string conexionString = "DATA SOURCE=CENTRO;USER ID=CENTROM;PASSWORD=123456;";
+        //string conexionString = "DATA SOURCE=CENTRO;USER ID=CENTROM;PASSWORD=123456;";
+        string conexionString = "Data Source=(DESCRIPTION =" +
+        "(ADDRESS = (PROTOCOL = TCP)(HOST=127.0.0.1)(PORT = 1521))"+
+        "(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = CENTRO)));USER ID=CENTROM;PASSWORD=123456;";
         private OracleConnection conexion;
         
         public string tabla = "";

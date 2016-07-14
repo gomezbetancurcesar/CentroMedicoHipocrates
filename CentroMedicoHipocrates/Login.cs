@@ -13,6 +13,8 @@ namespace CentroMedicoHipocrates
 {
     public partial class Login : Form
     {
+        private Validaciones validaciones = new Validaciones();
+
         public Login()
         {
             InitializeComponent();
@@ -26,6 +28,11 @@ namespace CentroMedicoHipocrates
         private void txtUsuario_TextChanged(object sender, EventArgs e)
         {
             cambiarColorTextbox(Color.White);
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,14 +49,15 @@ namespace CentroMedicoHipocrates
             }
             else
             {
-                cambiarColorTextbox(Color.Red);
+                validaciones.marcarError(txtPassword);
+                validaciones.marcarError(txtUsuario);
             }
         }
 
         private void cambiarColorTextbox(Color color)
         {
-            txtPassword.BackColor = color;
-            txtUsuario.BackColor = color;
+            validaciones.marcarError(txtPassword, Color.White);
+            validaciones.marcarError(txtUsuario, Color.White);
         }
     }
 }

@@ -13,10 +13,12 @@ namespace CapaDatos
         private int agenda_id;
         private int paciente_id;
         private int estado_reserva_id;
+        private int es_sobrecupo;
         private DateTime fecha_reserva;
         private Agenda Agenda;
         private Paciente Paciente;
         private EstadoReserva EstadoReserva;
+        private Fichas Fichas;
 
         public Reserva()
         {
@@ -47,6 +49,12 @@ namespace CapaDatos
             get { return this.estado_reserva_id; }
         }
 
+        public int ioEsSobrecupo
+        {
+            set { this.es_sobrecupo = value; }
+            get { return this.es_sobrecupo; }
+        }
+
         public DateTime ioFechaReserva
         {
             set { this.fecha_reserva = value; }
@@ -71,7 +79,13 @@ namespace CapaDatos
             get { return this.EstadoReserva; }
         }
 
-        public List<Reserva> buscarTodos(int agendaId = 0, int pacienteId = 0, Boolean fullData = false)
+        public Fichas ioFicha
+        {
+            set { this.Fichas = value; }
+            get { return this.Fichas; }
+        }
+
+        public List<Reserva> buscarTodos(int agendaId = 0, int pacienteId = 0, Boolean fullData = false, Boolean containAgenda = false)
         {
             List<Reserva> reservas = new List<Reserva>();
             Reserva reserva;
@@ -98,14 +112,19 @@ namespace CapaDatos
             {
                 reserva = new Reserva();
                 reserva.ioId = Int32.Parse(dr["id"].ToString());
-                reserva.ioAgendaId = Int32.Parse(dr["agenda_id"].ToString()); ;
-                reserva.ioPacienteId = Int32.Parse(dr["paciente_id"].ToString()); ; ;
-                reserva.ioEstadoReservaId = Int32.Parse(dr["estado_reserva_id"].ToString()); ; ;
+                reserva.ioAgendaId = Int32.Parse(dr["agenda_id"].ToString());
+                reserva.ioPacienteId = Int32.Parse(dr["paciente_id"].ToString());
+                reserva.ioEstadoReservaId = Int32.Parse(dr["estado_reserva_id"].ToString());
                 reserva.ioFechaReserva = Convert.ToDateTime(dr["fecha_reserva"].ToString());
+                reserva.ioEsSobrecupo = Int32.Parse(dr["es_sobrecupo"].ToString());
                 if (fullData)
                 {
                     reserva.ioPaciente = new Paciente().buscarPorId(reserva.ioPacienteId, true);
                     reserva.ioEstadoReserva = new EstadoReserva().buscarPorId(reserva.ioEstadoReservaId);
+                }
+                if (containAgenda)
+                {
+                    reserva.ioAgenda = new Agenda().buscarPorId(reserva.ioAgendaId, true);
                 }
                 reservas.Add(reserva);
             }
@@ -118,7 +137,7 @@ namespace CapaDatos
             List<Reserva> reservas = new List<Reserva>();
             Reserva reserva;
 
-            String query = "select re.id as IdReserva, pa.id as IdPaciente,";
+            String query = "select re.id as IdReserva, re.es_sobrecupo as sobreCupo, pa.id as IdPaciente,";
             query += "usu_doc.nombres as DocNombre, usu_doc.apellido_paterno as DocPaterno, usu_doc.apellido_materno as DocMaterno,";
             query += "tur.hora_inicio, tur.hora_fin,";
             query += "usu_pac.nombres as PacNombre, usu_pac.apellido_paterno as PacPaterno, usu_pac.apellido_materno as PacMaterno,";
@@ -146,6 +165,7 @@ namespace CapaDatos
                 reserva = new Reserva();
                 reserva.ioId = Int32.Parse(dr["IdReserva"].ToString());
                 reserva.ioPacienteId = Int32.Parse(dr["IdPaciente"].ToString());
+                reserva.ioEsSobrecupo = Int32.Parse(dr["sobreCupo"].ToString());
                 reserva.ioPaciente = new Paciente();
                 reserva.ioPaciente.ioUsuario = new Usuario();
                 reserva.ioPaciente.ioUsuario.ioNombre = dr["PacNombre"].ToString();
@@ -170,6 +190,37 @@ namespace CapaDatos
             return reservas;
         }
 
+        public List<Reserva> buscarPorAgendaPaciente(DateTime fecha, int pacienteId)
+        {
+            List<Reserva> reservas = new List<Reserva>();
+            Reserva reserva;
+            Conexion conexion = new Conexion();
+            string query = "select R.* from RESERVAS R ";
+            query += "INNER JOIN AGENDA AG on AG.id = R.AGENDA_ID ";
+            query += "INNER JOIN PACIENTES PA on PA.id = R.paciente_id ";
+            query += "where AG.DIA = date '"+fecha.Date.ToString("yyyy-MM-dd") +"' ";
+            query += "and r.PACIENTE_ID = " + pacienteId;
+            OracleDataReader dr = conexion.consultar(query);
+            while (dr.Read())
+            {
+                reserva = new Reserva();
+                reserva.ioId = Int32.Parse(dr["id"].ToString());
+                reserva.ioAgendaId = Int32.Parse(dr["agenda_id"].ToString());
+                reserva.ioPacienteId = Int32.Parse(dr["paciente_id"].ToString());
+                reserva.ioEstadoReservaId = Int32.Parse(dr["estado_reserva_id"].ToString());
+                reserva.ioFechaReserva = Convert.ToDateTime(dr["fecha_reserva"].ToString());
+                reserva.ioEsSobrecupo = Int32.Parse(dr["es_sobrecupo"].ToString());
+                //reserva.ioPaciente = new Paciente().buscarPorId(reserva.ioPacienteId, true);
+                //reserva.ioEstadoReserva = new EstadoReserva().buscarPorId(reserva.ioEstadoReservaId);
+                reserva.ioAgenda = new Agenda().buscarPorId(reserva.ioAgendaId, true);
+                reserva.ioEstadoReserva = new EstadoReserva().buscarPorId(reserva.ioEstadoReservaId);
+
+                reservas.Add(reserva);
+            }
+            conexion.cerrarConexion();
+            return reservas;
+        }
+
         public Reserva buscarPorId(int id, Boolean fullData = false)
         {
             Reserva reserva = new Reserva();
@@ -182,11 +233,13 @@ namespace CapaDatos
                 reserva.ioPacienteId = Int32.Parse(dr["paciente_id"].ToString()); ; ;
                 reserva.ioEstadoReservaId = Int32.Parse(dr["estado_reserva_id"].ToString()); ; ;
                 reserva.ioFechaReserva = Convert.ToDateTime(dr["fecha_reserva"].ToString());
+                reserva.ioEsSobrecupo = Int32.Parse(dr["es_sobrecupo"].ToString());
                 if (fullData)
                 {
                     reserva.ioPaciente = new Paciente().buscarPorId(reserva.ioPacienteId, true);
                     reserva.ioEstadoReserva = new EstadoReserva().buscarPorId(reserva.ioEstadoReservaId);
                     reserva.ioAgenda = new Agenda().buscarPorId(reserva.ioAgendaId, true);
+                    reserva.ioFicha = new Fichas().buscarPorReservaId(reserva.ioId);
                 }
             }
             conexion.cerrarConexion();
@@ -218,12 +271,13 @@ namespace CapaDatos
             int id = conexion.getSequenceValor("SEQ_RESERVAS", 1);
             conexion.cerrarConexion();
 
-            string query = "insert into reservas (id, agenda_id, paciente_id, estado_reserva_id, fecha_reserva) values (";
+            string query = "insert into reservas (id, agenda_id, paciente_id, estado_reserva_id, es_sobrecupo, fecha_reserva) values (";
             query += id + ",";
             query += reserva.ioAgendaId + ",";
             query += reserva.ioPacienteId + ",";
             query += reserva.ioEstadoReservaId + ",";
-            query += "DATE '" + DateTime.Now.ToString("yyyy-MM-dd") + "')";
+            query += reserva.ioEsSobrecupo + ",";
+            query += " TO_TIMESTAMP('" + DateTime.Now.ToString("yyyy-MM-dd H:mm:ss") + "','YYYY-MM-DD HH24:MI:SS'))";
 
             int filasIngresadas = conexion.ingresar(query);
             conexion.cerrarConexion();

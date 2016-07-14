@@ -33,13 +33,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblBottom = new System.Windows.Forms.Label();
-            this.lblTop = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtRutBuscado = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.panelDatosPersona = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.comboGenero = new System.Windows.Forms.ComboBox();
             this.lblPacienteId = new System.Windows.Forms.Label();
             this.lblUsuarioId = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnReservar = new System.Windows.Forms.Button();
             this.comboComuna = new System.Windows.Forms.ComboBox();
@@ -66,7 +68,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtRutDoctor = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -83,8 +84,12 @@
             this.GridHorarios = new System.Windows.Forms.DataGridView();
             this.IdAgenda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Horario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstadoTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstadoTurno = new System.Windows.Forms.DataGridViewButtonColumn();
             this.lblIdDoctor = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label20 = new System.Windows.Forms.Label();
             this.MenuContexto.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelDatosPersona.SuspendLayout();
@@ -92,10 +97,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridMedicos)).BeginInit();
             this.panelHorarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridHorarios)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // MenuContexto
             // 
+            this.MenuContexto.BackColor = System.Drawing.Color.MidnightBlue;
             this.MenuContexto.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem});
             this.MenuContexto.Location = new System.Drawing.Point(0, 0);
@@ -112,10 +120,10 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel1.Controls.Add(this.lblUsuario);
             this.panel1.Controls.Add(this.lblBottom);
-            this.panel1.Controls.Add(this.lblTop);
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(729, 100);
@@ -138,44 +146,43 @@
             this.lblBottom.Size = new System.Drawing.Size(500, 2);
             this.lblBottom.TabIndex = 3;
             // 
-            // lblTop
-            // 
-            this.lblTop.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTop.Location = new System.Drawing.Point(3, 0);
-            this.lblTop.Name = "lblTop";
-            this.lblTop.Size = new System.Drawing.Size(500, 2);
-            this.lblTop.TabIndex = 2;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 140);
+            this.label1.Location = new System.Drawing.Point(20, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.Size = new System.Drawing.Size(24, 13);
             this.label1.TabIndex = 13;
-            this.label1.Text = "Rut Paciente";
+            this.label1.Text = "Rut";
             // 
             // txtRutBuscado
             // 
-            this.txtRutBuscado.Location = new System.Drawing.Point(107, 135);
+            this.txtRutBuscado.Location = new System.Drawing.Point(120, 32);
             this.txtRutBuscado.Name = "txtRutBuscado";
             this.txtRutBuscado.Size = new System.Drawing.Size(117, 20);
             this.txtRutBuscado.TabIndex = 14;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(254, 135);
+            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(150)))), ((int)(((byte)(204)))));
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscar.Location = new System.Drawing.Point(120, 64);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 20);
+            this.btnBuscar.Size = new System.Drawing.Size(79, 23);
             this.btnBuscar.TabIndex = 15;
             this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // panelDatosPersona
             // 
+            this.panelDatosPersona.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.panelDatosPersona.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelDatosPersona.Controls.Add(this.label21);
+            this.panelDatosPersona.Controls.Add(this.comboGenero);
             this.panelDatosPersona.Controls.Add(this.lblPacienteId);
             this.panelDatosPersona.Controls.Add(this.lblUsuarioId);
+            this.panelDatosPersona.Controls.Add(this.label18);
             this.panelDatosPersona.Controls.Add(this.btnCancelar);
             this.panelDatosPersona.Controls.Add(this.btnReservar);
             this.panelDatosPersona.Controls.Add(this.comboComuna);
@@ -202,16 +209,37 @@
             this.panelDatosPersona.Controls.Add(this.label7);
             this.panelDatosPersona.Controls.Add(this.label5);
             this.panelDatosPersona.Controls.Add(this.label3);
-            this.panelDatosPersona.Controls.Add(this.label2);
-            this.panelDatosPersona.Location = new System.Drawing.Point(15, 169);
+            this.panelDatosPersona.Location = new System.Drawing.Point(12, 237);
             this.panelDatosPersona.Name = "panelDatosPersona";
-            this.panelDatosPersona.Size = new System.Drawing.Size(314, 396);
+            this.panelDatosPersona.Size = new System.Drawing.Size(324, 430);
             this.panelDatosPersona.TabIndex = 16;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(120, 4);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(79, 20);
+            this.label21.TabIndex = 33;
+            this.label21.Text = "Paciente";
+            // 
+            // comboGenero
+            // 
+            this.comboGenero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboGenero.FormattingEnabled = true;
+            this.comboGenero.Items.AddRange(new object[] {
+            "Femenino",
+            "Masculino"});
+            this.comboGenero.Location = new System.Drawing.Point(120, 135);
+            this.comboGenero.Name = "comboGenero";
+            this.comboGenero.Size = new System.Drawing.Size(191, 21);
+            this.comboGenero.TabIndex = 31;
             // 
             // lblPacienteId
             // 
             this.lblPacienteId.AutoSize = true;
-            this.lblPacienteId.Location = new System.Drawing.Point(10, 366);
+            this.lblPacienteId.Location = new System.Drawing.Point(29, 4);
             this.lblPacienteId.Name = "lblPacienteId";
             this.lblPacienteId.Size = new System.Drawing.Size(13, 13);
             this.lblPacienteId.TabIndex = 29;
@@ -221,16 +249,25 @@
             // lblUsuarioId
             // 
             this.lblUsuarioId.AutoSize = true;
-            this.lblUsuarioId.Location = new System.Drawing.Point(8, 342);
+            this.lblUsuarioId.Location = new System.Drawing.Point(10, 4);
             this.lblUsuarioId.Name = "lblUsuarioId";
             this.lblUsuarioId.Size = new System.Drawing.Size(13, 13);
             this.lblUsuarioId.TabIndex = 28;
             this.lblUsuarioId.Text = "0";
             this.lblUsuarioId.Visible = false;
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(20, 140);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(42, 13);
+            this.label18.TabIndex = 30;
+            this.label18.Text = "Género";
+            // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(222, 342);
+            this.btnCancelar.Location = new System.Drawing.Point(222, 374);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 27;
@@ -240,19 +277,21 @@
             // 
             // btnReservar
             // 
-            this.btnReservar.Location = new System.Drawing.Point(120, 342);
+            this.btnReservar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(150)))), ((int)(((byte)(204)))));
+            this.btnReservar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReservar.Location = new System.Drawing.Point(120, 374);
             this.btnReservar.Name = "btnReservar";
             this.btnReservar.Size = new System.Drawing.Size(75, 23);
             this.btnReservar.TabIndex = 26;
             this.btnReservar.Text = "Reservar";
-            this.btnReservar.UseVisualStyleBackColor = true;
+            this.btnReservar.UseVisualStyleBackColor = false;
             this.btnReservar.Click += new System.EventHandler(this.btnReservar_Click);
             // 
             // comboComuna
             // 
             this.comboComuna.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboComuna.FormattingEnabled = true;
-            this.comboComuna.Location = new System.Drawing.Point(120, 305);
+            this.comboComuna.Location = new System.Drawing.Point(120, 335);
             this.comboComuna.Name = "comboComuna";
             this.comboComuna.Size = new System.Drawing.Size(191, 21);
             this.comboComuna.TabIndex = 25;
@@ -261,16 +300,17 @@
             // 
             this.comboProvincia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboProvincia.FormattingEnabled = true;
-            this.comboProvincia.Location = new System.Drawing.Point(120, 280);
+            this.comboProvincia.Location = new System.Drawing.Point(120, 310);
             this.comboProvincia.Name = "comboProvincia";
             this.comboProvincia.Size = new System.Drawing.Size(191, 21);
             this.comboProvincia.TabIndex = 24;
+            this.comboProvincia.SelectedIndexChanged += new System.EventHandler(this.comboProvincia_SelectedIndexChanged);
             // 
             // comboIsapre
             // 
             this.comboIsapre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboIsapre.FormattingEnabled = true;
-            this.comboIsapre.Location = new System.Drawing.Point(120, 205);
+            this.comboIsapre.Location = new System.Drawing.Point(120, 235);
             this.comboIsapre.Name = "comboIsapre";
             this.comboIsapre.Size = new System.Drawing.Size(191, 21);
             this.comboIsapre.TabIndex = 19;
@@ -279,15 +319,16 @@
             // 
             this.comboRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboRegion.FormattingEnabled = true;
-            this.comboRegion.Location = new System.Drawing.Point(120, 255);
+            this.comboRegion.Location = new System.Drawing.Point(120, 285);
             this.comboRegion.Name = "comboRegion";
             this.comboRegion.Size = new System.Drawing.Size(191, 21);
             this.comboRegion.TabIndex = 23;
+            this.comboRegion.SelectedIndexChanged += new System.EventHandler(this.comboRegion_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(5, 209);
+            this.label6.Location = new System.Drawing.Point(20, 240);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(36, 13);
             this.label6.TabIndex = 4;
@@ -295,21 +336,21 @@
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(120, 230);
+            this.txtDireccion.Location = new System.Drawing.Point(120, 260);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(191, 20);
             this.txtDireccion.TabIndex = 22;
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(120, 180);
+            this.txtTelefono.Location = new System.Drawing.Point(120, 210);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(152, 20);
             this.txtTelefono.TabIndex = 21;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(120, 155);
+            this.txtEmail.Location = new System.Drawing.Point(120, 185);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(152, 20);
             this.txtEmail.TabIndex = 20;
@@ -318,35 +359,35 @@
             // 
             this.dateFechaNac.CustomFormat = "dd-MM-yyyy";
             this.dateFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateFechaNac.Location = new System.Drawing.Point(120, 130);
+            this.dateFechaNac.Location = new System.Drawing.Point(120, 160);
             this.dateFechaNac.Name = "dateFechaNac";
             this.dateFechaNac.Size = new System.Drawing.Size(152, 20);
             this.dateFechaNac.TabIndex = 18;
             // 
             // txtApellidoMaterno
             // 
-            this.txtApellidoMaterno.Location = new System.Drawing.Point(120, 105);
+            this.txtApellidoMaterno.Location = new System.Drawing.Point(120, 110);
             this.txtApellidoMaterno.Name = "txtApellidoMaterno";
             this.txtApellidoMaterno.Size = new System.Drawing.Size(152, 20);
             this.txtApellidoMaterno.TabIndex = 17;
             // 
             // txtApellidoPaterno
             // 
-            this.txtApellidoPaterno.Location = new System.Drawing.Point(120, 80);
+            this.txtApellidoPaterno.Location = new System.Drawing.Point(120, 85);
             this.txtApellidoPaterno.Name = "txtApellidoPaterno";
             this.txtApellidoPaterno.Size = new System.Drawing.Size(152, 20);
             this.txtApellidoPaterno.TabIndex = 16;
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(120, 55);
+            this.txtNombre.Location = new System.Drawing.Point(120, 60);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(152, 20);
             this.txtNombre.TabIndex = 15;
             // 
             // txtRut
             // 
-            this.txtRut.Location = new System.Drawing.Point(120, 30);
+            this.txtRut.Location = new System.Drawing.Point(120, 35);
             this.txtRut.Name = "txtRut";
             this.txtRut.Size = new System.Drawing.Size(152, 20);
             this.txtRut.TabIndex = 14;
@@ -354,7 +395,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(5, 109);
+            this.label13.Location = new System.Drawing.Point(20, 115);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(86, 13);
             this.label13.TabIndex = 13;
@@ -363,7 +404,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(5, 84);
+            this.label14.Location = new System.Drawing.Point(20, 90);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(84, 13);
             this.label14.TabIndex = 12;
@@ -372,7 +413,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(5, 59);
+            this.label15.Location = new System.Drawing.Point(20, 65);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(44, 13);
             this.label15.TabIndex = 11;
@@ -381,7 +422,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(5, 309);
+            this.label10.Location = new System.Drawing.Point(20, 340);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 13);
             this.label10.TabIndex = 10;
@@ -390,7 +431,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 284);
+            this.label11.Location = new System.Drawing.Point(20, 315);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(51, 13);
             this.label11.TabIndex = 9;
@@ -399,7 +440,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(5, 259);
+            this.label12.Location = new System.Drawing.Point(20, 290);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(41, 13);
             this.label12.TabIndex = 8;
@@ -408,7 +449,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(5, 234);
+            this.label9.Location = new System.Drawing.Point(20, 265);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 13);
             this.label9.TabIndex = 7;
@@ -417,7 +458,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(5, 184);
+            this.label8.Location = new System.Drawing.Point(20, 215);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 13);
             this.label8.TabIndex = 6;
@@ -426,7 +467,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 159);
+            this.label7.Location = new System.Drawing.Point(20, 190);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(32, 13);
             this.label7.TabIndex = 5;
@@ -435,7 +476,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(5, 134);
+            this.label5.Location = new System.Drawing.Point(20, 165);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 13);
             this.label5.TabIndex = 3;
@@ -444,25 +485,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 34);
+            this.label3.Location = new System.Drawing.Point(20, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(24, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Rut";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(119, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Datos Paciente";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(421, 140);
+            this.label4.Location = new System.Drawing.Point(8, 28);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 17;
@@ -470,7 +502,7 @@
             // 
             // txtRutDoctor
             // 
-            this.txtRutDoctor.Location = new System.Drawing.Point(492, 135);
+            this.txtRutDoctor.Location = new System.Drawing.Point(79, 23);
             this.txtRutDoctor.Name = "txtRutDoctor";
             this.txtRutDoctor.Size = new System.Drawing.Size(157, 20);
             this.txtRutDoctor.TabIndex = 18;
@@ -478,7 +510,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(421, 190);
+            this.label16.Location = new System.Drawing.Point(8, 78);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(37, 13);
             this.label16.TabIndex = 19;
@@ -488,7 +520,7 @@
             // 
             this.dateFechaBuscada.CustomFormat = "dd-MM-yyyy";
             this.dateFechaBuscada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateFechaBuscada.Location = new System.Drawing.Point(492, 185);
+            this.dateFechaBuscada.Location = new System.Drawing.Point(79, 73);
             this.dateFechaBuscada.Name = "dateFechaBuscada";
             this.dateFechaBuscada.Size = new System.Drawing.Size(157, 20);
             this.dateFechaBuscada.TabIndex = 20;
@@ -496,7 +528,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(421, 165);
+            this.label17.Location = new System.Drawing.Point(8, 53);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(67, 13);
             this.label17.TabIndex = 21;
@@ -506,42 +538,46 @@
             // 
             this.comboEspecialidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEspecialidad.FormattingEnabled = true;
-            this.comboEspecialidad.Location = new System.Drawing.Point(492, 160);
+            this.comboEspecialidad.Location = new System.Drawing.Point(79, 48);
             this.comboEspecialidad.Name = "comboEspecialidad";
             this.comboEspecialidad.Size = new System.Drawing.Size(157, 21);
             this.comboEspecialidad.TabIndex = 22;
             // 
             // btnVerAgenda
             // 
-            this.btnVerAgenda.Location = new System.Drawing.Point(666, 160);
+            this.btnVerAgenda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(150)))), ((int)(((byte)(204)))));
+            this.btnVerAgenda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVerAgenda.Location = new System.Drawing.Point(253, 48);
             this.btnVerAgenda.Name = "btnVerAgenda";
-            this.btnVerAgenda.Size = new System.Drawing.Size(75, 20);
+            this.btnVerAgenda.Size = new System.Drawing.Size(75, 21);
             this.btnVerAgenda.TabIndex = 23;
             this.btnVerAgenda.Text = "Buscar";
-            this.btnVerAgenda.UseVisualStyleBackColor = true;
+            this.btnVerAgenda.UseVisualStyleBackColor = false;
             this.btnVerAgenda.Click += new System.EventHandler(this.btnVerAgenda_Click);
             // 
             // panelDoctores
             // 
             this.panelDoctores.Controls.Add(this.GridMedicos);
-            this.panelDoctores.Location = new System.Drawing.Point(345, 224);
+            this.panelDoctores.Location = new System.Drawing.Point(343, 249);
             this.panelDoctores.Name = "panelDoctores";
-            this.panelDoctores.Size = new System.Drawing.Size(269, 167);
+            this.panelDoctores.Size = new System.Drawing.Size(304, 167);
             this.panelDoctores.TabIndex = 24;
             this.panelDoctores.Visible = false;
             // 
             // GridMedicos
             // 
             this.GridMedicos.AllowUserToAddRows = false;
+            this.GridMedicos.BackgroundColor = System.Drawing.Color.White;
+            this.GridMedicos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridMedicos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridMedicos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdMedico,
             this.NombreMedico,
             this.RutMedico});
-            this.GridMedicos.Location = new System.Drawing.Point(4, 4);
+            this.GridMedicos.Location = new System.Drawing.Point(4, 11);
             this.GridMedicos.Name = "GridMedicos";
             this.GridMedicos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GridMedicos.Size = new System.Drawing.Size(259, 150);
+            this.GridMedicos.Size = new System.Drawing.Size(297, 150);
             this.GridMedicos.TabIndex = 0;
             // 
             // IdMedico
@@ -565,21 +601,24 @@
             // panelHorarios
             // 
             this.panelHorarios.Controls.Add(this.GridHorarios);
-            this.panelHorarios.Location = new System.Drawing.Point(621, 224);
+            this.panelHorarios.Location = new System.Drawing.Point(685, 250);
             this.panelHorarios.Name = "panelHorarios";
-            this.panelHorarios.Size = new System.Drawing.Size(282, 312);
+            this.panelHorarios.Size = new System.Drawing.Size(280, 310);
             this.panelHorarios.TabIndex = 25;
             this.panelHorarios.Visible = false;
+            this.panelHorarios.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHorarios_Paint);
             // 
             // GridHorarios
             // 
             this.GridHorarios.AllowUserToAddRows = false;
+            this.GridHorarios.BackgroundColor = System.Drawing.Color.White;
+            this.GridHorarios.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.GridHorarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridHorarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdAgenda,
             this.Horario,
             this.EstadoTurno});
-            this.GridHorarios.Location = new System.Drawing.Point(4, 2);
+            this.GridHorarios.Location = new System.Drawing.Point(3, 11);
             this.GridHorarios.Name = "GridHorarios";
             this.GridHorarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GridHorarios.Size = new System.Drawing.Size(269, 264);
@@ -602,38 +641,85 @@
             this.EstadoTurno.HeaderText = "Estado";
             this.EstadoTurno.Name = "EstadoTurno";
             this.EstadoTurno.ReadOnly = true;
+            this.EstadoTurno.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.EstadoTurno.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // lblIdDoctor
             // 
             this.lblIdDoctor.AutoSize = true;
-            this.lblIdDoctor.Location = new System.Drawing.Point(666, 190);
+            this.lblIdDoctor.Location = new System.Drawing.Point(253, 78);
             this.lblIdDoctor.Name = "lblIdDoctor";
             this.lblIdDoctor.Size = new System.Drawing.Size(13, 13);
             this.lblIdDoctor.TabIndex = 26;
             this.lblIdDoctor.Text = "0";
             this.lblIdDoctor.Visible = false;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label19);
+            this.panel2.Controls.Add(this.txtRutBuscado);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.btnBuscar);
+            this.panel2.Location = new System.Drawing.Point(12, 133);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(324, 98);
+            this.panel2.TabIndex = 27;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(118, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(79, 20);
+            this.label19.TabIndex = 29;
+            this.label19.Text = "Paciente";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(251)))), ((int)(((byte)(251)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label20);
+            this.panel3.Controls.Add(this.comboEspecialidad);
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.lblIdDoctor);
+            this.panel3.Controls.Add(this.txtRutDoctor);
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.dateFechaBuscada);
+            this.panel3.Controls.Add(this.btnVerAgenda);
+            this.panel3.Controls.Add(this.label17);
+            this.panel3.Location = new System.Drawing.Point(345, 132);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(347, 99);
+            this.panel3.TabIndex = 28;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(75, 1);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(63, 20);
+            this.label20.TabIndex = 29;
+            this.label20.Text = "Doctor";
+            // 
             // Reservar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 741);
-            this.Controls.Add(this.lblIdDoctor);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(915, 733);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelHorarios);
             this.Controls.Add(this.panelDoctores);
-            this.Controls.Add(this.btnVerAgenda);
-            this.Controls.Add(this.comboEspecialidad);
-            this.Controls.Add(this.label17);
-            this.Controls.Add(this.dateFechaBuscada);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.txtRutDoctor);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.panelDatosPersona);
-            this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.txtRutBuscado);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.MenuContexto);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Reservar";
             this.Text = "Reservar";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -647,6 +733,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridMedicos)).EndInit();
             this.panelHorarios.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridHorarios)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -659,7 +749,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblBottom;
-        private System.Windows.Forms.Label lblTop;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtRutBuscado;
         private System.Windows.Forms.Button btnBuscar;
@@ -673,7 +762,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
@@ -707,9 +795,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IdMedico;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreMedico;
         private System.Windows.Forms.DataGridViewTextBoxColumn RutMedico;
+        private System.Windows.Forms.Label lblIdDoctor;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdAgenda;
         private System.Windows.Forms.DataGridViewTextBoxColumn Horario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstadoTurno;
-        private System.Windows.Forms.Label lblIdDoctor;
+        private System.Windows.Forms.DataGridViewButtonColumn EstadoTurno;
+        private System.Windows.Forms.ComboBox comboGenero;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
     }
 }

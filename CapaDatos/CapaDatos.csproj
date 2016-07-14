@@ -45,12 +45,15 @@
     <Compile Include="Agenda.cs" />
     <Compile Include="Comuna.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="Enfermedad.cs" />
     <Compile Include="Especialidad.cs" />
     <Compile Include="Estado.cs" />
+    <Compile Include="EstadoAgenda.cs" />
     <Compile Include="EstadoDia.cs" />
     <Compile Include="EstadoReserva.cs" />
     <Compile Include="EstadoTurno.cs" />
     <Compile Include="Examenes.cs" />
+    <Compile Include="FichaEnfermedad.cs" />
     <Compile Include="Fichas.cs" />
     <Compile Include="Isapre.cs" />
     <Compile Include="Doctor.cs" />
