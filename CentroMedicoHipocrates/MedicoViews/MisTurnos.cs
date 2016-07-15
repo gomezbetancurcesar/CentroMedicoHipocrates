@@ -198,6 +198,7 @@ namespace CentroMedicoHipocrates
                             label.Size = new System.Drawing.Size(37, 50);
                             label.TabIndex = 18;
                             label.Text = "Datos Reserva";
+                            //label.Font.Size = 15;
                             this.panelReservas.Controls.Add(label);
                         }
 
